@@ -35,7 +35,7 @@ ModuleBus in 3 steps
 3. Post function:
 
    ```java
-    EventBus.getDefault().post(MessageClient.class,"fun",Object...args);
+    ModuleBus.getInstance().post(MessageClient.class,"fun",Object...args);
     ```
 
 
