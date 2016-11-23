@@ -26,7 +26,7 @@ ModuleBus in 3 steps
     }
  
     @Override
-    public void onStop() {
+    public void onDestroy() {
         super.onStop();
         ModuleBus.getInstance().unregister(this);
     }
