@@ -56,3 +56,5 @@ Maven:
   <version>1.0</version>
   <type>pom</type>
 </dependency>
+
+*need to set base module depend with ModuleBus and ,other communicated modules depend with base module.
