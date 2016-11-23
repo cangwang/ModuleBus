@@ -4,9 +4,10 @@
     android:layout_height="match_parent">
     <TextView
         android:id="@+id/b_txt"
-        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
         android:layout_marginRight="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="abcd"/>
+        android:textSize="40dp"
+        android:text="B page"/>
 </RelativeLayout>

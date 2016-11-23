@@ -41,6 +41,6 @@ public class FragmentB extends Fragment {
 
     @ModuleEvent(coreClientClass = IFBClient.class)
     public void changeText(String text){
-        bText.setText(text);
+        bText.setText("N:"+text);
     }
 }
