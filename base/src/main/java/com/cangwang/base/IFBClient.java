@@ -1,5 +1,6 @@
 package com.cangwang.base;
 
+
 import com.cangwang.core.IBaseClient;
 
 /**

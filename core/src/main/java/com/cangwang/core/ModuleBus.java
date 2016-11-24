@@ -1,12 +1,12 @@
 package com.cangwang.core;
 
+import android.support.v4.util.ArrayMap;
 import android.util.Log;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by zjl on 16/10/19.
@@ -15,8 +15,8 @@ import java.util.Map;
 public class ModuleBus {
     private static final String TAG = "ModuleBus";
 
-    private static Map<Object,HashMap<String,Method>> moduleEventMethods = new HashMap<>();
-    private static Map<Class<?>,ArrayList<Object>> moduleClients = new HashMap<>();
+    private static ArrayMap<Object,HashMap<String,Method>> moduleEventMethods = new ArrayMap<>();
+    private static ArrayMap<Class<?>,ArrayList<Object>> moduleClients = new ArrayMap<>();
 
     private static ModuleBus instance;
 
@@ -54,13 +54,6 @@ public class ModuleBus {
 
     private void addClient(Class<?> clientClass,Object client){
         ArrayList<Object> clientList = moduleClients.get(clientClass);
-//        if (clientList !=null) {
-//            for (Object c : clientList) {
-//                if (c.getClass().getName().equals(client.getClass().getName())) {
-//                        clientList.remove(c);
-//                }
-//            }
-//        }
 
         if (clientList == null)
             clientList = new ArrayList<>();
@@ -98,6 +91,7 @@ public class ModuleBus {
     }
 
     public ArrayList<Object> getClient(Class<?> clientClass){
+
         if(clientClass == null) return null;
         ArrayList<Object> clientList = moduleClients.get(clientClass);
         if(clientList != null){
