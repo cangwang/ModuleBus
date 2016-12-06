@@ -121,7 +121,7 @@ public class ModuleBus {
                 return;
             }
 
-            for(Object  c: clientList){
+            for(Object c: clientList){
                 try{
                     method.invoke(c,args);
                 }catch (Throwable e){

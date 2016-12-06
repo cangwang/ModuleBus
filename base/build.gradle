@@ -1,12 +1,18 @@
-apply plugin: 'com.android.library'
+def isDebug = false;
+if(isDebug) {
+    apply plugin: 'com.android.application'
+}else{
+    apply plugin: 'com.android.library'
+}
+apply from: "${rootProject.rootDir}/common_config.gradle"
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "24.0.2"
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 25
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -19,6 +25,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {

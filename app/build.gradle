@@ -1,12 +1,14 @@
 apply plugin: 'com.android.application'
+//apply from: rootProject.getRootDir().getAbsolutePath() + "/common_config.gradle"
+apply from: "${rootProject.rootDir}/common_config.gradle"
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "24.0.2"
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
     defaultConfig {
-        applicationId "com.cangwang.modulebus"
-        minSdkVersion 15
-        targetSdkVersion 25
+        applicationId project.ext.applicationId
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -26,6 +28,9 @@ dependencies {
     })
     compile 'com.android.support:design:25.0.1'
     compile 'com.android.support:appcompat-v7:25.0.1'
-    compile project(':a')
-    compile project(':b')
+    if(!project.ext.isDebug){
+        compile project(':a')
+        compile project(':b')
+    }
+
 }

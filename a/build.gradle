@@ -1,12 +1,17 @@
-apply plugin: 'com.android.library'
+if(project.ext.isDebug) {
+    apply plugin: 'com.android.application'
+}else{
+    apply plugin: 'com.android.library'
+}
+apply from: "${rootProject.rootDir}/common_config.gradle"
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "24.0.2"
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 25
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -19,6 +24,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            if (project.ext.isDebug) {
+                manifest.srcFile 'src/debug/AndroidManifest.xml'
+                res.srcDirs = ['src/debug/res']
+
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java {
+                    //排除java/debug文件夹下的所有文件
+                    exclude 'src/debug/**'
+                }
+            }
+        }
+    }
+
 }
 
 dependencies {
