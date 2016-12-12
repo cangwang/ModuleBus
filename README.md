@@ -45,7 +45,7 @@ Add ModuleBus to your project
 
 Gradle:
 ```gradle
-compile 'com.cangwang.core:modulebus:1.0'
+compile 'com.cangwang.core:modulebus:1.0.1'
 ```
 
 Maven:
@@ -53,7 +53,7 @@ Maven:
 <dependency>
   <groupId>com.cangwang.core</groupId>
   <artifactId>modulebus</artifactId>
-  <version>1.0</version>
+  <version>1.0.1</version>
   <type>pom</type>
 </dependency>
 ```
