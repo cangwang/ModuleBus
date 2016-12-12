@@ -60,3 +60,9 @@ Maven:
 
 *Important<br/>
 need to set base module depend with ModuleBus and ,other communicated modules depend with base module.
+
+
+*2016.12.12 update <br/>
+(1)Use ArrayMap to change with HashMap.<br>
+(2)Add startModuleActivity function.<br>
+(3)Fix bugs and develop speeds in ModuleBus.<br>
