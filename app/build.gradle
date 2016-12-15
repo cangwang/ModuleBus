@@ -28,9 +28,8 @@ dependencies {
     })
     compile 'com.android.support:design:25.0.1'
     compile 'com.android.support:appcompat-v7:25.0.1'
-    if(!project.ext.isDebug){
+    if (!project.ext.isDebug) {
         compile project(':a')
         compile project(':b')
     }
-
 }

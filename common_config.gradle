@@ -6,7 +6,7 @@ project.ext {
     targetSdkVersion = 25
     applicationId = "com.cangwang.modulebus"
 
-    isDebug = true;
+    isDebug = false;
 
     //混淆
 //    minifyEnable = true

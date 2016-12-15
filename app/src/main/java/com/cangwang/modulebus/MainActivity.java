@@ -1,6 +1,6 @@
 package com.cangwang.modulebus;
 
-import android.animation.AnimatorSet;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -8,6 +8,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import com.cangwang.base.IFBClient;
+import com.cangwang.core.IBaseClient;
+import com.cangwang.core.ModuleBus;
+import com.cangwang.core.ModuleEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ModuleBus.getInstance().setPackageName(getPackageName());
+
         setContentView(R.layout.activity_main);
 
         pageTitles = PageConfig.getPageTitles(this);
@@ -98,5 +105,33 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        ModuleBus.getInstance().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        ModuleBus.getInstance().unregister(this);
+        super.onDestroy();
+    }
+
+    @ModuleEvent(coreClientClass = IBaseClient.class)
+    public void startModuleActivity(String className,Bundle bundle){
+        try {
+            Class clazz = Class.forName(className);
+            Intent intent = new Intent(this,clazz);
+            if (bundle!=null)
+                intent.putExtras(bundle);
+            startActivityForResult(intent,ModuleBus.MODULE_RESULT);
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == ModuleBus.MODULE_RESULT){
+            ModuleBus.getInstance().moduleResult(this,data);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

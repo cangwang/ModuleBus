@@ -1,24 +1,30 @@
 package com.cangwang.core;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.util.ArrayMap;
 import android.util.Log;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
 /**
  * Created by zjl on 16/10/19.
  */
-
 public class ModuleBus {
     private static final String TAG = "ModuleBus";
 
-    private static ArrayMap<Object,HashMap<String,Method>> moduleEventMethods = new ArrayMap<>();
-    private static ArrayMap<Class<?>,ArrayList<Object>> moduleClients = new ArrayMap<>();
+    public static final int MODULE_RESULT = 1001;
+
+    private static ArrayMap<Object,ArrayMap<String,Method>> moduleEventMethods = new ArrayMap<>();
+//    private static ArrayMap<Class<?>,ArrayList<Object>> moduleClients = new ArrayMap<>();
+    private static ArrayMap<Class<?>,ArrayMap<String,ArrayList<Object>>> moduleMethodClient = new ArrayMap<>();
 
     private static ModuleBus instance;
+
+    private String PK_NAME ="";
 
     public static ModuleBus getInstance(){
         if(instance == null){
@@ -46,27 +52,56 @@ public class ModuleBus {
             if(event !=null){
                 Class<?> clientClass = event.coreClientClass();
 
-                addClient(clientClass,client);
-                addEventMethod(client,clientClass,method);
+//                addClient(clientClass,client);
+//                addEventMethod(client,clientClass,method);
+                addClient(clientClass,client,method);
+                addEventMethod(clientClass,method);
             }
         }
     }
 
-    private void addClient(Class<?> clientClass,Object client){
-        ArrayList<Object> clientList = moduleClients.get(clientClass);
+//    private void addClient(Class<?> clientClass,Object client){
+//        ArrayList<Object> clientList = moduleClients.get(clientClass);
+//
+//        if (clientList == null)
+//            clientList = new ArrayList<>();
+//
+//        clientList.add(client);
+//        moduleClients.put(clientClass,clientList);
+//    }
 
-        if (clientList == null)
+    private void addClient(Class<?> clientClass,Object client,Method m){
+        ArrayMap<String,ArrayList<Object>> clientMethodList = moduleMethodClient.get(clientClass);
+
+        if (clientMethodList == null) {
+            clientMethodList = new ArrayMap<>();
+        }
+
+        ArrayList<Object> clientList = clientMethodList.get(m.getName());
+        if (clientList ==null){
             clientList = new ArrayList<>();
+        }
 
         clientList.add(client);
-        moduleClients.put(clientClass,clientList);
+        clientMethodList.put(m.getName(),clientList);
+        moduleMethodClient.put(clientClass,clientMethodList);
     }
 
-    private void addEventMethod(Object client,Class<?> clientClass, Method m){
-        HashMap<String,Method> methods = moduleEventMethods.get(client);
+//    private void addEventMethod(Object client,Class<?> clientClass, Method m){
+//        ArrayMap<String,Method> methods = moduleEventMethods.get(clientClass);
+//
+//        if(methods == null){
+//            methods = new ArrayMap<>();
+//            moduleEventMethods.put(clientClass,methods);
+//        }
+//        methods.put(m.getName(),m);
+//    }
+
+    private void addEventMethod(Class<?> clientClass, Method m){
+        ArrayMap<String,Method> methods = moduleEventMethods.get(clientClass);
 
         if(methods == null){
-            methods = new HashMap<>();
+            methods = new ArrayMap<>();
             moduleEventMethods.put(clientClass,methods);
         }
         methods.put(m.getName(),m);
@@ -85,30 +120,39 @@ public class ModuleBus {
             ModuleEvent event = method.getAnnotation(ModuleEvent.class);
             if(event !=null) {
                 Class<?> clientClass = event.coreClientClass();
-                moduleClients.remove(clientClass);
+//                moduleClients.remove(clientClass);
+                moduleMethodClient.remove(clientClass);
             }
         }
     }
 
-    public ArrayList<Object> getClient(Class<?> clientClass){
+//    public ArrayList<Object> getClient(Class<?> clientClass){
+//
+//        if(clientClass == null) return null;
+//        ArrayList<Object> clientList = moduleClients.get(clientClass);
+//        if(clientList != null){
+//            clientList = new ArrayList<>(clientList);
+//        }
+//
+//        return clientList;
+//    }
 
-        if(clientClass == null) return null;
-        ArrayList<Object> clientList = moduleClients.get(clientClass);
-        if(clientList != null){
-            clientList = new ArrayList<>(clientList);
-        }
+    public ArrayList<Object> getClient(Class<?> clientClass,String methodName){
 
-        return clientList;
+        if(clientClass == null || methodName == null) return null;
+        ArrayMap<String,ArrayList<Object>> clientMethodList= moduleMethodClient.get(clientClass);
+        return clientMethodList.get(methodName);
     }
 
     public void post(Class<?> clientClass,String methodName,Object...args){
         if(clientClass == null || methodName == null ||methodName.length() == 0) return;
 
-        ArrayList<Object> clientList = getClient(clientClass);
+        ArrayList<Object> clientList = getClient(clientClass,methodName);
+
         if(clientList == null) return;
 
         try{
-            HashMap<String,Method> methods = moduleEventMethods.get(clientClass);
+            ArrayMap<String,Method> methods = moduleEventMethods.get(clientClass);
             Method method = methods.get(methodName);
             if(method == null){
                 Log.e(TAG,"cannot find client method"+methodName +"for args["+args.length+"]" + Arrays.toString(args));
@@ -132,6 +176,32 @@ public class ModuleBus {
         }catch (Throwable e){
             Log.e(TAG,"Notify client error",e);
         }
+    }
+
+    private ArrayMap<String,Object> moduleAct = new ArrayMap<>();
+
+    public void startModuleActivity(Object object,String className){
+        startModuleActivity(object,className,null);
+    }
+
+    public void startModuleActivity(Object object,String className, Bundle bundle){
+        if(className == null) return;
+        moduleAct.put(className,object);
+        post(IBaseClient.class,"startModuleActivity",className,bundle);
+    }
+
+
+    public void moduleResult(Object object,Intent data){
+        if (data==null)return;
+        post(IBaseClient.class,"moduleResult",moduleAct.get(object.getClass().getName()),data);
+    }
+
+    public void setPackageName(String name){
+        this.PK_NAME = name;
+    }
+
+    public String getPacketName(){
+        return PK_NAME;
     }
 
 }

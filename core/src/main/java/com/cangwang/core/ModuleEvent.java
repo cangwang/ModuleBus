@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * Created by zjl on 16/11/17.
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
+@Target({ElementType.METHOD,ElementType.FIELD})
 @Documented
 public @interface ModuleEvent {
     Class<?> coreClientClass();

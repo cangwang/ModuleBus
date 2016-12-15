@@ -1,5 +1,9 @@
-apply plugin: 'com.android.library'
 apply from: "${rootProject.rootDir}/common_config.gradle"
+if(project.ext.isDebug) {
+    apply plugin: 'com.android.application'
+}else{
+    apply plugin: 'com.android.library'
+}
 
 android {
     compileSdkVersion project.ext.compileSdkVersion

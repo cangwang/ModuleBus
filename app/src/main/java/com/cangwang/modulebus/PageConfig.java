@@ -31,4 +31,6 @@ public class PageConfig {
             FragmentB
     };
 
+    public static final String ActivityB = "com.cangwang.b.BActivity";
+
 }

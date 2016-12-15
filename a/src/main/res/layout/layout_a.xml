@@ -15,4 +15,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="change"/>
+    <Button
+        android:id="@+id/create_btn"
+        android:layout_below="@id/a_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="createB"/>
 </RelativeLayout>
