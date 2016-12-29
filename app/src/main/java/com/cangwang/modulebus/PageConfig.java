@@ -33,4 +33,8 @@ public class PageConfig {
 
     public static final String ActivityB = "com.cangwang.b.BActivity";
 
+
+    public static final String MODULE_PAGE_NAME ="com.cangwang.page_name.PageNameModule";
+    public static final String MODULE_BODY_NAME ="com.cangwang.page_body.PageBodyModule";
+
 }

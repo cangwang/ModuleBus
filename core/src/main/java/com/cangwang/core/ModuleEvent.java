@@ -14,4 +14,5 @@ import java.lang.annotation.Target;
 @Documented
 public @interface ModuleEvent {
     Class<?> coreClientClass();
+    boolean single() default false;
 }

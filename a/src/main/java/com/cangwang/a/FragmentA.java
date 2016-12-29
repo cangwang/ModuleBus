@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.cangwang.base.IFBClient;
 import com.cangwang.core.ModuleBus;
+import com.cangwang.core.ModuleEvent;
 
 
 /**
@@ -21,6 +23,7 @@ import com.cangwang.core.ModuleBus;
 public class FragmentA extends Fragment {
     Button aBtn;
     Button createBBtn;
+    private TextView aTxt;
     int i=1;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class FragmentA extends Fragment {
                 i++;
             }
         });
+        aTxt = (TextView) view.findViewById(R.id.a_txt);
         createBBtn = (Button) view.findViewById(R.id.create_btn);
         createBBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,4 +65,8 @@ public class FragmentA extends Fragment {
         return view;
     }
 
+    @ModuleEvent(coreClientClass = IFBClient.class,single = true)
+    public int addNum(int num){
+        return num+1;
+    }
 }

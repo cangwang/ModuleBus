@@ -13,6 +13,8 @@
             <option value="$PROJECT_DIR$/b" />
             <option value="$PROJECT_DIR$/base" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/page_body" />
+            <option value="$PROJECT_DIR$/page_name" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

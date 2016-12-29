@@ -1,10 +1,11 @@
 package com.cangwang.core;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.util.ArrayMap;
 import android.util.Log;
+
+import com.cangwang.core.info.MethodInfo;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -18,8 +19,15 @@ public class ModuleBus {
 
     public static final int MODULE_RESULT = 1001;
 
-    private static ArrayMap<Object,ArrayMap<String,Method>> moduleEventMethods = new ArrayMap<>();
+//    private static ArrayMap<Object,ArrayMap<String,Method>> moduleEventMethods = new ArrayMap<>();
+    /**
+     * Object IBaseClient
+     * String methodName；
+     * MethodInfo method info
+     */
+    private static ArrayMap<Object,ArrayMap<String,MethodInfo>> moduleEventMethods = new ArrayMap<>();
 //    private static ArrayMap<Class<?>,ArrayList<Object>> moduleClients = new ArrayMap<>();
+
     private static ArrayMap<Class<?>,ArrayMap<String,ArrayList<Object>>> moduleMethodClient = new ArrayMap<>();
 
     private static ModuleBus instance;
@@ -54,8 +62,9 @@ public class ModuleBus {
 
 //                addClient(clientClass,client);
 //                addEventMethod(client,clientClass,method);
-                addClient(clientClass,client,method);
-                addEventMethod(clientClass,method);
+                addClient(clientClass, client, method);
+//                addEventMethod(clientClass, method);
+                addEventMethod(clientClass,method,event.single());
             }
         }
     }
@@ -97,14 +106,23 @@ public class ModuleBus {
 //        methods.put(m.getName(),m);
 //    }
 
-    private void addEventMethod(Class<?> clientClass, Method m){
-        ArrayMap<String,Method> methods = moduleEventMethods.get(clientClass);
+//    private void addEventMethod(Class<?> clientClass, Method m){
+//        ArrayMap<String,Method> methods = moduleEventMethods.get(clientClass);
+//
+//        if(methods == null){
+//            methods = new ArrayMap<>();
+//            moduleEventMethods.put(clientClass,methods);
+//        }
+//        methods.put(m.getName(),m);
+//    }
 
-        if(methods == null){
-            methods = new ArrayMap<>();
-            moduleEventMethods.put(clientClass,methods);
-        }
-        methods.put(m.getName(),m);
+    private void addEventMethod(Class<?> clientClass, Method m,boolean single){
+            ArrayMap<String, MethodInfo> methods = moduleEventMethods.get(clientClass);
+            if (methods == null) {
+                methods = new ArrayMap<>();
+                moduleEventMethods.put(clientClass, methods);
+            }
+            methods.put(m.getName(), new MethodInfo(m.getName(), m, single));
     }
 
     public void unregister(Object client){
@@ -138,10 +156,8 @@ public class ModuleBus {
 //    }
 
     public ArrayList<Object> getClient(Class<?> clientClass,String methodName){
-
         if(clientClass == null || methodName == null) return null;
-        ArrayMap<String,ArrayList<Object>> clientMethodList= moduleMethodClient.get(clientClass);
-        return clientMethodList.get(methodName);
+        return moduleMethodClient.get(clientClass).get(methodName);
     }
 
     public void post(Class<?> clientClass,String methodName,Object...args){
@@ -152,8 +168,9 @@ public class ModuleBus {
         if(clientList == null) return;
 
         try{
-            ArrayMap<String,Method> methods = moduleEventMethods.get(clientClass);
-            Method method = methods.get(methodName);
+//            ArrayMap<String,Method> methods = moduleEventMethods.get(clientClass);
+            ArrayMap<String,MethodInfo> methods = moduleEventMethods.get(clientClass);
+            Method method = methods.get(methodName).m;
             if(method == null){
                 Log.e(TAG,"cannot find client method"+methodName +"for args["+args.length+"]" + Arrays.toString(args));
                 return;
@@ -176,6 +193,47 @@ public class ModuleBus {
         }catch (Throwable e){
             Log.e(TAG,"Notify client error",e);
         }
+    }
+
+    public Object postSingle(Class<?> clientClass,String methodName,Object...args){
+        if(clientClass == null || methodName == null ||methodName.length() == 0) return null;
+
+        ArrayList<Object> clientList = getClient(clientClass,methodName);
+
+        if(clientList == null) return null;
+
+        try{
+            MethodInfo methodInfo = moduleEventMethods.get(clientClass).get(methodName);
+            boolean single = methodInfo.single;
+            Method method = methodInfo.m;
+
+            if (!single || clientList.size() != 1){
+                Log.e(TAG,"method"+methodName +"for args["+args.length+"]" + Arrays.toString(args) + " i s not single");
+                return null;
+            } else if(method == null){
+                Log.e(TAG,"cannot find client method"+methodName +"for args["+args.length+"]" + Arrays.toString(args));
+                return null;
+            }else if(method.getParameterTypes() == null){
+                Log.e(TAG,"cannot find client method param:"+method.getParameterTypes() +"for args["+args.length+"]" + Arrays.toString(args));
+                return null;
+            }else if(method.getParameterTypes().length != args.length){
+                Log.e(TAG,"method "+methodName +" param number not matched:method("+method.getParameterTypes().length+"), args(" + args.length+")");
+                return null;
+            }
+
+            for(Object c: clientList){
+                try{
+                    return method.invoke(c,args);
+                }catch (Throwable e){
+                    Log.e(TAG,"Notifiy client method invoke error.",e);
+                }
+            }
+
+        }catch (Throwable e){
+            Log.e(TAG,"Notify client error",e);
+            return null;
+        }
+        return null;
     }
 
     private ArrayMap<String,Object> moduleAct = new ArrayMap<>();

@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.cangwang.base.IFBClient;
@@ -18,7 +19,9 @@ import com.cangwang.core.ModuleEvent;
  */
 
 public class FragmentB extends Fragment {
-    TextView bText;
+    private TextView bText;
+    private Button bAdd;
+    int i=0;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,14 @@ public class FragmentB extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_b,container,false);
         bText = (TextView) view.findViewById(R.id.b_txt);
+        bAdd = (Button) view.findViewById(R.id.b_add);
+        bAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int number = (int)ModuleBus.getInstance().postSingle(IFBClient.class,"addNum",i);
+                bText.setText("N:"+number);
+            }
+        });
         ModuleBus.getInstance().register(this);
         return view;
     }
@@ -43,4 +54,6 @@ public class FragmentB extends Fragment {
     public void changeText(String text){
         bText.setText("N:"+text);
     }
+
+
 }
