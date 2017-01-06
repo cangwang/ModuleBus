@@ -13,8 +13,20 @@ import java.util.ArrayList;
  */
 
 public class ModuleManager {
-    public ArrayMap<String,ArrayList<Integer>> modules = new ArrayMap<>();
+    private ArrayMap<String,ArrayList<Integer>> modules = new ArrayMap<>();
     protected ArrayMap<String,ELAbsModule> allModules = new ArrayMap<>();
+
+    public ArrayMap<String, ArrayList<Integer>> getModules() {
+        return modules;
+    }
+
+    public void setModules(ArrayMap<String, ArrayList<Integer>> modules) {
+        this.modules = modules;
+    }
+
+    public void moduleConfig(ArrayMap<String, ArrayList<Integer>> modules) {
+        this.modules = modules;
+    }
 
     public ELAbsModule getModuleByNames(String name){
         if (!ModuleUtil.empty(allModules))

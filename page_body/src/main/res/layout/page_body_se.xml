@@ -16,10 +16,10 @@
     <Button
         android:id="@+id/change_page_Name"
         android:layout_width="200dp"
-        android:layout_height="20dp"
+        android:layout_height="30dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:layout_below="@id/page_body_bottom"
-        android:background="@android:color/holo_blue_dark"
-        android:text="change_name"/>
+        android:background="@android:color/holo_blue_light"
+        android:text="go_to_fragment"/>
 </RelativeLayout>

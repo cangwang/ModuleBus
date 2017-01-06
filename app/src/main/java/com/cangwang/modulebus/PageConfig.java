@@ -36,5 +36,6 @@ public class PageConfig {
 
     public static final String MODULE_PAGE_NAME ="com.cangwang.page_name.PageNameModule";
     public static final String MODULE_BODY_NAME ="com.cangwang.page_body.PageBodyModule";
+    public static final String MODULE_BODY_BT_NAME ="com.cangwang.page_body_bt.PageBodyBTModule";
 
 }

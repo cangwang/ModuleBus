@@ -24,9 +24,10 @@ public class ActivityModuleManager extends ModuleManager{
     }
 
     public void initModules(Bundle saveInstance, Activity activity){
-        if (modules ==null) return;
+        if (getModules() ==null) return;
 
-        for(String moduleName: modules.keySet()){
+        //获取配置
+        for(String moduleName: getModules().keySet()){
             ELAbsModule module = ELModuleFactory.newModuleInstance(moduleName);
             Log.d(TAG,"ActivityModuleManager init module name: "+ moduleName);
 
@@ -35,8 +36,9 @@ public class ActivityModuleManager extends ModuleManager{
                 moduleContext.setActivity(activity);
                 moduleContext.setSaveInstance(saveInstance);
 
+                //关联视图
                 SparseArrayCompat<ViewGroup> viewGroups =new SparseArrayCompat<>();
-                ArrayList<Integer> mViewIds = modules.get(moduleName);
+                ArrayList<Integer> mViewIds = getModules().get(moduleName);
                 if (mViewIds !=null &&mViewIds.size()>0) {
                     for (int i = 0; i < mViewIds.size(); i++) {
                         viewGroups.put(i, (ViewGroup) activity.findViewById(mViewIds.get(i).intValue()));
@@ -49,10 +51,5 @@ public class ActivityModuleManager extends ModuleManager{
                 allModules.put(moduleName,module);
             }
         }
-    }
-
-
-    public void moduleConfig(ArrayMap<String,ArrayList<Integer>> modules){
-        this.modules = modules;
     }
 }

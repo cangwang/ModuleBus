@@ -53,5 +53,6 @@ public abstract class ModuleManageActivity extends AppCompatActivity{
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        moduleManager.onConfigurationChanged(newConfig);
     }
 }

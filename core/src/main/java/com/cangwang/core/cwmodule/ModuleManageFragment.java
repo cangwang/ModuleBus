@@ -2,11 +2,15 @@ package com.cangwang.core.cwmodule;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 /**
  * Created by cangwang on 2016/12/26.
@@ -21,11 +25,15 @@ public abstract class ModuleManageFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView =  inflater.inflate(getContentViewId(),container,false);
         moduleManager = new FragmentModuleManager();
-        moduleManager.initModules(savedInstanceState,getActivity(),rootView);
+        moduleManager.initModules(savedInstanceState,getActivity(),rootView,moduleConfig());
         return rootView;
     }
 
 
+    @LayoutRes
+    public abstract int getContentViewId();
+
+    public abstract ArrayMap<String,ArrayList<Integer>> moduleConfig();
 
     @Override
     public void onResume() {
@@ -50,8 +58,4 @@ public abstract class ModuleManageFragment extends Fragment{
         super.onConfigurationChanged(newConfig);
         moduleManager.onConfigurationChanged(newConfig);
     }
-
-
-
-    public abstract int getContentViewId();
 }

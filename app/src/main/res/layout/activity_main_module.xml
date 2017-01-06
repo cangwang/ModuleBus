@@ -19,6 +19,6 @@
     <RelativeLayout
         android:id="@+id/page_bodyB"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="120dp"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

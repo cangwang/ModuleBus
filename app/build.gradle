@@ -32,6 +32,7 @@ dependencies {
         compile project(':a')
         compile project(':b')
         compile project(':page_body')
+        compile project(':page_body_bt')
         compile project(':page_name')
     }
 

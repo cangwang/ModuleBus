@@ -1,6 +1,7 @@
 package com.cangwang.page_body;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,8 @@ public class PageBodyModule extends ELBasicModule {
         changeNameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ModuleBus.getInstance().post(IBaseClient.class,"changeNameTxt","Cang_Wang");
+//                ModuleBus.getInstance().post(IBaseClient.class,"changeNameTxt","Cang_Wang");
+                activity.startActivity(new Intent("com.cangwang.moduleFragment"));
             }
         });
     }
