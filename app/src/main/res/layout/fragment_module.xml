@@ -12,6 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"/>
     <RelativeLayout
+        android:id="@+id/page_view"
+        android:layout_below="@id/page_name"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <RelativeLayout
+            android:id="@+id/page_view_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/page_bodyT"
         android:layout_width="match_parent"
         android:layout_height="50dp"

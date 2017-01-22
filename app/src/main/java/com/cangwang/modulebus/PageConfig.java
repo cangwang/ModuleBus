@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by air on 16/7/6.
+ * Created by zjl on 16/7/6.
  */
 public class PageConfig {
     public static List<String> pageTitles = new ArrayList<String>();
@@ -37,5 +37,7 @@ public class PageConfig {
     public static final String MODULE_PAGE_NAME ="com.cangwang.page_name.PageNameModule";
     public static final String MODULE_BODY_NAME ="com.cangwang.page_body.PageBodyModule";
     public static final String MODULE_BODY_BT_NAME ="com.cangwang.page_body_bt.PageBodyBTModule";
+
+    public static final String MODULE_VIEW_PAGE_NAME ="com.cangwang.page_view.PageViewModule";
 
 }

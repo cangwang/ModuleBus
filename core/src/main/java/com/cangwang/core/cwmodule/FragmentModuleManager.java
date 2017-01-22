@@ -29,11 +29,12 @@ public class FragmentModuleManager extends ModuleManager{
         //获取配置
         for(String moduleName:getModules().keySet()){
             if (ModuleUtil.empty(moduleName)) return;
-            Log.d(TAG,"FramentModuleManager init module name: "+ moduleName);
-
+            Log.d(TAG,"FragmentModuleManager init module name: "+ moduleName);
+            //创建模块
             ELAbsModule module = ELModuleFactory.newModuleInstance(moduleName);
             if (module!=null){
                 ELModuleContext moduleContext = new ELModuleContext();
+                //关联Activity
                 moduleContext.setActivity(activity);
                 moduleContext.setSaveInstance(saveIntanceState);
 

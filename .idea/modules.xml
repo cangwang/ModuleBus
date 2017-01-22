@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/page_body/page_body.iml" filepath="$PROJECT_DIR$/page_body/page_body.iml" />
       <module fileurl="file://$PROJECT_DIR$/page_body_bt/page_body_bt.iml" filepath="$PROJECT_DIR$/page_body_bt/page_body_bt.iml" />
       <module fileurl="file://$PROJECT_DIR$/page_name/page_name.iml" filepath="$PROJECT_DIR$/page_name/page_name.iml" />
+      <module fileurl="file://$PROJECT_DIR$/page_view/page_view.iml" filepath="$PROJECT_DIR$/page_view/page_view.iml" />
     </modules>
   </component>
 </project>

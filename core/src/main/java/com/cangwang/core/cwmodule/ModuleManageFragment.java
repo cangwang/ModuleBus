@@ -38,24 +38,28 @@ public abstract class ModuleManageFragment extends Fragment{
     @Override
     public void onResume() {
         super.onResume();
-        moduleManager.onResume();
+        if (moduleManager !=null)
+            moduleManager.onResume();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        moduleManager.onStop();
+        if (moduleManager !=null)
+            moduleManager.onStop();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        moduleManager.onDestroy();
+        if (moduleManager !=null)
+            moduleManager.onDestroy();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        moduleManager.onConfigurationChanged(newConfig);
+        if (moduleManager !=null)
+            moduleManager.onConfigurationChanged(newConfig);
     }
 }
