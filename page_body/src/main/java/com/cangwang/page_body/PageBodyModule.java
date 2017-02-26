@@ -1,7 +1,9 @@
 package com.cangwang.page_body;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +14,13 @@ import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleBus;
 import com.cangwang.core.cwmodule.ELBasicModule;
 import com.cangwang.core.cwmodule.ELModuleContext;
+import com.cangwang.core.util.ModuleImpl;
 
 /**
- * Created by air on 2016/12/28.
+ * Created by cangwang on 2016/12/28.
  */
 
-public class PageBodyModule extends ELBasicModule {
+public class PageBodyModule extends ELBasicModule implements ModuleImpl{
     private Activity activity;
     private ViewGroup parentViewGroup_T;
     private ViewGroup parentViewGroup_B;
@@ -51,5 +54,12 @@ public class PageBodyModule extends ELBasicModule {
                 activity.startActivity(new Intent("com.cangwang.moduleFragment"));
             }
         });
+    }
+
+    @Override
+    public void onLoad(Application app) {
+        for (int i=0;i<5;i++){
+            Log.v("PageBodyModule","PageBodyModule onLoad");
+        }
     }
 }

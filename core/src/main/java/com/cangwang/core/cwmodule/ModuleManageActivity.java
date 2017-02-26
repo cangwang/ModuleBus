@@ -6,6 +6,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -22,9 +23,10 @@ public abstract class ModuleManageActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentViewId());
-
+        long ti =System.currentTimeMillis();
         moduleManager = new ActivityModuleManager();
         moduleManager.initModules(savedInstanceState,this,moduleConfig());
+        Log.v("ModuleManageActivity","init use time = "+(System.currentTimeMillis() - ti));
     }
 
     @LayoutRes

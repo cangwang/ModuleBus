@@ -8,4 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppWelcome" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/dream</item>
+    </style>
 </resources>

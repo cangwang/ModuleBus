@@ -40,4 +40,19 @@ public class PageConfig {
 
     public static final String MODULE_VIEW_PAGE_NAME ="com.cangwang.page_view.PageViewModule";
 
+    public static final String BODY_CREATE ="com.cangwang.page_body.BodyCreate";
+    public static final String NAME_CREATE ="com.cangwang.page_name.NameCreate";
+
+    public static final  String[] modulesList = {
+            MODULE_PAGE_NAME,
+            MODULE_BODY_NAME,
+            MODULE_BODY_BT_NAME
+    };
+
+
+    public static final String[] moduleCreate = {
+            BODY_CREATE,
+            NAME_CREATE
+    };
+
 }

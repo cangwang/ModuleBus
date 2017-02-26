@@ -1,6 +1,8 @@
 package com.cangwang.page_name;
 
 import android.app.Activity;
+import android.app.Application;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +13,13 @@ import com.cangwang.core.ModuleBus;
 import com.cangwang.core.ModuleEvent;
 import com.cangwang.core.cwmodule.ELBasicModule;
 import com.cangwang.core.cwmodule.ELModuleContext;
+import com.cangwang.core.util.ModuleImpl;
 
 /**
  * Created by air on 2016/12/28.
  */
 
-public class PageNameModule extends ELBasicModule {
+public class PageNameModule extends ELBasicModule implements ModuleImpl{
     private Activity activity;
     private ViewGroup parentViewGroup;
     private View pageNameView;
@@ -46,5 +49,12 @@ public class PageNameModule extends ELBasicModule {
     @ModuleEvent(coreClientClass = IBaseClient.class)
     public void changeNameTxt(String name){
         pageTitle.setText(name);
+    }
+
+    @Override
+    public void onLoad(Application app) {
+        for (int i=0;i<5;i++){
+            Log.v("PageNameModule","PageNameModule onLoad");
+        }
     }
 }
