@@ -66,3 +66,7 @@ need to set base module depend with ModuleBus and ,other communicated modules de
 (1)Use ArrayMap to change with HashMap.<br>
 (2)Add startModuleActivity function.<br>
 (3)Fix bugs and develop speeds in ModuleBus.<br>
+
+*2017.2.27 update <br/>
+(1) Add Module architecture inclue activity,fragment and view.<br>
+(2) Add Application util ModuleImpl.<br>
