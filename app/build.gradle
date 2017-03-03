@@ -1,12 +1,19 @@
-apply plugin: 'com.android.application'
 //apply from: rootProject.getRootDir().getAbsolutePath() + "/common_config.gradle"
 apply from: "${rootProject.rootDir}/common_config.gradle"
+if(project.ext.isLib){
+    apply plugin: 'com.android.library'
+    apply from: 'fat-aar.gradle'
+}else {
+    apply plugin: 'com.android.application'
+}
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
     buildToolsVersion project.ext.buildToolsVersion
     defaultConfig {
-        applicationId project.ext.applicationId
+        if (!project.ext.isLib) {
+            applicationId project.ext.applicationId
+        }
         minSdkVersion project.ext.minSdkVersion
         targetSdkVersion project.ext.targetSdkVersion
         versionCode 1
@@ -28,13 +35,24 @@ dependencies {
     })
     compile 'com.android.support:design:25.0.1'
     compile 'com.android.support:appcompat-v7:25.0.1'
-    if (!project.ext.isDebug) {
-        compile project(':a')
-        compile project(':b')
-        compile project(':page_body')
-        compile project(':page_body_bt')
-        compile project(':page_name')
-        compile project(':page_view')
-    }
 
+    if(project.ext.isLib) {
+        embedded project(':page_body')
+        embedded project(':page_body_bt')
+        embedded project(':page_name')
+        embedded project(':page_view')
+    }else{
+        if (!project.ext.isDebug) {
+            compile project(':a')
+            compile project(':b')
+            compile project(':page_body')
+            compile project(':page_body_bt')
+            compile project(':page_name')
+            compile project(':page_view')
+        }else{
+            compile project(':core')
+        }
+    }
 }
+
+

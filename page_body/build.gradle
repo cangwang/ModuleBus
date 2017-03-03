@@ -21,6 +21,12 @@ android {
     }
 }
 
+repositories{
+    flatDir{
+        dirs 'libs'
+    }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -28,4 +34,5 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile project(':base')
+//    compile name:'core-release',ext:'aar'
 }
