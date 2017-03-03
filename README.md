@@ -45,7 +45,7 @@ Add ModuleBus to your project
 
 Gradle:
 ```gradle
-compile 'com.cangwang.core:modulebus:1.0.1'
+compile 'com.cangwang.core:modulebus:2.0.0'
 ```
 
 Maven:
@@ -53,7 +53,7 @@ Maven:
 <dependency>
   <groupId>com.cangwang.core</groupId>
   <artifactId>modulebus</artifactId>
-  <version>1.0.1</version>
+  <version>2.0.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -70,3 +70,6 @@ need to set base module depend with ModuleBus and ,other communicated modules de
 *2017.2.27 update <br/>
 (1) Add Module architecture inclue activity,fragment and view.<br>
 (2) Add Application util ModuleImpl.<br>
+
+*2017.3.3 update moduleBus 2.0.0<br/>
+(1) update Module architecture inclue activity,fragment and view.<br>
