@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/b/b.iml" filepath="$PROJECT_DIR$/b/b.iml" />
       <module fileurl="file://$PROJECT_DIR$/base/base.iml" filepath="$PROJECT_DIR$/base/base.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/news/news.iml" filepath="$PROJECT_DIR$/news/news.iml" />
       <module fileurl="file://$PROJECT_DIR$/page_body/page_body.iml" filepath="$PROJECT_DIR$/page_body/page_body.iml" />
       <module fileurl="file://$PROJECT_DIR$/page_body_bt/page_body_bt.iml" filepath="$PROJECT_DIR$/page_body_bt/page_body_bt.iml" />
       <module fileurl="file://$PROJECT_DIR$/page_name/page_name.iml" filepath="$PROJECT_DIR$/page_name/page_name.iml" />

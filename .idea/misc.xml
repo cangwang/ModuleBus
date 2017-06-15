@@ -3,6 +3,15 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="E:\Maven" />
+        <option name="mavenHome" value="E:/apache-maven-3.3.9" />
+        <option name="userSettingsFile" value="E:\apache-maven-3.3.9\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="android.support.annotation.Nullable" />
     <option name="myDefaultNotNull" value="android.support.annotation.NonNull" />
@@ -41,20 +50,18 @@
             <id>Android &gt; Lint &gt; Correctness</id>
           </State>
           <State>
-            <id>Android Lint for Kotlin</id>
+            <id>Android &gt; Lint &gt; Performance</id>
           </State>
           <State>
-            <id>Java</id>
+            <id>CorrectnessLintAndroid</id>
           </State>
           <State>
-            <id>Java language level migration aidsJava</id>
+            <id>General</id>
+          </State>
+          <State>
+            <id>LintAndroid</id>
           </State>
         </expanded-state>
-        <selected-state>
-          <State>
-            <id>Since15</id>
-          </State>
-        </selected-state>
       </profile-state>
     </entry>
   </component>
@@ -74,14 +81,11 @@
   <component name="ProjectType">
     <option name="id" value="Android" />
   </component>
-  <component name="SvnConfiguration">
-    <configuration>$USER_HOME$/.subversion</configuration>
-  </component>
   <component name="masterDetails">
     <states>
       <state key="ProjectJDKs.UI">
         <settings>
-          <last-edited>1.8</last-edited>
+          <last-edited>1.7</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
