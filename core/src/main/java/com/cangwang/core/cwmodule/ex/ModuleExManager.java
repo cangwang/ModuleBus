@@ -1,34 +1,27 @@
-package com.cangwang.core.cwmodule;
+package com.cangwang.core.cwmodule.ex;
 
 import android.content.res.Configuration;
 import android.support.v4.util.ArrayMap;
 
-
+import com.cangwang.core.cwmodule.ELAbsModule;
 import com.cangwang.core.util.ModuleUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by cangwang on 2016/12/26.
  */
 
-public class ModuleManager {
-    private ArrayMap<String,ArrayList<Integer>> modules = new ArrayMap<>();
-    protected ArrayMap<String,ELAbsModule> allModules = new ArrayMap<>();
+public class ModuleExManager {
+    private List<String> modules = new ArrayList<>();   //模块名字
+    protected ArrayMap<String,ELAbsModule> allModules = new ArrayMap<>();   //模块实体
 
-    public ArrayMap<String, ArrayList<Integer>> getModules() {
+    public List<String> getModuleNames(){
         return modules;
     }
 
-    public String[] getModuleNames(){
-        return (String[]) modules.keySet().toArray();
-    }
-
-    public void setModules(ArrayMap<String, ArrayList<Integer>> modules) {
-        this.modules = modules;
-    }
-
-    public void moduleConfig(ArrayMap<String, ArrayList<Integer>> modules) {
+    public void moduleConfig(List<String> modules) {
         this.modules = modules;
     }
 

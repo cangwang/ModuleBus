@@ -10,16 +10,20 @@ import android.view.ViewGroup;
  */
 
 public class ELModuleContext {
-    private Activity component;
+    public static final int TOP_VIEW_GROUP = 0;
+    public static final int BOTTOM_VIEW_GROUP = 1;
+    public static final int PLUGIN_CENTER_VIEW = 2;
+
+    private Activity context;
     private Bundle saveInstance;
     private SparseArrayCompat<ViewGroup> viewGroups = new SparseArrayCompat<>();
 
     public Activity getActivity(){
-        return component;
+        return context;
     }
 
     public void setActivity(Activity component){
-        this.component = component;
+        this.context = component;
     }
 
     public Bundle getSaveInstance(){

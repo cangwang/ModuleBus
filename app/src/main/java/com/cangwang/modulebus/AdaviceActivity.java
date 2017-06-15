@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.cangwang.modulebus.ExModule.ModuleMainExActivity;
+
 /**
  * Created by cangwang on 2017/2/26.
  */
@@ -19,7 +21,7 @@ public class AdaviceActivity extends AppCompatActivity{
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        startActivity(new Intent(this,ModuleMainActivity.class));
+        startActivity(new Intent(this,ModuleMainExActivity.class));
         finish();
     }
 }
