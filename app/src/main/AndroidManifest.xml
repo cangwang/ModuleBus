@@ -56,6 +56,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".ExModule.ModuleExActivity">
+            <intent-filter>
+                <action android:name="com.cangwang.moduleExFg" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

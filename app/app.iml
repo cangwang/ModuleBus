@@ -139,8 +139,6 @@
     <orderEntry type="library" exported="" name="appcompat-v7-25.0.1" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-25.0.1" level="project" />
     <orderEntry type="module" module-name="page_body" exported="" />
-    <orderEntry type="module" module-name="a" exported="" />
-    <orderEntry type="module" module-name="b" exported="" />
     <orderEntry type="module" module-name="page_body_bt" exported="" />
     <orderEntry type="module" module-name="page_view" exported="" />
     <orderEntry type="module" module-name="page_name" exported="" />

@@ -43,8 +43,6 @@ dependencies {
         embedded project(':page_view')
     }else{
         if (!project.ext.isDebug) {
-            compile project(':a')
-            compile project(':b')
             compile project(':page_body')
             compile project(':page_body_bt')
             compile project(':page_name')

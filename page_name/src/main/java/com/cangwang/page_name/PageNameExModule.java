@@ -1,6 +1,5 @@
 package com.cangwang.page_name;
 
-import android.app.Activity;
 import android.app.Application;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,35 +10,29 @@ import android.widget.TextView;
 import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleBus;
 import com.cangwang.core.ModuleEvent;
-import com.cangwang.core.cwmodule.ELBasicModule;
 import com.cangwang.core.cwmodule.ELModuleContext;
+import com.cangwang.core.cwmodule.ex.ELBasicExModule;
 import com.cangwang.core.util.ModuleImpl;
 
 /**
  * Created by cangwang on 2017/6/15
  */
 
-public class PageNameExModule extends ELBasicModule implements ModuleImpl{
-    private Activity activity;
-    private ViewGroup parentViewGroup;
+public class PageNameExModule extends ELBasicExModule implements ModuleImpl{
     private View pageNameView;
     private TextView pageTitle;
 
     @Override
     public void init(ELModuleContext moduleContext, String extend) {
         super.init(moduleContext, extend);
-        activity = moduleContext.getActivity();
-        parentViewGroup = moduleContext.getView(ELModuleContext.TOP_VIEW_GROUP);
         this.moduleContext = moduleContext;
         initView();
         ModuleBus.getInstance().register(this);
     }
 
     private void initView(){
-        pageNameView = LayoutInflater.from(activity).inflate(R.layout.page_name_layout,parentViewGroup,true);
+        pageNameView = LayoutInflater.from(context).inflate(R.layout.page_name_layout,parentTop,true);
         pageTitle = (TextView) pageNameView.findViewById(R.id.page_title);
-        if (parentViewGroup !=null && pageNameView !=null)
-            parentViewGroup.addView(pageNameView);
     }
 
     @Override

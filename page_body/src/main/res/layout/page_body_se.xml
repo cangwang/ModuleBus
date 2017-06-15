@@ -10,7 +10,9 @@
         android:id="@+id/page_body_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:layout_above="@+id/change_page_Name"
         android:text="Page_Body_Bottom"
         android:textSize="20dp"/>
     <Button
@@ -18,8 +20,8 @@
         android:layout_width="200dp"
         android:layout_height="30dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:layout_below="@id/page_body_bottom"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
         android:background="@android:color/holo_blue_light"
         android:text="go_to_fragment"/>
 </RelativeLayout>
