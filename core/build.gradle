@@ -24,15 +24,15 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    provided 'com.android.support:appcompat-v7:25.0.1'
-    provided 'io.reactivex.rxjava2:rxjava:2.1.0'
-    provided 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    provided 'com.android.support:appcompat-v7:25.+'
+    provided 'io.reactivex.rxjava2:rxjava:2.+'
+    provided 'io.reactivex.rxjava2:rxandroid:+'
 }
 
 ext {
     PUBLISH_GROUP_ID = 'com.cangwang.core'
     PUBLISH_ARTIFACT_ID = 'modulebus'
-    PUBLISH_VERSION = '2.0.0'
+    PUBLISH_VERSION = '3.0.0'
 }
 
 apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'

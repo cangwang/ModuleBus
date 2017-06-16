@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.cangwang.core.cwmodule.ELModuleContext;
 import com.cangwang.core.cwmodule.ex.ELBasicExModule;
@@ -30,11 +32,17 @@ public class PageBodyExModule extends ELBasicExModule implements ModuleImpl{
     }
 
     private void initView(){
+        //直接添加布局到父布局
         pageBodyView_fi = LayoutInflater.from(context).inflate(R.layout.page_body_fi,parentTop,true);
         pageBodyTop = (TextView) pageBodyView_fi.findViewById(R.id.page_body_top);
 
-        pageBodyView_se = LayoutInflater.from(context).inflate(R.layout.page_body_se,parentBottom,true);
-        pageBodyBottom = (TextView) pageBodyView_se.findViewById(R.id.page_body_bottom);
+//        pageBodyView_se = LayoutInflater.from(context).inflate(R.layout.page_body_se,parentBottom,true);
+//        pageBodyBottom = (TextView) pageBodyView_se.findViewById(R.id.page_body_bottom);
+        //动态添加布局
+        pageBodyView_se = LayoutInflater.from(context).inflate(R.layout.page_body_se,null);
+        RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        if (parentBottom!=null)
+            parentBottom.addView(pageBodyView_se,rl);
 
         changeNameBtn = (Button) pageBodyView_se.findViewById(R.id.change_page_Name);
         changeNameBtn.setOnClickListener(new View.OnClickListener() {
