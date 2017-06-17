@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import com.cangwang.core.R;
 import com.cangwang.core.cwmodule.ELModuleContext;
-import com.cangwang.core.cwmodule.ELModuleFactory;
 import com.cangwang.core.info.ModuleInfo;
 
 import java.util.List;
@@ -68,7 +67,7 @@ public abstract class ModuleManageExFragment extends Fragment{
                 .map(new Function<String, ModuleInfo>() {
                     @Override
                     public ModuleInfo apply(@NonNull String s){
-                        return new ModuleInfo(s, ELModuleFactory.newModuleInstance(s));
+                        return new ModuleInfo(s, ELModuleExFactory.newModuleInstance(s));
                     }
                 })
 //              .delay(10, TimeUnit.MILLISECONDS)
@@ -80,7 +79,7 @@ public abstract class ModuleManageExFragment extends Fragment{
                         try {
                             if(elAbsModule!=null){
                                 long before = System.currentTimeMillis();
-                                elAbsModule.module.init(modudleContext, "");
+                                elAbsModule.module.init(modudleContext, null);
                                 Log.d(TAG, "modulename: " + elAbsModule.getClass().getSimpleName() + " init time = " + (System.currentTimeMillis() - before) + "ms");
                                 moduleManager.putModule(elAbsModule.name, elAbsModule.module);
                             }

@@ -1,6 +1,7 @@
 package com.cangwang.page_body_bt;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,10 +26,11 @@ public class PageBodyExModule extends ELBasicExModule {
     private Button changeNameBtn;
 
     @Override
-    public void init(ELModuleContext moduleContext, String extend) {
+    public boolean init(ELModuleContext moduleContext, Bundle extend) {
         super.init(moduleContext, extend);
         this.moduleContext = moduleContext;
         initView();
+        return true;
     }
 
     private void initView(){

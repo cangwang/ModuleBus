@@ -1,6 +1,7 @@
 package com.cangwang.page_name;
 
 import android.app.Application;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,11 +24,12 @@ public class PageNameExModule extends ELBasicExModule implements ModuleImpl{
     private TextView pageTitle;
 
     @Override
-    public void init(ELModuleContext moduleContext, String extend) {
+    public boolean init(ELModuleContext moduleContext, Bundle extend) {
         super.init(moduleContext, extend);
         this.moduleContext = moduleContext;
         initView();
         ModuleBus.getInstance().register(this);
+        return true;
     }
 
     private void initView(){

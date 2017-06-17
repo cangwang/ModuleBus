@@ -10,11 +10,9 @@ import android.view.ViewGroup;
 
 import com.cangwang.core.R;
 import com.cangwang.core.cwmodule.ELModuleContext;
-import com.cangwang.core.cwmodule.ELModuleFactory;
 import com.cangwang.core.info.ModuleInfo;
 
 import java.util.List;
-
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -33,6 +31,7 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
     private ViewGroup pluginViewGroup;
 
     private ModuleExManager moduleManager;
+    private ELModuleContext modudleContext;
 
     @SuppressWarnings("deprecation")
     @Override
@@ -49,7 +48,7 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
     }
 
     public void initView(Bundle mSavedInstanceState){
-        final ELModuleContext modudleContext = new ELModuleContext();
+        modudleContext = new ELModuleContext();
         modudleContext.setActivity(this);
         modudleContext.setSaveInstance(mSavedInstanceState);
         //关联视图
@@ -63,7 +62,7 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
                 .map(new Function<String, ModuleInfo>() {
                     @Override
                     public ModuleInfo apply(@NonNull String s){
-                        return new ModuleInfo(s, ELModuleFactory.newModuleInstance(s));
+                        return new ModuleInfo(s, ELModuleExFactory.newModuleInstance(s));
                     }
                 })
 //              .delay(10, TimeUnit.MILLISECONDS)
@@ -75,7 +74,7 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
                         try {
                             if(elAbsModule!=null){
                                 long before = System.currentTimeMillis();
-                                elAbsModule.module.init(modudleContext, "");
+                                elAbsModule.module.init(modudleContext, null);
                                 Log.d(TAG, "modulename: " + elAbsModule.getClass().getSimpleName() + " init time = " + (System.currentTimeMillis() - before) + "ms");
                                 moduleManager.putModule(elAbsModule.name, elAbsModule.module);
                             }
@@ -117,5 +116,43 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         moduleManager.onConfigurationChanged(newConfig);
+    }
+
+    /**
+     * 添加模块
+     * @param moduleName
+     * @param extend
+     */
+    public void addModule(String moduleName,Bundle extend){
+        addModule(moduleName,extend,null);
+    }
+
+    public void addModule(String moduleName,Bundle extend,ModuleLoadListener listener){
+        if (moduleName !=null && !moduleName.isEmpty()){
+            ELAbsExModule module = moduleManager.getModuleByNames(moduleName);
+            if (module ==null){
+                module = ELModuleExFactory.newModuleInstance(moduleName);
+            }
+            if (modudleContext !=null &&module!=null){
+                boolean result = module.init(modudleContext,extend);
+                listener.laodResult(result);
+                if (result)
+                    moduleManager.putModule(moduleName,module);
+            }
+        }
+    }
+
+    /**
+     * 移除模块
+     * @param moduleName
+     */
+    public void removeModule(String moduleName){
+        if (moduleName!=null ||!moduleName.isEmpty()) {
+            ELAbsExModule module = moduleManager.getModuleByNames(moduleName);
+            if (module != null) {
+                module.onDestroy();
+                moduleManager.remove(moduleName);
+            }
+        }
     }
 }

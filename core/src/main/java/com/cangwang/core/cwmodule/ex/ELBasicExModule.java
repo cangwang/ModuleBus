@@ -13,7 +13,7 @@ import com.cangwang.core.cwmodule.ELModuleContext;
  * Created by cangwang on 2016/12/26.
  */
 
-public class ELBasicExModule extends ELAbsModule{
+public class ELBasicExModule extends ELAbsExModule{
     public Activity context;
     public FragmentActivity mContext;
     public ELModuleContext moduleContext;
@@ -23,12 +23,13 @@ public class ELBasicExModule extends ELAbsModule{
     public ViewGroup parentPlugin;
 
     @Override
-    public void init(ELModuleContext moduleContext, String extend) {
+    public boolean init(ELModuleContext moduleContext, Bundle extend) {
         context = moduleContext.getActivity();
         parentTop = moduleContext.getView(ELModuleContext.TOP_VIEW_GROUP);
         parentBottom = moduleContext.getView(ELModuleContext.BOTTOM_VIEW_GROUP);
         parentPlugin = moduleContext.getView(ELModuleContext.PLUGIN_CENTER_VIEW);
         handler = new Handler();
+        return true;
     }
 
     @Override

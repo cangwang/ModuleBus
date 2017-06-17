@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ModuleExManager {
     private List<String> modules = new ArrayList<>();   //模块名字
-    protected ArrayMap<String,ELAbsModule> allModules = new ArrayMap<>();   //模块实体
+    protected ArrayMap<String,ELAbsExModule> allModules = new ArrayMap<>();   //模块实体
 
     public List<String> getModuleNames(){
         return modules;
@@ -25,42 +25,48 @@ public class ModuleExManager {
         this.modules = modules;
     }
 
-    public ELAbsModule getModuleByNames(String name){
+    public ELAbsExModule getModuleByNames(String name){
         if (!ModuleUtil.empty(allModules))
             return allModules.get(name);
         return null;
     }
 
-    public void putModule(String name,ELAbsModule module){
+    public void remove(String name){
+        if (!ModuleUtil.empty(allModules)){
+            allModules.remove(name);
+        }
+    }
+
+    public void putModule(String name,ELAbsExModule module){
         allModules.put(name,module);
     }
 
     public void onResume(){
-        for (ELAbsModule module:allModules.values())
+        for (ELAbsExModule module:allModules.values())
             if (module !=null)
                 module.onResume();
     }
 
     public void onPause(){
-        for (ELAbsModule module:allModules.values())
+        for (ELAbsExModule module:allModules.values())
             if (module !=null)
                 module.onPause();
     }
 
     public void onStop(){
-        for (ELAbsModule module:allModules.values())
+        for (ELAbsExModule module:allModules.values())
             if (module !=null)
                 module.onStop();
     }
 
     public void onConfigurationChanged(Configuration newConfig){
-        for (ELAbsModule module:allModules.values())
+        for (ELAbsExModule module:allModules.values())
             if (module!=null)
                 module.onOrientationChanges(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE);
     }
 
     public void onDestroy(){
-        for (ELAbsModule module:allModules.values())
+        for (ELAbsExModule module:allModules.values())
             if (module !=null){
                 module.onDestroy();
             }
