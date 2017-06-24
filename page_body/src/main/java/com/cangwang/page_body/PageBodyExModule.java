@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.cangwang.core.IBaseClient;
+import com.cangwang.core.ModuleBus;
 import com.cangwang.core.cwmodule.ELModuleContext;
 import com.cangwang.core.cwmodule.ex.ELBasicExModule;
 import com.cangwang.core.util.ModuleImpl;
@@ -24,6 +27,8 @@ public class PageBodyExModule extends ELBasicExModule implements ModuleImpl{
     private TextView pageBodyTop;
     private TextView pageBodyBottom;
     private Button changeNameBtn;
+    private Button addTitle;
+    private Button removeTitle;
 
     @Override
     public boolean init(ELModuleContext moduleContext, Bundle extend) {
@@ -45,6 +50,24 @@ public class PageBodyExModule extends ELBasicExModule implements ModuleImpl{
         RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         if (parentBottom!=null)
             parentBottom.addView(pageBodyView_se,rl);
+
+        removeTitle = (Button)pageBodyView_se.findViewById(R.id.remove_title);
+        addTitle = (Button)pageBodyView_se.findViewById(R.id.add_title);
+
+        removeTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ModuleBus.getInstance().post(IBaseClient.class,"removeModule","com.cangwang.page_name.PageNameExModule");
+            }
+        });
+
+        addTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle =new Bundle();
+                ModuleBus.getInstance().post(IBaseClient.class,"addModule","com.cangwang.page_name.PageNameExModule",bundle);
+            }
+        });
 
         changeNameBtn = (Button) pageBodyView_se.findViewById(R.id.change_page_Name);
         changeNameBtn.setOnClickListener(new View.OnClickListener() {

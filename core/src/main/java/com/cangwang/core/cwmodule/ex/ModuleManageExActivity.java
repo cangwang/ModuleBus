@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ViewGroup;
 
+import com.cangwang.core.IBaseClient;
+import com.cangwang.core.ModuleBus;
+import com.cangwang.core.ModuleEvent;
 import com.cangwang.core.R;
 import com.cangwang.core.cwmodule.ELModuleContext;
 import com.cangwang.core.info.ModuleInfo;
@@ -38,11 +41,11 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.module_rank_layout);
+        ModuleBus.getInstance().register(this);
         mTopViewGroup = (ViewGroup) findViewById(R.id.layout_top);
         mBottomViewGroup = (ViewGroup) findViewById(R.id.layout_bottom);
         pluginViewGroup = (ViewGroup) findViewById(R.id.layout_plugincenter);
         moduleManager = new ModuleExManager();
-
         moduleManager.moduleConfig(moduleConfig());
         initView(savedInstanceState);
     }
@@ -110,6 +113,7 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
     protected void onDestroy() {
         super.onDestroy();
         moduleManager.onDestroy();
+        ModuleBus.getInstance().unregister(this);
     }
 
     @Override
@@ -123,6 +127,7 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
      * @param moduleName
      * @param extend
      */
+    @ModuleEvent(coreClientClass = IBaseClient.class)
     public void addModule(String moduleName,Bundle extend){
         addModule(moduleName,extend,null);
     }
@@ -146,6 +151,7 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
      * 移除模块
      * @param moduleName
      */
+    @ModuleEvent(coreClientClass = IBaseClient.class)
     public void removeModule(String moduleName){
         if (moduleName!=null ||!moduleName.isEmpty()) {
             ELAbsExModule module = moduleManager.getModuleByNames(moduleName);

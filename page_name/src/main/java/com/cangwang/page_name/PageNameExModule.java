@@ -39,6 +39,7 @@ public class PageNameExModule extends ELBasicExModule implements ModuleImpl{
 
     @Override
     public void onDestroy() {
+        detachView();
         ModuleBus.getInstance().unregister(this);
         super.onDestroy();
     }
@@ -53,5 +54,12 @@ public class PageNameExModule extends ELBasicExModule implements ModuleImpl{
         for (int i=0;i<5;i++){
             Log.v("PageNameModule","PageNameModule onLoad");
         }
+    }
+
+    @Override
+    public void detachView() {
+        if (pageTitle.getParent() !=null)
+            ((ViewGroup)pageTitle.getParent()).removeView(pageTitle);
+        super.detachView();
     }
 }

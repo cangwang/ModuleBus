@@ -162,7 +162,10 @@ public class ModuleBus {
 
     public ArrayList<Object> getClient(Class<?> clientClass,String methodName){
         if(clientClass == null || methodName == null) return null;
-        return moduleMethodClient.get(clientClass).get(methodName);
+        if (moduleMethodClient.get(clientClass)!=null)
+            return moduleMethodClient.get(clientClass).get(methodName);
+        else
+            return null;
     }
 
     public void post(Class<?> clientClass,String methodName,Object...args){

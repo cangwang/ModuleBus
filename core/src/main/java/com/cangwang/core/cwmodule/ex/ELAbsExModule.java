@@ -24,4 +24,5 @@ public abstract class ELAbsExModule {
 
     public abstract void onDestroy();
 
+    public abstract void detachView();
 }

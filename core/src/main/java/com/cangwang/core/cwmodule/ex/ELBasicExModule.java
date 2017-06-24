@@ -58,6 +58,11 @@ public class ELBasicExModule extends ELAbsExModule{
     }
 
     @Override
+    public void detachView(){
+
+    }
+
+    @Override
     public void onDestroy() {
 
     }
