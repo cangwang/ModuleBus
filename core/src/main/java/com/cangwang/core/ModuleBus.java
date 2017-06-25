@@ -138,13 +138,15 @@ public class ModuleBus {
 
 
         Method[] methods = orginalClass.getMethods();
-
         for(Method method:methods) {
             ModuleEvent event = method.getAnnotation(ModuleEvent.class);
             if(event !=null) {
                 Class<?> clientClass = event.coreClientClass();
+                if (moduleEventMethods.get(clientClass)==null) return;
+                moduleEventMethods.get(clientClass).remove(method);  //移除方法
 //                moduleClients.remove(clientClass);
-                moduleMethodClient.remove(clientClass);
+                if (moduleEventMethods.get(clientClass).isEmpty())   //如果此类中已经无方法，移除此类
+                    moduleMethodClient.remove(clientClass);
             }
         }
     }

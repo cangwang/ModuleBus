@@ -51,8 +51,8 @@ public class PageBodyExModule extends ELBasicExModule implements ModuleImpl{
         if (parentBottom!=null)
             parentBottom.addView(pageBodyView_se,rl);
 
-        removeTitle = (Button)pageBodyView_se.findViewById(R.id.remove_title);
-        addTitle = (Button)pageBodyView_se.findViewById(R.id.add_title);
+        removeTitle = genericFindViewById(R.id.remove_title);
+        addTitle = genericFindViewById(R.id.add_title);
 
         removeTitle.setOnClickListener(new View.OnClickListener() {
             @Override

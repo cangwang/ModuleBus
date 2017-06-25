@@ -1,8 +1,10 @@
 package com.cangwang.core.cwmodule.ex;
 
+import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -34,7 +36,7 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
     private ViewGroup pluginViewGroup;
 
     private ModuleExManager moduleManager;
-    private ELModuleContext modudleContext;
+    private ELModuleContext moduleContext;
 
     @SuppressWarnings("deprecation")
     @Override
@@ -51,15 +53,15 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
     }
 
     public void initView(Bundle mSavedInstanceState){
-        modudleContext = new ELModuleContext();
-        modudleContext.setActivity(this);
-        modudleContext.setSaveInstance(mSavedInstanceState);
+        moduleContext = new ELModuleContext();
+        moduleContext.setActivity(this);
+        moduleContext.setSaveInstance(mSavedInstanceState);
         //关联视图
         SparseArrayCompat<ViewGroup> sVerticalViews = new SparseArrayCompat<>();
         sVerticalViews.put(ELModuleContext.TOP_VIEW_GROUP, mTopViewGroup);
         sVerticalViews.put(ELModuleContext.BOTTOM_VIEW_GROUP, mBottomViewGroup);
         sVerticalViews.put(ELModuleContext.PLUGIN_CENTER_VIEW, pluginViewGroup);
-        modudleContext.setViewGroups(sVerticalViews);
+        moduleContext.setViewGroups(sVerticalViews);
 
         Observable.fromIterable(moduleManager.getModuleNames())
                 .map(new Function<String, ModuleInfo>() {
@@ -77,7 +79,7 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
                         try {
                             if(elAbsModule!=null){
                                 long before = System.currentTimeMillis();
-                                elAbsModule.module.init(modudleContext, null);
+                                elAbsModule.module.init(moduleContext, null);
                                 Log.d(TAG, "modulename: " + elAbsModule.getClass().getSimpleName() + " init time = " + (System.currentTimeMillis() - before) + "ms");
                                 moduleManager.putModule(elAbsModule.name, elAbsModule.module);
                             }
@@ -134,13 +136,16 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
 
     public void addModule(String moduleName,Bundle extend,ModuleLoadListener listener){
         if (moduleName !=null && !moduleName.isEmpty()){
+            if (moduleManager.allModules.containsKey(moduleName))  //模块不重复添加
+                return;
             ELAbsExModule module = moduleManager.getModuleByNames(moduleName);
-            if (module ==null){
+            if (module == null){
                 module = ELModuleExFactory.newModuleInstance(moduleName);
             }
-            if (modudleContext !=null &&module!=null){
-                boolean result = module.init(modudleContext,extend);
-                listener.laodResult(result);
+            if (moduleContext !=null &&module!=null){
+                boolean result = module.init(moduleContext,extend);
+                if (listener!=null)
+                    listener.laodResult(result);  //监听回调
                 if (result)
                     moduleManager.putModule(moduleName,module);
             }
@@ -153,11 +158,22 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
      */
     @ModuleEvent(coreClientClass = IBaseClient.class)
     public void removeModule(String moduleName){
-        if (moduleName!=null ||!moduleName.isEmpty()) {
+        if (moduleName!=null &&!moduleName.isEmpty()) {
             ELAbsExModule module = moduleManager.getModuleByNames(moduleName);
             if (module != null) {
+                module.detachView();  //先移除界面，再销毁
                 module.onDestroy();
                 moduleManager.remove(moduleName);
+            }
+        }
+    }
+
+    @ModuleEvent(coreClientClass = IBaseClient.class)
+    public void moduleVisible(String moduleName,boolean isVisible){
+        if (moduleName !=null && !moduleName.isEmpty()){
+            ELAbsExModule module = moduleManager.getModuleByNames(moduleName);
+            if (module !=null){
+                module.setVisible(isVisible);
             }
         }
     }

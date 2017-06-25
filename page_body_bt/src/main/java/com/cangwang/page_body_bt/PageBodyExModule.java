@@ -24,6 +24,8 @@ public class PageBodyExModule extends ELBasicExModule {
     private TextView pageBodyTop;
     private TextView pageBodyBottom;
     private Button changeNameBtn;
+    private Button showTitle;
+    private Button goneTitle;
 
     @Override
     public boolean init(ELModuleContext moduleContext, Bundle extend) {
@@ -35,11 +37,28 @@ public class PageBodyExModule extends ELBasicExModule {
 
     private void initView(){
         pageBodyView_bt = LayoutInflater.from(context).inflate(R.layout.page_body_bt,parentTop,true);
-        pageBodyTop = (TextView) pageBodyView_bt.findViewById(R.id.page_body_top);
+        pageBodyTop = genericFindViewById(R.id.page_body_top);
+
+        showTitle = genericFindViewById(R.id.show_title);
+        goneTitle = genericFindViewById(R.id.gone_title);
+
+        showTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ModuleBus.getInstance().post(IBaseClient.class,"moduleVisible","com.cangwang.page_name.PageNameExModule",true);
+            }
+        });
+
+        goneTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ModuleBus.getInstance().post(IBaseClient.class,"moduleVisible","com.cangwang.page_name.PageNameExModule",false);
+            }
+        });
 
         pageBodyView_bts = LayoutInflater.from(context).inflate(R.layout.page_body_bts,parentBottom,true);
 
-        changeNameBtn = (Button) pageBodyView_bts.findViewById(R.id.change_name);
+        changeNameBtn = genericFindViewById(R.id.change_name);
         changeNameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

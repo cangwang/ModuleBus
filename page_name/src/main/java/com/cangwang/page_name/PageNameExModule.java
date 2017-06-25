@@ -33,13 +33,14 @@ public class PageNameExModule extends ELBasicExModule implements ModuleImpl{
     }
 
     private void initView(){
-        pageNameView = LayoutInflater.from(context).inflate(R.layout.page_name_layout,parentTop,true);
-        pageTitle = (TextView) pageNameView.findViewById(R.id.page_title);
+//        pageNameView = LayoutInflater.from(context).inflate(R.layout.page_name_layout,parentTop,false);
+        pageNameView = initLayout(R.layout.page_name_layout,parentTop);
+        //一定需使用此方式初始化控件，不然无法隐藏或运行中移除控件
+        pageTitle = genericFindViewById(R.id.page_title);
     }
 
     @Override
     public void onDestroy() {
-        detachView();
         ModuleBus.getInstance().unregister(this);
         super.onDestroy();
     }
@@ -54,12 +55,5 @@ public class PageNameExModule extends ELBasicExModule implements ModuleImpl{
         for (int i=0;i<5;i++){
             Log.v("PageNameModule","PageNameModule onLoad");
         }
-    }
-
-    @Override
-    public void detachView() {
-        if (pageTitle.getParent() !=null)
-            ((ViewGroup)pageTitle.getParent()).removeView(pageTitle);
-        super.detachView();
     }
 }

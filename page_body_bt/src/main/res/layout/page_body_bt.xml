@@ -5,6 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/page_body_top"
+        android:layout_marginBottom="10dp"
+        android:layout_centerHorizontal="true">
+        <Button
+            android:id="@+id/show_title"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+
+            android:background="@android:color/holo_red_light"
+            android:text="show title"/>
+        <Button
+            android:id="@+id/gone_title"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/show_title"
+            android:background="@android:color/holo_green_light"
+            android:text="gone title"/>
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/page_body_top"
