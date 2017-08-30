@@ -1,1 +1,1 @@
-include ':app', ':base', ':a', ':b', ':core', ':page_name', ':page_body', ':page_body_bt', ':page_view'
+include ':app', ':base', ':a', ':b', ':core', ':page_name', ':page_body', ':page_body_bt', ':page_view', ':compiler', ':annotation'

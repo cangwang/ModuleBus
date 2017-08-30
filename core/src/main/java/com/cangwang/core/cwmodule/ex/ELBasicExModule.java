@@ -3,13 +3,13 @@ package com.cangwang.core.cwmodule.ex;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.CallSuper;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cangwang.core.cwmodule.ELAbsModule;
 import com.cangwang.core.cwmodule.ELModuleContext;
 
 import java.util.ArrayList;
@@ -30,6 +30,7 @@ public class ELBasicExModule extends ELAbsExModule{
     public View own;
     public List<View> viewList = new ArrayList<>();
 
+    @CallSuper
     @Override
     public boolean init(ELModuleContext moduleContext, Bundle extend) {
         context = moduleContext.getActivity();
@@ -47,7 +48,7 @@ public class ELBasicExModule extends ELAbsExModule{
         return view;
     }
 
-        @Override
+    @Override
     public void onSaveInstanceState(Bundle outState) {
 
     }
@@ -72,6 +73,7 @@ public class ELBasicExModule extends ELAbsExModule{
 
     }
 
+    @CallSuper
     @Override
     public void detachView(){
         ViewGroup viewGroup;
@@ -82,6 +84,7 @@ public class ELBasicExModule extends ELAbsExModule{
         }
     }
 
+    @CallSuper
     @Override
     public void onDestroy() {
 

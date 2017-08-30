@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 project.ext {
     compileSdkVersion = 25
-    buildToolsVersion = "24.0.2"
+    buildToolsVersion = "25.0.2"
     minSdkVersion = 15
     targetSdkVersion = 25
     applicationId = "com.cangwang.modulebus"
