@@ -11,16 +11,22 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.cangwang.annotation.ModuleGroup;
+import com.cangwang.annotation.ModuleUnit;
 import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleBus;
 import com.cangwang.core.cwmodule.ELModuleContext;
 import com.cangwang.core.cwmodule.ex.ELBasicExModule;
 import com.cangwang.core.util.ModuleImpl;
+import com.cangwang.enums.LayoutLevel;
 
 /**
  * Created by cangwang on 2016/12/28.
  */
-
+@ModuleGroup({
+       @ModuleUnit(templet="normal",layoutlevel = LayoutLevel.NORMAL,extralevel = 1),
+        @ModuleUnit(templet="special",layoutlevel = LayoutLevel.HIGHT,extralevel = 2)
+})
 public class PageBodyExModule extends ELBasicExModule implements ModuleImpl{
     private View pageBodyView_fi;
     private View pageBodyView_se;

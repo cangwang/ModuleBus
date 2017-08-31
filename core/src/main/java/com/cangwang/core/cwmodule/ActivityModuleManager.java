@@ -17,6 +17,7 @@ public class ActivityModuleManager extends ModuleManager{
     private static final String TAG = "ActivityModuleManager";
 
 
+
     public void initModules(Bundle saveInstance, Activity activity,ArrayMap<String,ArrayList<Integer>> modules){
         if (activity == null || modules == null) return;
         moduleConfig(modules);
