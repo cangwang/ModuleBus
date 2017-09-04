@@ -3,6 +3,7 @@ package com.cangwang.utils;
 public class ModuleUtil {
 
     public static final String PROJECT = "ModuleBus";
+    public static final String MODULE_UNIT = "ModuleUnit";
     public static final String SEPARATOR = "$$";
 
     public static final String FACADE_PACKAGE = "com.cangwang.core";
@@ -15,6 +16,8 @@ public class ModuleUtil {
     public static final String IMODULE_GROUP = FACADE_PACKAGE + TEMPLATE_PACKAGE + ".IModuleGroup";
     public static final String IMODULE_UNIT = FACADE_PACKAGE + TEMPLATE_PACKAGE + ".IModuleUnit";
     public static final String METHOD_LOAD_INTO = "loadInto";
+
+    public static final String NAME_OF_MODULEUNIT = MODULE_UNIT + SEPARATOR;
 
     public static final String ANNOTATION_TYPE_MODULEUNIT = MODULE_ANNOTATION + "ModuleUnit";
 }

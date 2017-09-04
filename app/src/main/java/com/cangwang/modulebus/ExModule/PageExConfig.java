@@ -36,7 +36,7 @@ public class PageExConfig {
 
     public static final String MODULE_PAGE_NAME ="com.cangwang.page_name.PageNameExModule";
     public static final String MODULE_BODY_NAME ="com.cangwang.page_body.PageBodyExModule";
-    public static final String MODULE_BODY_BT_NAME ="com.cangwang.page_body_bt.PageBodyExModule";
+    public static final String MODULE_BODY_BT_NAME ="com.cangwang.page_body_bt.PageBodyBTExModule";
 
     public static final String MODULE_VIEW_PAGE_NAME ="com.cangwang.page_view.PageViewModule";
 

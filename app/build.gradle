@@ -44,6 +44,7 @@ dependencies {
     })
     compile 'com.android.support:design:25.0.1'
     compile 'com.android.support:appcompat-v7:25.0.1'
+    annotationProcessor project(":compiler")
 
     if(project.ext.isLib) {
         embedded project(':page_body')

@@ -28,4 +28,6 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile project(':base')
+    annotationProcessor project(":compiler")
+
 }

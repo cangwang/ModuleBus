@@ -1,24 +1,22 @@
 package com.cangwang.page_body_bt;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.cangwang.annotation.ModuleUnit;
 import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleBus;
-import com.cangwang.core.cwmodule.ELBasicModule;
 import com.cangwang.core.cwmodule.ELModuleContext;
 import com.cangwang.core.cwmodule.ex.ELBasicExModule;
 
 /**
  * Created by cangwang on 2017/6/15.
  */
-
-public class PageBodyExModule extends ELBasicExModule {
+@ModuleUnit()
+public class PageBodyBTExModule extends ELBasicExModule {
     private View pageBodyView_bt;
     private View pageBodyView_bts;
     private TextView pageBodyTop;

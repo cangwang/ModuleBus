@@ -1,7 +1,6 @@
 package com.cangwang.process;
 
 import com.cangwang.annotation.ModuleUnit;
-import com.cangwang.enums.LayoutLevel;
 import com.cangwang.model.ModuleMeta;
 import com.cangwang.utils.Logger;
 import com.cangwang.utils.ModuleUtil;
@@ -109,21 +108,24 @@ public class ModuleUnitProcessor extends AbstractProcessor {
 
             for (Element element:modulesElements){
                 ModuleUnit moduleUnit=element.getAnnotation(ModuleUnit.class);
-                ModuleMeta moduleMeta= new ModuleMeta(moduleUnit,element);
                 ClassName name = ClassName.get(((TypeElement)element));
+                String address = name.packageName()+"."+name.simpleName();  //真实模块入口地址 包名+类名
+                ModuleMeta moduleMeta= new ModuleMeta(moduleUnit,address);
                 groupMap.put(element.getSimpleName().toString(),moduleMeta);
 
                 loadIntoMethodOfRootBuilder.addStatement("metaSet.add(new $T($S,$S,$L,$L))",
                         moduleMetaCn,
                         moduleMeta.templet,
-                        name.packageName()+"."+name.simpleName(),
+                        moduleMeta.moduleName,
                         moduleMeta.layoutlevel.getValue(),
                         moduleMeta.extralevel
                 );
 
+                logger.info(">>> build moduleUnit,moduleMeta = " + moduleMeta.toString() + " <<<");
+
                 //构造java文件
                 JavaFile.builder(ModuleUtil.FACADE_PACKAGE,
-                        TypeSpec.classBuilder(moduleMeta.moduleName)
+                        TypeSpec.classBuilder(ModuleUtil.NAME_OF_MODULEUNIT+name.simpleName())
                                 .addJavadoc(ModuleUtil.WARNING_TIPS)
                                 .addSuperinterface(ClassName.get(elements.getTypeElement(ModuleUtil.IMODULE_UNIT)))
                                 .addModifiers(Modifier.PUBLIC)

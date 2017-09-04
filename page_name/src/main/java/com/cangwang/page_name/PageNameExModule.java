@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.cangwang.annotation.ModuleUnit;
 import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleBus;
 import com.cangwang.core.ModuleEvent;
@@ -18,7 +19,7 @@ import com.cangwang.core.util.ModuleImpl;
 /**
  * Created by cangwang on 2017/6/15
  */
-
+@ModuleUnit(templet = "top")
 public class PageNameExModule extends ELBasicExModule implements ModuleImpl{
     private View pageNameView;
     private TextView pageTitle;

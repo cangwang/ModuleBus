@@ -24,7 +24,7 @@ import com.cangwang.enums.LayoutLevel;
  * Created by cangwang on 2016/12/28.
  */
 
-@ModuleUnit(layoutlevel = LayoutLevel.NORMAL,extralevel = 1)
+@ModuleUnit(templet = "top")
 public class PageBodyExModule extends ELBasicExModule implements ModuleImpl{
     private View pageBodyView_fi;
     private View pageBodyView_se;

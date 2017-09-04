@@ -28,6 +28,7 @@ dependencies {
     provided 'io.reactivex.rxjava2:rxjava:2.+'
     provided 'io.reactivex.rxjava2:rxandroid:+'
     compile project(':annotation')
+    annotationProcessor project(":compiler")
 }
 
 ext {

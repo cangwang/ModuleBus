@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.cangwang.annotation.ModuleUnit;
 import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleBus;
 import com.cangwang.core.ModuleEvent;
@@ -15,7 +16,7 @@ import com.cangwang.core.cwmodule.ELModuleContext;
 /**
  * Created by air on 2017/1/13.
  */
-
+@ModuleUnit()
 public class PageViewModule extends ELBasicModule {
 
     private Activity activity;

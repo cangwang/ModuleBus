@@ -12,28 +12,48 @@ import javax.lang.model.element.Element;
 
 public class ModuleMeta {
 //    public Element rwaType;
-    public String moduleName;
     public String templet;
+    public String moduleName;
     public LayoutLevel layoutlevel;
     public int extralevel;
 
     public ModuleMeta(String templet,String moduleName,int layoutlevel,int extralevel){
 //        this.rwaType = rawType;
-        this.moduleName = moduleName;
         this.templet = templet;
-        this.layoutlevel = LayoutLevel.values()[layoutlevel];
+        this.moduleName = moduleName;
+        if (layoutlevel == 500){
+            this.layoutlevel = LayoutLevel.VERY_LOW;
+        }else if (layoutlevel == 400){
+            this.layoutlevel = LayoutLevel.LOW;
+        }else if (layoutlevel == 300){
+            this.layoutlevel = LayoutLevel.NORMAL;
+        }else if (layoutlevel == 200){
+            this.layoutlevel = LayoutLevel.HIGHT;
+        }else if (layoutlevel == 100){
+            this.layoutlevel = LayoutLevel.VERY_HIGHT;
+        }
         this.extralevel = extralevel;
     }
 
-    public ModuleMeta(ModuleUnit unit, Element rawType){
+    public ModuleMeta(ModuleUnit unit,String moduleName){
 //        this.rwaType = rawType;
-        this.moduleName = rawType.getSimpleName().toString();
+        this.moduleName = moduleName;
         this.templet = unit.templet();
         this.layoutlevel = unit.layoutlevel();
         this.extralevel = unit.extralevel();
     }
 
-    public static ModuleMeta build(ModuleUnit unit, Element rawType){
-        return  new ModuleMeta(unit,rawType);
+//    public static ModuleMeta build(ModuleUnit unit, Element rawType){
+//        return  new ModuleMeta(unit,rawType);
+//    }
+
+    @Override
+    public String toString() {
+        return "ModuleMeta{" +
+                "moduleName='" + moduleName + '\'' +
+                ", templet='" + templet + '\'' +
+                ", layoutlevel=" + layoutlevel +
+                ", extralevel=" + extralevel +
+                '}';
     }
 }
