@@ -26,6 +26,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    gradle.taskGraph.whenReady {
+        tasks.each {
+            task ->
+                if(task.name.contains("Test")){
+                    task.enabled=false;
+                }
+        }
+    }
 }
 
 dependencies {

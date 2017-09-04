@@ -12,9 +12,9 @@ import java.lang.annotation.Target;
  * Created by cangwang on 2017/8/31.
  */
 @Target({ElementType.TYPE})
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.CLASS)
 public @interface ModuleUnit {
-    String templet();
-    LayoutLevel layoutlevel();
-    int extralevel();
+    String templet() default "normal";
+    LayoutLevel layoutlevel() default LayoutLevel.NORMAL;
+    int extralevel() default 0;
 }

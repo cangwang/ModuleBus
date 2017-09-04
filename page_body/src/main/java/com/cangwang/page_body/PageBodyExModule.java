@@ -23,10 +23,8 @@ import com.cangwang.enums.LayoutLevel;
 /**
  * Created by cangwang on 2016/12/28.
  */
-@ModuleGroup({
-       @ModuleUnit(templet="normal",layoutlevel = LayoutLevel.NORMAL,extralevel = 1),
-        @ModuleUnit(templet="special",layoutlevel = LayoutLevel.HIGHT,extralevel = 2)
-})
+
+@ModuleUnit(layoutlevel = LayoutLevel.NORMAL,extralevel = 1)
 public class PageBodyExModule extends ELBasicExModule implements ModuleImpl{
     private View pageBodyView_fi;
     private View pageBodyView_se;
