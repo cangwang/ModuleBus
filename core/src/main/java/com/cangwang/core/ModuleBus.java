@@ -11,6 +11,7 @@ import com.cangwang.core.info.MethodInfo;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by zjl on 16/10/19.
@@ -273,6 +274,10 @@ public class ModuleBus {
 
     public static void init(Context context){
         ModuleCenter.init(context);
+    }
+
+    public List<String> getModuleList(String templet) {
+        return ModuleCenter.getModuleList(templet);
     }
 
 }

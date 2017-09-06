@@ -10,6 +10,7 @@ import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterSpec;
 import com.squareup.javapoet.ParameterizedTypeName;
+import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -112,6 +113,7 @@ public class ModuleUnitProcessor extends AbstractProcessor {
                 String address = name.packageName()+"."+name.simpleName();  //真实模块入口地址 包名+类名
                 ModuleMeta moduleMeta= new ModuleMeta(moduleUnit,address);
                 groupMap.put(element.getSimpleName().toString(),moduleMeta);
+
 
                 loadIntoMethodOfRootBuilder.addStatement("metaSet.add(new $T($S,$S,$L,$L))",
                         moduleMetaCn,

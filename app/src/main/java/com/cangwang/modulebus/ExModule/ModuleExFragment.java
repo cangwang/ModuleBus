@@ -2,6 +2,7 @@ package com.cangwang.modulebus.ExModule;
 
 import android.os.Bundle;
 
+import com.cangwang.core.ModuleBus;
 import com.cangwang.core.cwmodule.ex.ModuleManageExFragment;
 
 import java.util.ArrayList;
@@ -29,12 +30,6 @@ public class ModuleExFragment extends ModuleManageExFragment {
 
     @Override
     public List<String> moduleConfig() {
-        if (PageExConfig.moduleList.size()>0)
-            return PageExConfig.moduleList;
-
-        List<String> moduleList= new ArrayList<>();
-        moduleList.add(PageExConfig.MODULE_PAGE_NAME);
-        moduleList.add(PageExConfig.MODULE_BODY_BT_NAME);
-        return moduleList;
+        return ModuleBus.getInstance().getModuleList("normal");
     }
 }

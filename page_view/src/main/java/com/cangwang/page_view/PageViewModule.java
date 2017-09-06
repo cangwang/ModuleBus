@@ -1,6 +1,7 @@
 package com.cangwang.page_view;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +13,13 @@ import com.cangwang.core.ModuleBus;
 import com.cangwang.core.ModuleEvent;
 import com.cangwang.core.cwmodule.ELBasicModule;
 import com.cangwang.core.cwmodule.ELModuleContext;
+import com.cangwang.core.cwmodule.ex.ELBasicExModule;
 
 /**
  * Created by air on 2017/1/13.
  */
-@ModuleUnit()
-public class PageViewModule extends ELBasicModule {
+//@ModuleUnit()
+public class PageViewModule extends ELBasicExModule {
 
     private Activity activity;
     private ViewGroup parentViewGroup;
@@ -25,13 +27,14 @@ public class PageViewModule extends ELBasicModule {
     private TextView pageTitle;
 
     @Override
-    public void init(ELModuleContext moduleContext, String extend) {
+    public boolean init(ELModuleContext moduleContext, Bundle extend) {
         super.init(moduleContext, extend);
         activity = moduleContext.getActivity();
         parentViewGroup = moduleContext.getView(0);
         this.moduleContext = moduleContext;
         initView();
         ModuleBus.getInstance().register(this);
+        return true;
     }
 
     private void initView(){

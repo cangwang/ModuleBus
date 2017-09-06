@@ -46,13 +46,20 @@ public class ModuleCenter {
     private static void sort(Set<ModuleMeta> group){
         for (ModuleMeta meta:group){
             Log.i(TAG,"meta ="+meta.toString());
-            Set<ModuleMeta> metaSet = new HashSet<>();
-            if (sortgroup.get(meta.templet)!=null){
-                metaSet = sortgroup.get(meta.templet);
+            String[] templets = split(meta.templet);
+            for (String templet :templets) {
+                Set<ModuleMeta> metaSet = new HashSet<>();
+                if (sortgroup.get(templet) != null) {
+                    metaSet = sortgroup.get(templet);
+                }
+                metaSet.add(meta);
+                sortgroup.put(templet, metaSet);
             }
-            metaSet.add(meta);
-            sortgroup.put(meta.templet,metaSet);
         }
+    }
+
+    private static String[] split(String groupName){
+        return groupName.split(",");
     }
 
     public static List<String> getModuleList(String templet){

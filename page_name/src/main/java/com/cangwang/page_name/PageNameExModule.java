@@ -19,7 +19,7 @@ import com.cangwang.core.util.ModuleImpl;
 /**
  * Created by cangwang on 2017/6/15
  */
-@ModuleUnit(templet = "top")
+@ModuleUnit(templet = "top,normal")
 public class PageNameExModule extends ELBasicExModule implements ModuleImpl{
     private View pageNameView;
     private TextView pageTitle;
