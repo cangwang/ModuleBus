@@ -3,29 +3,27 @@ package com.cangwang.page_name;
 import android.app.Application;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cangwang.annotation.ModuleUnit;
 import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleBus;
 import com.cangwang.core.ModuleEvent;
-import com.cangwang.core.cwmodule.ELModuleContext;
-import com.cangwang.core.cwmodule.ex.ELBasicExModule;
+import com.cangwang.core.cwmodule.CWModuleContext;
+import com.cangwang.core.cwmodule.ex.CWBasicExModule;
 import com.cangwang.core.util.ModuleImpl;
 
 /**
  * Created by cangwang on 2017/6/15
  */
 @ModuleUnit(templet = "top,normal")
-public class PageNameExModule extends ELBasicExModule implements ModuleImpl{
+public class PageNameExModule extends CWBasicExModule implements ModuleImpl{
     private View pageNameView;
     private TextView pageTitle;
 
     @Override
-    public boolean init(ELModuleContext moduleContext, Bundle extend) {
+    public boolean init(CWModuleContext moduleContext, Bundle extend) {
         super.init(moduleContext, extend);
         this.moduleContext = moduleContext;
         initView();

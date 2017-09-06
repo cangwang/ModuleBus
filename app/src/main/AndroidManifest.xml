@@ -9,31 +9,13 @@
         android:name=".ModuleApplication"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--<activity android:name=".MainActivity">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
-        <activity android:name=".AdaviceActivity"
+        <activity android:name=".AdviceActivity"
             android:theme="@style/AppWelcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ModuleMainActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-            <intent-filter>
-                <action android:name="com.cangwang.main" />
-
-                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".ExModule.ModuleMainExActivity"
@@ -45,13 +27,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ModuleExampleActivity">
-            <intent-filter>
-                <action android:name="com.cangwang.moduleFragment" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <activity android:name=".ExModule.ModuleExActivity">
             <intent-filter>
                 <action android:name="com.cangwang.moduleExFg" />

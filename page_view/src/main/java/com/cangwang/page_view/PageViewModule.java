@@ -7,19 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.cangwang.annotation.ModuleUnit;
 import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleBus;
 import com.cangwang.core.ModuleEvent;
-import com.cangwang.core.cwmodule.ELBasicModule;
-import com.cangwang.core.cwmodule.ELModuleContext;
-import com.cangwang.core.cwmodule.ex.ELBasicExModule;
+import com.cangwang.core.cwmodule.CWModuleContext;
+import com.cangwang.core.cwmodule.ex.CWBasicExModule;
 
 /**
  * Created by air on 2017/1/13.
  */
 //@ModuleUnit()
-public class PageViewModule extends ELBasicExModule {
+public class PageViewModule extends CWBasicExModule {
 
     private Activity activity;
     private ViewGroup parentViewGroup;
@@ -27,7 +25,7 @@ public class PageViewModule extends ELBasicExModule {
     private TextView pageTitle;
 
     @Override
-    public boolean init(ELModuleContext moduleContext, Bundle extend) {
+    public boolean init(CWModuleContext moduleContext, Bundle extend) {
         super.init(moduleContext, extend);
         activity = moduleContext.getActivity();
         parentViewGroup = moduleContext.getView(0);

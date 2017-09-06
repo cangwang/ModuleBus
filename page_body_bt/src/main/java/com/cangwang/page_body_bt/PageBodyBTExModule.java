@@ -9,14 +9,14 @@ import android.widget.TextView;
 import com.cangwang.annotation.ModuleUnit;
 import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleBus;
-import com.cangwang.core.cwmodule.ELModuleContext;
-import com.cangwang.core.cwmodule.ex.ELBasicExModule;
+import com.cangwang.core.cwmodule.CWModuleContext;
+import com.cangwang.core.cwmodule.ex.CWBasicExModule;
 
 /**
  * Created by cangwang on 2017/6/15.
  */
 @ModuleUnit()
-public class PageBodyBTExModule extends ELBasicExModule {
+public class PageBodyBTExModule extends CWBasicExModule {
     private View pageBodyView_bt;
     private View pageBodyView_bts;
     private TextView pageBodyTop;
@@ -26,7 +26,7 @@ public class PageBodyBTExModule extends ELBasicExModule {
     private Button goneTitle;
 
     @Override
-    public boolean init(ELModuleContext moduleContext, Bundle extend) {
+    public boolean init(CWModuleContext moduleContext, Bundle extend) {
         super.init(moduleContext, extend);
         this.moduleContext = moduleContext;
         initView();

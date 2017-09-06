@@ -1,7 +1,7 @@
 package com.cangwang.core.info;
 
 
-import com.cangwang.core.cwmodule.ex.ELAbsExModule;
+import com.cangwang.core.cwmodule.ex.CWAbsExModule;
 
 /**
  * Created by zjl on 2017/5/18.
@@ -9,9 +9,9 @@ import com.cangwang.core.cwmodule.ex.ELAbsExModule;
 
 public class ModuleInfo {
     public String name;
-    public ELAbsExModule module;
+    public CWAbsExModule module;
 
-    public ModuleInfo(String name, ELAbsExModule module) {
+    public ModuleInfo(String name, CWAbsExModule module) {
         this.name = name;
         this.module = module;
     }

@@ -1,20 +1,20 @@
-package com.cangwang.core.cwmodule;
+package com.cangwang.core.cwmodule.ex;
 
 /**
- * Created by cangwang on 2016/12/26.
+ * Created by cangwang on 2017/6/16.
  */
 
-public class ELModuleFactory {
+public class CWModuleExFactory {
 
-    public static ELAbsModule newModuleInstance(String name){
+    public static CWAbsExModule newModuleInstance(String name){
         if (name ==null || name.equals("")){
             return null;
         }
 
         try{
-            Class<? extends ELAbsModule> moduleClzz = (Class<? extends ELAbsModule>) Class.forName(name);
+            Class<? extends CWAbsExModule> moduleClzz = (Class<? extends CWAbsExModule>) Class.forName(name);
             if (moduleClzz !=null){
-                ELAbsModule instance = (ELAbsModule)moduleClzz.newInstance();
+                CWAbsExModule instance = (CWAbsExModule)moduleClzz.newInstance();
                 return instance;
             }
             return null;

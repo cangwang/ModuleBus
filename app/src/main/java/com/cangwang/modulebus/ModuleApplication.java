@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.cangwang.core.ModuleBus;
 import com.cangwang.core.util.ModuleImpl;
+import com.cangwang.modulebus.ExModule.PageExConfig;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -27,7 +28,7 @@ public class ModuleApplication extends Application{
     public void onCreate() {
         super.onCreate();
         long time = System.currentTimeMillis();
-        for (String implName:PageConfig.moduleCreate){
+        for (String implName: PageExConfig.moduleCreate){
             try {
                 Class<?> clazz = Class.forName(implName);
                 if (clazz.newInstance() instanceof ModuleImpl){

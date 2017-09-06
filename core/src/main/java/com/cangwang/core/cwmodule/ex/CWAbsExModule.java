@@ -1,16 +1,16 @@
-package com.cangwang.core.cwmodule;
+package com.cangwang.core.cwmodule.ex;
 
 import android.os.Bundle;
 
-import java.util.Map;
+import com.cangwang.core.cwmodule.CWModuleContext;
 
 /**
  * Created by cangwang on 2016/12/26.
  */
 
-public abstract class ELAbsModule {
+public abstract class CWAbsExModule {
 
-    public abstract void init(ELModuleContext moduleContext,String extend);
+    public abstract boolean init(CWModuleContext moduleContext, Bundle extend);
 
     public abstract void onSaveInstanceState(Bundle outState);
 
@@ -24,4 +24,7 @@ public abstract class ELAbsModule {
 
     public abstract void onDestroy();
 
+    public abstract void detachView();
+
+    public abstract void setVisible(boolean visible);
 }

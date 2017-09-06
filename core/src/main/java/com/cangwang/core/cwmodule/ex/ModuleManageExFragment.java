@@ -14,7 +14,7 @@ import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleBus;
 import com.cangwang.core.ModuleEvent;
 import com.cangwang.core.R;
-import com.cangwang.core.cwmodule.ELModuleContext;
+import com.cangwang.core.cwmodule.CWModuleContext;
 import com.cangwang.core.info.ModuleInfo;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public abstract class ModuleManageExFragment extends Fragment{
     private View rootView;
 
     private ModuleExManager moduleManager;
-    private ELModuleContext moduleContext;
+    private CWModuleContext moduleContext;
 
     @Nullable
     @Override
@@ -57,21 +57,21 @@ public abstract class ModuleManageExFragment extends Fragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        moduleContext = new ELModuleContext();
+        moduleContext = new CWModuleContext();
         moduleContext.setActivity(getActivity());
         moduleContext.setSaveInstance(savedInstanceState);
         //关联视图
         SparseArrayCompat<ViewGroup> sVerticalViews = new SparseArrayCompat<>();
-        sVerticalViews.put(ELModuleContext.TOP_VIEW_GROUP, mTopViewGroup);
-        sVerticalViews.put(ELModuleContext.BOTTOM_VIEW_GROUP, mBottomViewGroup);
-        sVerticalViews.put(ELModuleContext.PLUGIN_CENTER_VIEW, pluginViewGroup);
+        sVerticalViews.put(CWModuleContext.TOP_VIEW_GROUP, mTopViewGroup);
+        sVerticalViews.put(CWModuleContext.BOTTOM_VIEW_GROUP, mBottomViewGroup);
+        sVerticalViews.put(CWModuleContext.PLUGIN_CENTER_VIEW, pluginViewGroup);
         moduleContext.setViewGroups(sVerticalViews);
 
         Observable.fromIterable(moduleManager.getModuleNames())
                 .map(new Function<String, ModuleInfo>() {
                     @Override
                     public ModuleInfo apply(@NonNull String s){
-                        return new ModuleInfo(s, ELModuleExFactory.newModuleInstance(s));
+                        return new ModuleInfo(s, CWModuleExFactory.newModuleInstance(s));
                     }
                 })
 //              .delay(10, TimeUnit.MILLISECONDS)
@@ -139,9 +139,9 @@ public abstract class ModuleManageExFragment extends Fragment{
         if (moduleName !=null && !moduleName.isEmpty()){
             if (moduleManager.allModules.containsKey(moduleName))  //模块不重复添加
                 return;
-            ELAbsExModule module = moduleManager.getModuleByNames(moduleName);
+            CWAbsExModule module = moduleManager.getModuleByNames(moduleName);
             if (module == null){
-                module = ELModuleExFactory.newModuleInstance(moduleName);
+                module = CWModuleExFactory.newModuleInstance(moduleName);
             }
             if (moduleContext !=null &&module!=null){
                 boolean result = module.init(moduleContext,extend);
@@ -160,7 +160,7 @@ public abstract class ModuleManageExFragment extends Fragment{
     @ModuleEvent(coreClientClass = IBaseClient.class)
     public void removeModule(String moduleName){
         if (moduleName!=null &&!moduleName.isEmpty()) {
-            ELAbsExModule module = moduleManager.getModuleByNames(moduleName);
+            CWAbsExModule module = moduleManager.getModuleByNames(moduleName);
             if (module != null) {
                 module.detachView();  //先移除界面，再销毁
                 module.onDestroy();
@@ -172,7 +172,7 @@ public abstract class ModuleManageExFragment extends Fragment{
     @ModuleEvent(coreClientClass = IBaseClient.class)
     public void moduleVisible(String moduleName,boolean isVisible){
         if (moduleName !=null && !moduleName.isEmpty()){
-            ELAbsExModule module = moduleManager.getModuleByNames(moduleName);
+            CWAbsExModule module = moduleManager.getModuleByNames(moduleName);
             if (module !=null){
                 module.setVisible(isVisible);
             }
