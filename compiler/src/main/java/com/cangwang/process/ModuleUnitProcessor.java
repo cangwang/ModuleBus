@@ -114,11 +114,14 @@ public class ModuleUnitProcessor extends AbstractProcessor {
                 ModuleMeta moduleMeta= new ModuleMeta(moduleUnit,address);
                 groupMap.put(element.getSimpleName().toString(),moduleMeta);
 
+                String[] nameZone = split(moduleMeta.moduleName);
+                moduleMeta.title = !moduleMeta.title.equals("CangWang") ? moduleMeta.title:nameZone[ nameZone.length-1];
 
-                loadIntoMethodOfRootBuilder.addStatement("metaSet.add(new $T($S,$S,$L,$L))",
+                loadIntoMethodOfRootBuilder.addStatement("metaSet.add(new $T($S,$S,$S,$L,$L))",
                         moduleMetaCn,
                         moduleMeta.templet,
                         moduleMeta.moduleName,
+                        moduleMeta.title,
                         moduleMeta.layoutlevel.getValue(),
                         moduleMeta.extralevel
                 );
@@ -136,5 +139,9 @@ public class ModuleUnitProcessor extends AbstractProcessor {
                 ).build().writeTo(mFiler);
             }
         }
+    }
+
+    private String[] split(String groupName){
+        return groupName.split("\\.");
     }
 }

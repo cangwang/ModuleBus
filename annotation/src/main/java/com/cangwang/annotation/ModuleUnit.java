@@ -15,6 +15,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.CLASS)
 public @interface ModuleUnit {
     String templet() default "normal";
+    String title() default "CangWang";
     LayoutLevel layoutlevel() default LayoutLevel.NORMAL;
     int extralevel() default 0;
 }

@@ -65,8 +65,7 @@ public class ModuleCenter {
     public static List<String> getModuleList(String templet){
         List<String> list = new ArrayList<>();
         if (sortgroup.containsKey(templet)) {
-            Set<ModuleMeta> metaSet = sortgroup.get(templet);
-            for (ModuleMeta meta : metaSet) {
+            for (ModuleMeta meta : sortgroup.get(templet)) {
                 list.add(meta.moduleName);
             }
         }else {
@@ -74,5 +73,23 @@ public class ModuleCenter {
         }
         Log.i(TAG,"list ="+list.toString());
         return list;
+    }
+
+    public static Set<ModuleMeta> getMouleList(String templet){
+        if (sortgroup.containsKey(templet)){
+            return sortgroup.get(templet);
+        }
+        return null;
+    }
+
+    public static List<String> getTitleList(String templet){
+        if (sortgroup.containsKey(templet)) {
+            List<String> namelist = new ArrayList<>();
+            for (ModuleMeta meta : sortgroup.get(templet)) {
+                namelist.add(meta.title);
+            }
+            return namelist;
+        }
+        return null;
     }
 }
