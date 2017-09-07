@@ -114,17 +114,20 @@ public class ModuleUnitProcessor extends AbstractProcessor {
                 ModuleMeta moduleMeta= new ModuleMeta(moduleUnit,address);
                 groupMap.put(element.getSimpleName().toString(),moduleMeta);
 
-                String[] nameZone = split(moduleMeta.moduleName);
+                String[] nameZone = splitDot(moduleMeta.moduleName);
                 moduleMeta.title = !moduleMeta.title.equals("CangWang") ? moduleMeta.title:nameZone[ nameZone.length-1];
 
-                loadIntoMethodOfRootBuilder.addStatement("metaSet.add(new $T($S,$S,$S,$L,$L))",
-                        moduleMetaCn,
-                        moduleMeta.templet,
-                        moduleMeta.moduleName,
-                        moduleMeta.title,
-                        moduleMeta.layoutlevel.getValue(),
-                        moduleMeta.extralevel
-                );
+                String[] templets = split(moduleMeta.templet);
+                for (String templet:templets) {
+                    loadIntoMethodOfRootBuilder.addStatement("metaSet.add(new $T($S,$S,$S,$L,$L))",
+                            moduleMetaCn,
+                            templet,
+                            moduleMeta.moduleName,
+                            moduleMeta.title,
+                            moduleMeta.layoutlevel.getValue(),
+                            moduleMeta.extralevel
+                    );
+                }
 
                 logger.info(">>> build moduleUnit,moduleMeta = " + moduleMeta.toString() + " <<<");
 
@@ -141,7 +144,11 @@ public class ModuleUnitProcessor extends AbstractProcessor {
         }
     }
 
-    private String[] split(String groupName){
+    private String[] splitDot(String groupName){
         return groupName.split("\\.");
+    }
+
+    private String[] split(String groupName){
+        return groupName.split(",");
     }
 }
