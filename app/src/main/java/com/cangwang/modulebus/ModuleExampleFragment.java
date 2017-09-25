@@ -21,11 +21,6 @@ public class ModuleExampleFragment extends ModuleManageFragment {
     private ModuleManagerView moduleManagerView;
 
     @Override
-    public int getContentViewId() {
-        return R.layout.fragment_module;
-    }
-
-    @Override
     public ArrayMap<String, ArrayList<Integer>> moduleConfig() {
         ArrayMap<String, ArrayList<Integer>> map = new ArrayMap<>();
         map.put(PageConfig.MODULE_PAGE_NAME,new ArrayList<Integer>(){{add(R.id.page_name);}});
@@ -36,7 +31,7 @@ public class ModuleExampleFragment extends ModuleManageFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_module,container,false);
         moduleManagerView = new ModuleManagerView(getActivity(),savedInstanceState,view.findViewById(R.id.page_view)) {
             @Override
             public ArrayMap<String, ArrayList<Integer>> moduleConfig() {

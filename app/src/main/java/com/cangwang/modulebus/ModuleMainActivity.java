@@ -17,12 +17,13 @@ public class ModuleMainActivity extends ModuleManageActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_module);
     }
 
-    @Override
-    public int getContentViewId() {
-        return R.layout.activity_main_module;
-    }
+//    @Override
+//    public int getContentViewId() {
+//        return R.layout.activity_main_module;
+//    }
 
 
     @Override

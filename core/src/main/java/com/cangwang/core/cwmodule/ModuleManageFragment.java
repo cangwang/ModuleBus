@@ -20,18 +20,12 @@ public abstract class ModuleManageFragment extends Fragment{
     private View rootView;
     private FragmentModuleManager moduleManager;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView =  inflater.inflate(getContentViewId(),container,false);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         moduleManager = new FragmentModuleManager();
-        moduleManager.initModules(savedInstanceState,getActivity(),rootView,moduleConfig());
-        return rootView;
+        moduleManager.initModules(savedInstanceState,getActivity(),view,moduleConfig());
     }
-
-
-    @LayoutRes
-    public abstract int getContentViewId();
 
     public abstract ArrayMap<String,ArrayList<Integer>> moduleConfig();
 
