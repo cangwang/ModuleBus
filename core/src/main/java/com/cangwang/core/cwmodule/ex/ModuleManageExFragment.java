@@ -45,18 +45,18 @@ public abstract class ModuleManageExFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView =  inflater.inflate(R.layout.module_rank_layout,container,false);
-        mTopViewGroup = (ViewGroup) rootView.findViewById(R.id.layout_top);
-        mBottomViewGroup = (ViewGroup) rootView.findViewById(R.id.layout_bottom);
-        pluginViewGroup = (ViewGroup) rootView.findViewById(R.id.layout_plugincenter);
-        moduleManager = new ModuleExManager();
-        moduleManager.moduleConfig(moduleConfig());
-        ModuleBus.getInstance().register(this);
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mTopViewGroup = (ViewGroup) rootView.findViewById(R.id.layout_top);
+        mBottomViewGroup = (ViewGroup) rootView.findViewById(R.id.layout_bottom);
+        pluginViewGroup = (ViewGroup) rootView.findViewById(R.id.layout_plugincenter);
+        moduleManager = new ModuleExManager();
+        moduleManager.moduleConfig(moduleConfig());
+        ModuleBus.getInstance().register(this);
         moduleContext = new CWModuleContext();
         moduleContext.setActivity(getActivity());
         moduleContext.setSaveInstance(savedInstanceState);
@@ -137,7 +137,7 @@ public abstract class ModuleManageExFragment extends Fragment{
 
     public void addModule(String moduleName,Bundle extend,ModuleLoadListener listener){
         if (moduleName !=null && !moduleName.isEmpty()){
-            if (moduleManager.allModules.containsKey(moduleName))  //模块不重复添加
+            if (moduleManager.allModules.containsKey(moduleName))
                 return;
             CWAbsExModule module = moduleManager.getModuleByNames(moduleName);
             if (module == null){
@@ -146,7 +146,7 @@ public abstract class ModuleManageExFragment extends Fragment{
             if (moduleContext !=null &&module!=null){
                 boolean result = module.init(moduleContext,extend);
                 if (listener!=null)
-                    listener.laodResult(result);  //监听回调
+                    listener.laodResult(result);
                 if (result)
                     moduleManager.putModule(moduleName,module);
             }

@@ -28,11 +28,11 @@ public class ModuleCenter {
 
     public synchronized static void init(Context context){
         try {
-            List<String> classFileNames = ClassUtils.getFileNameByPackageName(context, ModuleUtil.NAME_OF_MODULEUNIT);
+            List<String> classFileNames = ClassUtils.getFileNameByPackageName(context, ModuleUtil.NAME_OF_MODULEUNIT);  //获取指定ModuleUnit$$的类名的文件
             for (String className:classFileNames){
                 if (className.startsWith(ModuleUtil.ADDRESS_OF_MODULEUNIT)){
                     IModuleUnit iModuleUnit = (IModuleUnit)(Class.forName(className).getConstructor().newInstance());
-                    iModuleUnit.loadInto(group);
+                    iModuleUnit.loadInto(group);  //加载列表
                 }
             }
             Log.i(TAG,"group ="+group.toString());
@@ -43,6 +43,10 @@ public class ModuleCenter {
         }
     }
 
+    /**
+     * 排列Module列表
+     * @param group
+     */
     private static void sort(Set<ModuleMeta> group){
         for (ModuleMeta meta:group){
             Log.i(TAG,"meta ="+meta.toString());

@@ -44,9 +44,6 @@ public class PageBodyExModule extends CWBasicExModule implements ModuleImpl{
         //直接添加布局到父布局
         pageBodyView_fi = LayoutInflater.from(context).inflate(R.layout.page_body_fi,parentTop,true);
         pageBodyTop = (TextView) pageBodyView_fi.findViewById(R.id.page_body_top);
-
-//        pageBodyView_se = LayoutInflater.from(context).inflate(R.layout.page_body_se,parentBottom,true);
-//        pageBodyBottom = (TextView) pageBodyView_se.findViewById(R.id.page_body_bottom);
         //动态添加布局
         pageBodyView_se = LayoutInflater.from(context).inflate(R.layout.page_body_se,null);
         RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -88,3 +85,4 @@ public class PageBodyExModule extends CWBasicExModule implements ModuleImpl{
         }
     }
 }
+

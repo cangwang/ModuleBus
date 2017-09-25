@@ -1,11 +1,9 @@
 /**
  * This is free and unencumbered software released into the public domain.
-
  Anyone is free to copy, modify, publish, use, compile, sell, or
  distribute this software, either in source code form or as a compiled
  binary, for any purpose, commercial or non-commercial, and by any
  means.
-
  In jurisdictions that recognize copyright laws, the author or authors
  of this software dedicate any and all copyright interest in the
  software to the public domain. We make this dedication for the benefit
@@ -13,7 +11,6 @@
  successors. We intend this dedication to be an overt act of
  relinquishment in perpetuity of all present and future rights to this
  software under copyright law.
-
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -21,7 +18,6 @@
  OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  OTHER DEALINGS IN THE SOFTWARE.
-
  For more information, please refer to <http://unlicense.org/>
  */
 
@@ -54,7 +50,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:manifest-merger:25.2.0'
+        classpath 'com.android.tools.build:manifest-merger:25.3.2'
     }
 }
 
@@ -67,15 +63,17 @@ dependencies {
 }
 
 // Paths to embedded jar files
-ext.embeddedJars = new ArrayList<String>()
+ext.embeddedJars = new ArrayList()
 // Paths to embedded aar projects
-ext.embeddedAarDirs = new ArrayList<String>()
+ext.embeddedAarDirs = new ArrayList()
+// Embedded aar files dependencies
+ext.embeddedAarFiles = new ArrayList<ResolvedArtifact>()
 // List of embedded R classes
-ext.embeddedRClasses = new ArrayList<String>()
+ext.embeddedRClasses = new ArrayList()
 
 // Change backslash to forward slash on windows
 ext.build_dir = buildDir.path.replace(File.separator, '/');
-
+ext.root_dir = project.rootDir.absolutePath.replace(File.separator, '/');
 ext.exploded_aar_dir = "$build_dir/intermediates/exploded-aar";
 ext.classs_release_dir = "$build_dir/intermediates/classes/release";
 ext.bundle_release_dir = "$build_dir/intermediates/bundles/release";
@@ -84,15 +82,40 @@ ext.generated_rsrc_dir = "$build_dir/generated/source/r/release";
 
 ext.base_r2x_dir = "$build_dir/fat-aar/release/";
 
+def gradleVersionStr = GradleVersion.current().getVersion();
+ext.gradleApiVersion = gradleVersionStr.substring(0, gradleVersionStr.lastIndexOf(".")).toFloat();
+
+println "Gradle version: " + gradleVersionStr;
+
 afterEvaluate {
     // the list of dependency must be reversed to use the right overlay order.
     def dependencies = new ArrayList(configurations.embedded.resolvedConfiguration.firstLevelModuleDependencies)
     dependencies.reverseEach {
-        def aarPath = "${exploded_aar_dir}/${it.moduleGroup}/${it.moduleName}/${it.moduleVersion}"
+
+        def aarPath;
+        if (gradleApiVersion >= 2.3f)
+            aarPath = "${root_dir}/${it.moduleName}/build/intermediates/bundles/default"
+        else
+            aarPath = "${exploded_aar_dir}/${it.moduleGroup}/${it.moduleName}/${it.moduleVersion}"
         it.moduleArtifacts.each {
             artifact ->
+
+                println "ARTIFACT 3 : "
+                println artifact
                 if (artifact.type == 'aar') {
+                    if (!embeddedAarFiles.contains(artifact)) {
+                        embeddedAarFiles.add(artifact)
+                    }
                     if (!embeddedAarDirs.contains(aarPath)) {
+                        if( artifact.file.isFile() ){
+                            println artifact.file
+                            println aarPath
+
+                            copy {
+                                from zipTree( artifact.file )
+                                into aarPath
+                            }
+                        }
                         embeddedAarDirs.add(aarPath)
                     }
                 } else if (artifact.type == 'jar') {
@@ -116,7 +139,14 @@ afterEvaluate {
 
         // Embed JNI Libraries
         bundleRelease.dependsOn embedJniLibs
-        embedJniLibs.dependsOn transformNative_libsWithSyncJniLibsForRelease
+
+        if(gradleApiVersion >= 2.3f) {
+            embedJniLibs.dependsOn transformNativeLibsWithSyncJniLibsForRelease
+            ext.bundle_release_dir = "$build_dir/intermediates/bundles/default"
+        }else{
+            embedJniLibs.dependsOn transformNative_libsWithSyncJniLibsForRelease
+            ext.bundle_release_dir = "$build_dir/intermediates/bundles/release";
+        }
 
         // Merge Embedded Manifests
         bundleRelease.dependsOn embedManifests
@@ -159,12 +189,35 @@ private List getMergedInputResourceSets(List inputResourceSet) {
 
     List newInputResourceSet = new ArrayList(inputResourceSet)
 
+    println "getMergedInputResourceSets"
+
+    println embeddedAarDirs
     embeddedAarDirs.each { aarPath ->
         try {
-            def resname = (aarPath.split(exploded_aar_dir)[1]).replace('/', ':');
+            println aarPath
+            def resname
+            if (gradleApiVersion >= 2.3f) {
+                def parentProject = project.rootProject.name.toString()
+                println "parent: "
+                println parentProject
+
+                def startIndex = aarPath.indexOf('/' + parentProject)
+                def endIndex = aarPath.indexOf('/build/')
+
+                println "start"
+                println startIndex
+                println "end"
+                println endIndex
+                if (startIndex < 1 || endIndex < 1)
+                    return;
+                resname = aarPath.substring(startIndex, endIndex).replace('/', ':')
+            }
+            else
+                resname = (aarPath.split(exploded_aar_dir)[1]).replace('/', ':');
             def rs = ResourceSetClass.newInstance([resname, true] as Object[])
             rs.addSource(file("$aarPath/res"))
-            // println "ResourceSet is " + rs
+            println "ResourceSet is " + rs
+            println resname
             newInputResourceSet += rs
         } catch (Exception e) {
             e.printStackTrace();
@@ -198,7 +251,7 @@ task embedProguard << {
         try {
             def proguardLibFile = file("$aarPath/proguard.txt")
             if (proguardLibFile.exists())
-                proguardRelease.append(proguardLibFile.text)
+                proguardRelease.append("\n" + proguardLibFile.text)
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
@@ -211,52 +264,68 @@ task generateRJava << {
     println "Running FAT-AAR Task :generateRJava"
 
     // Now generate the R.java file for each embedded dependency
-    def libPackageName = new XmlParser().parse(android.sourceSets.main.manifest.srcFile).@package
+    def mainManifestFile = android.sourceSets.main.manifest.srcFile;
+    def libPackageName = "";
+
+    if(mainManifestFile.exists()) {
+
+        libPackageName = new XmlParser().parse(mainManifestFile).@package
+    }
 
     embeddedAarDirs.each { aarPath ->
 
-        def aarManifest = new XmlParser().parse(file("$aarPath/AndroidManifest.xml"));
-        def aarPackageName = aarManifest.@package
-        String packagePath = aarPackageName.replace('.', '/')
-
-        // Generate the R.java file and map to current project's R.java
-        // This will recreate the class file
-        def rTxt = file("$aarPath/R.txt")
-        def rMap = new ConfigObject()
-
-        if (rTxt.exists()) {
-            rTxt.eachLine {
-                line ->
-                    //noinspection GroovyUnusedAssignment
-                    def (type, subclass, name, value) = line.tokenize(' ')
-                    rMap[subclass].putAt(name, type)
-            }
+        def manifestFile = file("$aarPath/AndroidManifest.xml");
+        if(!manifestFile.exists()) {
+            manifestFile = file("./src/main/AndroidManifest.xml");
         }
 
-        def sb = "package $aarPackageName;" << '\n' << '\n'
-        sb << 'public final class R {' << '\n'
+        if(manifestFile.exists()) {
+            def aarManifest = new XmlParser().parse(manifestFile);
+            def aarPackageName = aarManifest.@package
 
-        rMap.each {
-            subclass, values ->
-                sb << "  public static final class $subclass {" << '\n'
-                values.each {
-                    name, type ->
-                        sb << "    public static $type $name = ${libPackageName}.R.${subclass}.${name};" << '\n'
+            String packagePath = aarPackageName.replace('.', '/')
+
+            // Generate the R.java file and map to current project's R.java
+            // This will recreate the class file
+            def rTxt = file("$aarPath/R.txt")
+            def rMap = new ConfigObject()
+
+            if (rTxt.exists()) {
+                rTxt.eachLine {
+                    line ->
+                        //noinspection GroovyUnusedAssignment
+                        def (type, subclass, name, value) = line.tokenize(' ')
+                        rMap[subclass].putAt(name, type)
                 }
-                sb << "    }" << '\n'
+            }
+
+            def sb = "package $aarPackageName;" << '\n' << '\n'
+            sb << 'public final class R {' << '\n'
+
+            rMap.each {
+                subclass, values ->
+                    sb << "  public static final class $subclass {" << '\n'
+                    values.each {
+                        name, type ->
+                            sb << "    public static $type $name = ${libPackageName}.R.${subclass}.${name};" << '\n'
+                    }
+                    sb << "    }" << '\n'
+            }
+
+            sb << '}' << '\n'
+
+            mkdir("$generated_rsrc_dir/$packagePath")
+            file("$generated_rsrc_dir/$packagePath/R.java").write(sb.toString())
+
+            embeddedRClasses += "$packagePath/R.class"
+            embeddedRClasses += "$packagePath/R\$*.class"
         }
 
-        sb << '}' << '\n'
-
-        mkdir("$generated_rsrc_dir/$packagePath")
-        file("$generated_rsrc_dir/$packagePath/R.java").write(sb.toString())
-
-        embeddedRClasses += "$packagePath/R.class"
-        embeddedRClasses += "$packagePath/R\$*.class"
     }
 }
 
 task collectRClass << {
+    println "COLLECTRCLASS"
     delete base_r2x_dir
     mkdir base_r2x_dir
 
@@ -268,8 +337,12 @@ task collectRClass << {
 }
 
 task embedRClass(type: org.gradle.jvm.tasks.Jar, dependsOn: collectRClass) {
+    println "EMBED R CLASS"
+
     destinationDir file("$bundle_release_dir/libs/")
+    println destinationDir
     from base_r2x_dir
+    println base_r2x_dir
 }
 
 /**
@@ -280,15 +353,44 @@ task embedJavaJars(dependsOn: embedRClass) << {
     println "Running FAT-AAR Task :embedJavaJars"
 
     embeddedAarDirs.each { aarPath ->
+
         // Explode all classes.jar files to classes so that they can be proguarded
-        copy {
-            from zipTree("$aarPath/jars/classes.jar")
-            into classs_release_dir
+        def jar_dir
+        if (gradleApiVersion >= 2.3f)
+            jar_dir = "$aarPath"
+        else
+            jar_dir = "$aarPath/jars"
+
+        if(embeddedAarFiles.size() > 0){
+
+            embeddedAarFiles.each {
+                artifact ->
+                    FileTree aarFileTree = zipTree(artifact.file.getAbsolutePath());
+
+                    def aarFile = aarFileTree.files.find { it.name.contains("classes.jar") }
+
+                    copy {
+                        from zipTree(aarFile)
+                        into classs_release_dir
+                    }
+            }
+
+        }else{
+
+            println jar_dir
+            println classs_release_dir
+            println bundle_release_dir
+            println embeddedJars
+
+            copy {
+                from zipTree(jar_dir + "/classes.jar")
+                into classs_release_dir
+            }
         }
 
         // Copy all additional jar files to bundle lib
-        FileTree jars = fileTree(dir: "$aarPath/jars", include: '*.jar', exclude: 'classes.jar')
-        jars += fileTree(dir: "$aarPath/jars/libs", include: '*.jar')
+        FileTree jars = fileTree(dir: jar_dir, include: '*.jar', exclude: 'classes.jar')
+        jars += fileTree(dir: jar_dir + "/libs", include: '*.jar')
         jars += fileTree(dir: "$aarPath/libs", include: '*.jar')
 
         copy {
@@ -324,11 +426,13 @@ task embedManifests << {
     println "Running FAT-AAR Task :embedManifests"
 
     ILogger mLogger = new MiLogger()
-    List<File> libraryManifests = new ArrayList<>()
+    List libraryManifests = new ArrayList<>()
 
     embeddedAarDirs.each { aarPath ->
-        if (!libraryManifests.contains(aarPath)) {
-            libraryManifests.add(file("$aarPath/AndroidManifest.xml"))
+        File dependencyManifest = file("$aarPath/AndroidManifest.xml")
+
+        if (!libraryManifests.contains(aarPath) && dependencyManifest.exists()) {
+            libraryManifests.add(dependencyManifest)
         }
     }
 
@@ -337,6 +441,14 @@ task embedManifests << {
     File origManifest = file("$bundle_release_dir/AndroidManifest.xml")
     File copyManifest = file("$bundle_release_dir/AndroidManifest.orig.xml")
     File aaptManifest = file("$manifest_aaapt_dir/AndroidManifest.xml")
+
+    if(!origManifest.exists()) {
+        origManifest = file("./src/main/AndroidManifest.xml")
+    }
+
+    if(!origManifest.exists()) {
+        return;
+    }
 
     copy {
         from origManifest.parentFile
