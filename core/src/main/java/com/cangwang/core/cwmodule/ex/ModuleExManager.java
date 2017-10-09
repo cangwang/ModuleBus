@@ -1,12 +1,15 @@
 package com.cangwang.core.cwmodule.ex;
 
 import android.content.res.Configuration;
+import android.os.Handler;
 import android.support.v4.util.ArrayMap;
 
 import com.cangwang.core.util.ModuleUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by cangwang on 2016/12/26.
@@ -22,6 +25,17 @@ public class ModuleExManager {
 
     public void moduleConfig(List<String> modules) {
         this.modules = modules;
+    }
+
+    private Handler handler = new Handler();
+    private ExecutorService pool = Executors.newSingleThreadExecutor();
+
+    public Handler getHandler(){
+        return handler;
+    }
+
+    public ExecutorService getPool(){
+        return pool;
     }
 
     public CWAbsExModule getModuleByNames(String name){
@@ -65,9 +79,12 @@ public class ModuleExManager {
     }
 
     public void onDestroy(){
-        for (CWAbsExModule module:allModules.values())
-            if (module !=null){
+        for (CWAbsExModule module:allModules.values()) {
+            if (module != null) {
                 module.onDestroy();
             }
+        }
+        handler = null;
+        pool=null;
     }
 }
