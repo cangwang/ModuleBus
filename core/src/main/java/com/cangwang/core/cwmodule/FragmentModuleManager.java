@@ -25,33 +25,44 @@ public class FragmentModuleManager extends ModuleManager{
         initModules(saveInstance,activity,rootView);
     }
 
-    public void initModules(Bundle saveIntanceState, Activity activity, View rootView){
+    public void initModules(final Bundle saveIntanceState, final Activity activity, final View rootView){
         //获取配置
-        for(String moduleName:getModules().keySet()){
+        for(final String moduleName:getModules().keySet()){
             if (ModuleUtil.empty(moduleName)) return;
-            Log.d(TAG,"FragmentModuleManager init module name: "+ moduleName);
-            //创建模块
-            ELAbsModule module = ELModuleFactory.newModuleInstance(moduleName);
-            if (module!=null){
-                ELModuleContext moduleContext = new ELModuleContext();
-                //关联Activity
-                moduleContext.setActivity(activity);
-                moduleContext.setSaveInstance(saveIntanceState);
+            pool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d(TAG,"FragmentModuleManager init module name: "+ moduleName);
+                    //创建模块
+                    final ELAbsModule module = ELModuleFactory.newModuleInstance(moduleName);
+                    if (module!=null){
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                ELModuleContext moduleContext = new ELModuleContext();
+                                //关联Activity
+                                moduleContext.setActivity(activity);
+                                moduleContext.setSaveInstance(saveIntanceState);
 
-                //关联视图
-                SparseArrayCompat<ViewGroup> sVerticalViews = new SparseArrayCompat<>();
-                ArrayList<Integer> viewIds = getModules().get(moduleName);
-                if (viewIds !=null && viewIds.size() >0){
-                    for (int i = 0;i<viewIds.size();i++){
-                        sVerticalViews.put(i,(ViewGroup)rootView.findViewById(viewIds.get(i).intValue()));
+                                //关联视图
+                                SparseArrayCompat<ViewGroup> sVerticalViews = new SparseArrayCompat<>();
+                                ArrayList<Integer> viewIds = getModules().get(moduleName);
+                                if (viewIds !=null && viewIds.size() >0){
+                                    for (int i = 0;i<viewIds.size();i++){
+                                        sVerticalViews.put(i,(ViewGroup)rootView.findViewById(viewIds.get(i).intValue()));
+                                    }
+                                }
+
+                                moduleContext.setViewGroups(sVerticalViews);
+                                module.init(moduleContext,"");
+
+                                allModules.put(moduleName,module);
+                            }
+                        });
                     }
                 }
+            });
 
-                moduleContext.setViewGroups(sVerticalViews);
-                module.init(moduleContext,"");
-
-                allModules.put(moduleName,module);
-            }
         }
     }
 }

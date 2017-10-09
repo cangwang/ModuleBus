@@ -1,12 +1,15 @@
 package com.cangwang.core.cwmodule;
 
 import android.content.res.Configuration;
+import android.os.Handler;
 import android.support.v4.util.ArrayMap;
 
 
 import com.cangwang.core.util.ModuleUtil;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by cangwang on 2016/12/26.
@@ -22,6 +25,13 @@ public class ModuleManager {
 
     public void setModules(ArrayMap<String, ArrayList<Integer>> modules) {
         this.modules = modules;
+    }
+
+    ExecutorService pool;
+    Handler handler = new Handler();
+
+    public ModuleManager(){
+        pool = Executors.newFixedThreadPool(3);
     }
 
     public void moduleConfig(ArrayMap<String, ArrayList<Integer>> modules) {

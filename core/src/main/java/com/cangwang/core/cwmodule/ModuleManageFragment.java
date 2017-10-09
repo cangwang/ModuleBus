@@ -17,7 +17,6 @@ import java.util.ArrayList;
  */
 
 public abstract class ModuleManageFragment extends Fragment{
-    private View rootView;
     private FragmentModuleManager moduleManager;
 
     @Override
