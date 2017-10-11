@@ -18,6 +18,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -93,7 +94,7 @@ public class ModuleUnitProcessor extends AbstractProcessor {
             ClassName moduleMetaCn = ClassName.get(ModuleMeta.class);
 
             ParameterizedTypeName inputMapTypeOfGroup = ParameterizedTypeName.get(
-                    ClassName.get(Set.class),
+                    ClassName.get(List.class),
                     ClassName.get(ModuleMeta.class)
             );
 

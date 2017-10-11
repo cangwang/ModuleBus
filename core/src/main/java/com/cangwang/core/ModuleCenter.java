@@ -11,20 +11,19 @@ import com.cangwang.model.ModuleMeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
+ * Module loading
  * Created by cangwang on 2017/9/4.
  */
 
 public class ModuleCenter {
     private final static String TAG = "ModuleCenter";
 
-    private static Set<ModuleMeta> group= new HashSet<>();
-    private static Map<String,Set<ModuleMeta>> sortgroup = new HashMap<>();
+    private static List<ModuleMeta> group= new ArrayList<>();
+    private static Map<String,List<ModuleMeta>> sortgroup = new HashMap<>();
 
     public synchronized static void init(Context context){
         try {
@@ -36,7 +35,7 @@ public class ModuleCenter {
                 }
             }
             Log.i(TAG,"group ="+group.toString());
-            sort(group);
+            sortTemplate(group);
 
         }catch (Exception e){
             Log.e(TAG,e.toString());
@@ -47,16 +46,36 @@ public class ModuleCenter {
      * 排列Module列表
      * @param group
      */
-    private static void sort(Set<ModuleMeta> group){
+    private static void sortTemplate(List<ModuleMeta> group){
+        ModuleMeta exitMeta;
         for (ModuleMeta meta:group){
             Log.i(TAG,"meta ="+meta.toString());
-            Set<ModuleMeta> metaSet = new HashSet<>();
+            List<ModuleMeta> metaList = new ArrayList<>();
             if (sortgroup.get(meta.templet) != null) {
-                metaSet = sortgroup.get(meta.templet);
+                metaList = sortgroup.get(meta.templet);
             }
-            metaSet.add(meta);
-            sortgroup.put(meta.templet, metaSet);
+
+            int index = 0;
+            for (int i = 0; i < metaList.size(); i++) {
+                exitMeta = metaList.get(i);
+                if (meta.layoutlevel.getValue() < exitMeta.layoutlevel.getValue()) {  //比较层级参数,值越低,越先被加载
+                    index=i;
+                } else if (meta.layoutlevel.getValue() == exitMeta.layoutlevel.getValue()) {   //层级相同
+                    if (meta.extralevel >= exitMeta.extralevel) {          //比较额外层级参数
+                       index=i;
+                    }
+                }
+            }
+
+            if (index == 0){  //如果遍历后不符合条件，会添加到尾部
+                metaList.add(meta);
+            }else {
+                metaList.add(index,meta);
+            }
+
+            sortgroup.put(meta.templet, metaList);
         }
+        Log.i(TAG,"sortgroup ="+sortgroup.toString());
     }
 
     private static String[] split(String groupName){
@@ -73,10 +92,14 @@ public class ModuleCenter {
             Log.i(TAG,"do not have key "+ templet);
         }
         Log.i(TAG,"list ="+list.toString());
+
         return list;
     }
 
-    public static Set<ModuleMeta> getMouleList(String templet){
+
+
+
+    public static List<ModuleMeta> getMouleList(String templet){
         if (sortgroup.containsKey(templet)){
             return sortgroup.get(templet);
         }

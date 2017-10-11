@@ -13,11 +13,12 @@ import com.cangwang.core.ModuleEvent;
 import com.cangwang.core.cwmodule.CWModuleContext;
 import com.cangwang.core.cwmodule.ex.CWBasicExModule;
 import com.cangwang.core.util.ModuleImpl;
+import com.cangwang.enums.LayoutLevel;
 
 /**
  * Created by cangwang on 2017/6/15
  */
-@ModuleUnit(templet = "top,normal")
+@ModuleUnit(templet = "top,normal",layoutlevel = LayoutLevel.LOW)
 public class PageNameExModule extends CWBasicExModule implements ModuleImpl{
     private View pageNameView;
     private TextView pageTitle;
