@@ -8,6 +8,7 @@ import com.cangwang.core.util.ModuleUtil;
 import com.cangwang.core.util.ClassUtils;
 import com.cangwang.model.ModuleMeta;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,9 +58,9 @@ public class ModuleCenter {
             int index = 0;
             for (int i = 0; i < metaList.size(); i++) {
                 exitMeta = metaList.get(i);
-                if (meta.layoutlevel < exitMeta.layoutlevel) {  //比较层级参数,值越低,越先被加载
+                if (meta.layoutlevel.getValue() < exitMeta.layoutlevel.getValue()) {  //比较层级参数,值越低,越先被加载
                     index=i;
-                } else if (meta.layoutlevel == exitMeta.layoutlevel) {   //层级相同
+                } else if (meta.layoutlevel.getValue() == exitMeta.layoutlevel.getValue()) {   //层级相同
                     if (meta.extralevel >= exitMeta.extralevel) {          //比较额外层级参数
                        index=i;
                     }

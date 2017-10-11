@@ -15,7 +15,7 @@ public class ModuleMeta {
     public String templet;
     public String moduleName;
     public String title;
-    public int layoutlevel;
+    public LayoutLevel layoutlevel;
     public int extralevel;
 
     public ModuleMeta(String templet,String moduleName,String title,int layoutlevel,int extralevel){
@@ -23,18 +23,17 @@ public class ModuleMeta {
         this.templet = templet;
         this.moduleName = moduleName;
         this.title = title;
-//        if (layoutlevel == 500){
-//            this.layoutlevel = LayoutLevel.VERY_LOW;
-//        }else if (layoutlevel == 400){
-//            this.layoutlevel = LayoutLevel.LOW;
-//        }else if (layoutlevel == 300){
-//            this.layoutlevel = LayoutLevel.NORMAL;
-//        }else if (layoutlevel == 200){
-//            this.layoutlevel = LayoutLevel.HIGHT;
-//        }else if (layoutlevel == 100){
-//            this.layoutlevel = LayoutLevel.VERY_HIGHT;
-//        }
-        this.extralevel = layoutlevel;
+        if (layoutlevel == 500){
+            this.layoutlevel = LayoutLevel.VERY_LOW;
+        }else if (layoutlevel == 400){
+            this.layoutlevel = LayoutLevel.LOW;
+        }else if (layoutlevel == 300){
+            this.layoutlevel = LayoutLevel.NORMAL;
+        }else if (layoutlevel == 200){
+            this.layoutlevel = LayoutLevel.HIGHT;
+        }else if (layoutlevel == 100){
+            this.layoutlevel = LayoutLevel.VERY_HIGHT;
+        }
         this.extralevel = extralevel;
     }
 

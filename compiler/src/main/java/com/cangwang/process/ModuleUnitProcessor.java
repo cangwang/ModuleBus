@@ -125,7 +125,7 @@ public class ModuleUnitProcessor extends AbstractProcessor {
                             templet,
                             moduleMeta.moduleName,
                             moduleMeta.title,
-                            moduleMeta.layoutlevel,
+                            moduleMeta.layoutlevel.getValue(),
                             moduleMeta.extralevel
                     );
                 }

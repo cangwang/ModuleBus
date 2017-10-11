@@ -16,6 +16,6 @@ import java.lang.annotation.Target;
 public @interface ModuleUnit {
     String templet() default "normal";
     String title() default "CangWang";
-    int layoutlevel() default LayoutLevel.NORMAL;
+    LayoutLevel layoutlevel() default LayoutLevel.NORMAL;
     int extralevel() default 0;
 }
