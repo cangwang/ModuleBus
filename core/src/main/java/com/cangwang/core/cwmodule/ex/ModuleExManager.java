@@ -27,14 +27,20 @@ public class ModuleExManager {
         this.modules = modules;
     }
 
-    private Handler handler = new Handler();
-    private ExecutorService pool = Executors.newSingleThreadExecutor();
+    private Handler handler;
+    private ExecutorService pool;
 
     public Handler getHandler(){
+        if (handler == null){
+            handler = new Handler();
+        }
         return handler;
     }
 
     public ExecutorService getPool(){
+        if (pool ==null){
+            pool = Executors.newSingleThreadExecutor();
+        }
         return pool;
     }
 
@@ -79,12 +85,12 @@ public class ModuleExManager {
     }
 
     public void onDestroy(){
+        handler = null;
+        pool=null;
         for (CWAbsExModule module:allModules.values()) {
             if (module != null) {
                 module.onDestroy();
             }
         }
-        handler = null;
-        pool=null;
     }
 }
