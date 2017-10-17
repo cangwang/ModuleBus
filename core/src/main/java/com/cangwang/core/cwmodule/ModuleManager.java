@@ -31,7 +31,19 @@ public class ModuleManager {
     Handler handler = new Handler();
 
     public ModuleManager(){
-        pool = Executors.newFixedThreadPool(3);
+
+    }
+
+    public ExecutorService getPool(){
+        if (pool == null)
+            pool = Executors.newSingleThreadExecutor();
+        return pool;
+    }
+
+    public Handler getHandler(){
+        if (pool == null)
+            handler = new Handler();
+        return handler;
     }
 
     public void moduleConfig(ArrayMap<String, ArrayList<Integer>> modules) {
@@ -69,6 +81,8 @@ public class ModuleManager {
     }
 
     public void onDestroy(){
+        handler = null;
+        pool = null;
         for (ELAbsModule module:allModules.values())
             if (module !=null){
                 module.onDestroy();

@@ -27,31 +27,31 @@ public class ActivityModuleManager extends ModuleManager{
 
         //获取配置
         for(final String moduleName: getModules().keySet()){
-            pool.execute(new Runnable() {
+            getPool().execute(new Runnable() {
                 @Override
                 public void run() {
                     final ELAbsModule module = ELModuleFactory.newModuleInstance(moduleName);
                     Log.d(TAG,"ActivityModuleManager init module name: "+ moduleName);
                     if (module!=null) {
-                        handler.post(new Runnable() {
+                        final ELModuleContext moduleContext =new ELModuleContext();
+                        moduleContext.setActivity(activity);
+                        moduleContext.setSaveInstance(saveInstance);
+
+                        //关联视图
+                        SparseArrayCompat<ViewGroup> viewGroups =new SparseArrayCompat<>();
+                        ArrayList<Integer> mViewIds = getModules().get(moduleName);
+                        if (mViewIds !=null &&mViewIds.size()>0) {
+                            for (int i = 0; i < mViewIds.size(); i++) {
+                                viewGroups.put(i, (ViewGroup) activity.findViewById(mViewIds.get(i).intValue()));
+                            }
+                        }
+
+                        moduleContext.setViewGroups(viewGroups);
+
+                        getHandler().post(new Runnable() {
                             @Override
                             public void run() {
-                                ELModuleContext moduleContext =new ELModuleContext();
-                                moduleContext.setActivity(activity);
-                                moduleContext.setSaveInstance(saveInstance);
-
-                                //关联视图
-                                SparseArrayCompat<ViewGroup> viewGroups =new SparseArrayCompat<>();
-                                ArrayList<Integer> mViewIds = getModules().get(moduleName);
-                                if (mViewIds !=null &&mViewIds.size()>0) {
-                                    for (int i = 0; i < mViewIds.size(); i++) {
-                                        viewGroups.put(i, (ViewGroup) activity.findViewById(mViewIds.get(i).intValue()));
-                                    }
-                                }
-
-                                moduleContext.setViewGroups(viewGroups);
                                 module.init(moduleContext,"");
-
                                 allModules.put(moduleName,module);
                             }
                         });
@@ -60,5 +60,33 @@ public class ActivityModuleManager extends ModuleManager{
             });
         }
     }
+
+//    public void initModules(Bundle saveInstance, Activity activity) {
+//        if (getModules() ==null) return;
+//
+//        //获取配置
+//         for(String moduleName: getModules().keySet()) {
+//             ELAbsModule module = ELModuleFactory.newModuleInstance(moduleName);
+//             Log.d(TAG, "ActivityModuleManager init module name: " + moduleName);
+//
+//             if (module != null) {
+//                 ELModuleContext moduleContext = new ELModuleContext();
+//                 moduleContext.setActivity(activity);
+//                 moduleContext.setSaveInstance(saveInstance);
+//
+//                 //关联视图
+//                 SparseArrayCompat<ViewGroup> viewGroups = new SparseArrayCompat<>();
+//                 ArrayList<Integer> mViewIds = getModules().get(moduleName);
+//                 if (mViewIds != null && mViewIds.size() > 0) {
+//                     for (int i = 0; i < mViewIds.size(); i++) {
+//                         viewGroups.put(i, (ViewGroup) activity.findViewById(mViewIds.get(i).intValue()));
+//                     }
+//                     moduleContext.setViewGroups(viewGroups);
+//                     module.init(moduleContext, "");
+//                 }
+//             }
+//             allModules.put(moduleName,module);
+//         }
+//    }
 
 }

@@ -29,33 +29,31 @@ public class FragmentModuleManager extends ModuleManager{
         //获取配置
         for(final String moduleName:getModules().keySet()){
             if (ModuleUtil.empty(moduleName)) return;
-            pool.execute(new Runnable() {
+            getPool().execute(new Runnable() {
                 @Override
                 public void run() {
                     Log.d(TAG,"FragmentModuleManager init module name: "+ moduleName);
                     //创建模块
                     final ELAbsModule module = ELModuleFactory.newModuleInstance(moduleName);
                     if (module!=null){
-                        handler.post(new Runnable() {
+                        final ELModuleContext moduleContext = new ELModuleContext();
+                        //关联Activity
+                        moduleContext.setActivity(activity);
+                        moduleContext.setSaveInstance(saveIntanceState);
+
+                        //关联视图
+                        SparseArrayCompat<ViewGroup> sVerticalViews = new SparseArrayCompat<>();
+                        ArrayList<Integer> viewIds = getModules().get(moduleName);
+                        if (viewIds !=null && viewIds.size() >0){
+                            for (int i = 0;i<viewIds.size();i++){
+                                sVerticalViews.put(i,(ViewGroup)rootView.findViewById(viewIds.get(i).intValue()));
+                            }
+                        }
+                        moduleContext.setViewGroups(sVerticalViews);
+                        getHandler().post(new Runnable() {
                             @Override
                             public void run() {
-                                ELModuleContext moduleContext = new ELModuleContext();
-                                //关联Activity
-                                moduleContext.setActivity(activity);
-                                moduleContext.setSaveInstance(saveIntanceState);
-
-                                //关联视图
-                                SparseArrayCompat<ViewGroup> sVerticalViews = new SparseArrayCompat<>();
-                                ArrayList<Integer> viewIds = getModules().get(moduleName);
-                                if (viewIds !=null && viewIds.size() >0){
-                                    for (int i = 0;i<viewIds.size();i++){
-                                        sVerticalViews.put(i,(ViewGroup)rootView.findViewById(viewIds.get(i).intValue()));
-                                    }
-                                }
-
-                                moduleContext.setViewGroups(sVerticalViews);
                                 module.init(moduleContext,"");
-
                                 allModules.put(moduleName,module);
                             }
                         });
