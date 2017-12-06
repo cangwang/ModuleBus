@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.cangwang.annotation.ModuleGroup;
 import com.cangwang.annotation.ModuleUnit;
 import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleBus;
@@ -18,7 +19,10 @@ import com.cangwang.enums.LayoutLevel;
 /**
  * Created by cangwang on 2017/6/15
  */
-@ModuleUnit(templet = "top,normal",layoutlevel = LayoutLevel.LOW)
+@ModuleGroup({
+        @ModuleUnit(templet = "top",layoutlevel = LayoutLevel.LOW),
+        @ModuleUnit(templet = "normal",layoutlevel = LayoutLevel.VERY_LOW)
+})
 public class PageNameExModule extends CWBasicExModule implements ModuleImpl{
     private View pageNameView;
     private TextView pageTitle;

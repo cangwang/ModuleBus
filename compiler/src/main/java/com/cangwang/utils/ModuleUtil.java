@@ -20,4 +20,12 @@ public class ModuleUtil {
     public static final String NAME_OF_MODULEUNIT = MODULE_UNIT + SEPARATOR;
 
     public static final String ANNOTATION_TYPE_MODULEUNIT = MODULE_ANNOTATION + "ModuleUnit";
+
+    public static String[] splitDot(String groupName){
+        return groupName.split("\\.");
+    }
+
+    public static String[] split(String groupName){
+        return groupName.split(",");
+    }
 }

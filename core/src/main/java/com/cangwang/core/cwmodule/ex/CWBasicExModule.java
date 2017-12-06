@@ -54,6 +54,11 @@ public class CWBasicExModule extends CWAbsExModule {
     }
 
     @Override
+    public void onStart() {
+
+    }
+
+    @Override
     public void onResume() {
 
     }
