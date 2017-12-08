@@ -6,5 +6,7 @@
 .DS_Store
 /build
 /captures
+/news
 *.iml
+
 local.properties

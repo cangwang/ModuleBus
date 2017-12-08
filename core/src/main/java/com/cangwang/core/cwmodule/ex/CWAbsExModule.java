@@ -14,6 +14,8 @@ public abstract class CWAbsExModule {
 
     public abstract void onSaveInstanceState(Bundle outState);
 
+    public abstract void onStart();
+
     public abstract void onResume();
 
     public abstract void onPause();
