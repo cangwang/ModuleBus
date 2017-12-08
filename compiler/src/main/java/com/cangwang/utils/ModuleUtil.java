@@ -1,5 +1,17 @@
 package com.cangwang.utils;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ModuleUtil {
 
     public static final String PROJECT = "ModuleBus";
@@ -28,4 +40,53 @@ public class ModuleUtil {
     public static String[] split(String groupName){
         return groupName.split(",");
     }
+
+    public static void writeFile(String filePath, String sets)
+            throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        PrintWriter out = new PrintWriter(fw);
+        out.write(sets);
+        out.println();
+        fw.close();
+        out.close();
+    }
+
+//    private static List<JsonObject> ReadJsonFile(){
+//        String path="./test.json";
+//        File file=new File(path);
+//        BufferedReader reader=null;
+//        String jsonContent="";
+//        List<JsonObject> jsonObjList=new ArrayList<JsonObject>();
+//
+//        try {
+//            reader=new BufferedReader(new FileReader(file));
+//            String tempString=null;
+//            while((tempString=reader.readLine())!=null){
+////                System.out.println(tempString);
+//                jsonContent+=tempString;
+//
+//                //
+//                JsonParser jsonParser = new JsonParser();
+//                jsonParser.
+//                JsonObject jo=new JsonParser(tempString);
+//                jsonObjList.add(jo);
+//            }
+//        } catch (Exception e) {
+//            // TODO: handle exception
+//            e.printStackTrace();
+//        }
+//        finally {
+//            if(reader!=null){
+//                try {
+//                    reader.close();
+//                } catch (IOException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                }
+//            }
+//            return jsonObjList;
+//        }
+//
+//    }
+
 }
