@@ -19,6 +19,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ applicationName : project.getName() ]
+            }
+        }
     }
     buildTypes {
         release {
@@ -31,7 +37,7 @@ android {
         tasks.each {
             task ->
                 if(task.name.contains("Test")){
-                    task.enabled=false;
+                    task.enabled=false
                 }
         }
     }

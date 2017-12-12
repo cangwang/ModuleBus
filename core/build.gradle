@@ -12,7 +12,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     lintOptions {
@@ -35,8 +34,6 @@ repositories{
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     provided 'com.android.support:appcompat-v7:23.+'
-//    provided 'io.reactivex.rxjava2:rxjava:2.+'
-//    provided 'io.reactivex.rxjava2:rxandroid:+'
     compile project(':annotation')
     annotationProcessor project(":compiler")
 }

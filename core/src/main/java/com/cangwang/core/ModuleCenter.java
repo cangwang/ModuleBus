@@ -3,11 +3,16 @@ package com.cangwang.core;
 import android.content.Context;
 import android.util.Log;
 
+import com.cangwang.bean.ModuleUnitBean;
 import com.cangwang.core.template.IModuleUnit;
 import com.cangwang.core.util.ModuleUtil;
 import com.cangwang.core.util.ClassUtils;
 import com.cangwang.model.ModuleMeta;
 
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,21 +29,45 @@ public class ModuleCenter {
 
     private static List<ModuleMeta> group= new ArrayList<>();
     private static Map<String,List<ModuleMeta>> sortgroup = new HashMap<>();
+    private static List<ModuleUnitBean> moduleGroup = new ArrayList<>();
 
     public synchronized static void init(Context context){
+        JSONArray array = ModuleUtil.getAssetJson(context,"center.json");
+        if (array == null) return;
+        Log.e(TAG,"modulearray = "+array.toString());
+        int length = array.length();
         try {
-            List<String> classFileNames = ClassUtils.getFileNameByPackageName(context, ModuleUtil.NAME_OF_MODULEUNIT);  //获取指定ModuleUnit$$的类名的文件
-            for (String className:classFileNames){
-                if (className.startsWith(ModuleUtil.ADDRESS_OF_MODULEUNIT)){
-                    IModuleUnit iModuleUnit = (IModuleUnit)(Class.forName(className).getConstructor().newInstance());
-                    iModuleUnit.loadInto(group);  //加载列表
-                }
+            for (int i = 0;i<length;i++){
+                JSONObject o = array.getJSONObject(i);
+                ModuleUnitBean bean = new ModuleUnitBean(o.getString("path"),
+                        o.getString("templet"),
+                        o.getString("title"),
+                        o.getInt("layout_level"),
+                        o.getInt("extra_level"));
+                moduleGroup.add(bean);
             }
-            Log.i(TAG,"group ="+group.toString());
-            sortTemplate(group);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
 
-        }catch (Exception e){
-            Log.e(TAG,e.toString());
+    public synchronized static void init(Context context,String jsonName){
+        JSONArray array = ModuleUtil.getAssetJson(context,jsonName+".json");
+        if (array == null) return;
+        Log.e(TAG,"modulearray = "+array.toString());
+        int length = array.length();
+        try {
+            for (int i = 0;i<length;i++){
+                JSONObject o = array.getJSONObject(i);
+                ModuleUnitBean bean = new ModuleUnitBean(o.getString("path"),
+                        o.getString("templet"),
+                        o.getString("title"),
+                        o.getInt("layout_level"),
+                        o.getInt("extra_level"));
+                moduleGroup.add(bean);
+            }
+        }catch (JSONException e){
+            e.printStackTrace();
         }
     }
 
@@ -83,21 +112,15 @@ public class ModuleCenter {
     }
 
     public static List<String> getModuleList(String templet){
+        if (moduleGroup.isEmpty()) return null;
         List<String> list = new ArrayList<>();
-        if (sortgroup.containsKey(templet)) {
-            for (ModuleMeta meta : sortgroup.get(templet)) {
-                list.add(meta.moduleName);
+        for (ModuleUnitBean bean: moduleGroup){
+            if (bean.templet.equals(templet)){
+                list.add(bean.path);
             }
-        }else {
-            Log.i(TAG,"do not have key "+ templet);
         }
-        Log.i(TAG,"list ="+list.toString());
-
         return list;
     }
-
-
-
 
     public static List<ModuleMeta> getMouleList(String templet){
         if (sortgroup.containsKey(templet)){

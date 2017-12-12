@@ -1,5 +1,15 @@
 package com.cangwang.core.util;
 
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Map;
 
 /**
@@ -21,4 +31,25 @@ public class ModuleUtil {
     public static boolean empty(String s){
         return s == null || s.isEmpty();
     }
+
+
+    public static JSONArray getAssetJson(Context context,String jsonName){
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            AssetManager assetManager =  context.getAssets();
+            BufferedReader bf = new BufferedReader(new InputStreamReader(assetManager.open(jsonName)));
+            String line;
+            while ((line = bf.readLine())!=null){
+                stringBuilder.append(line);
+            }
+            return new JSONArray(stringBuilder.toString());
+        }catch (IOException e){
+            e.printStackTrace();
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

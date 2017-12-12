@@ -2,12 +2,12 @@ apply plugin: 'java'
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.google.auto.service:auto-service:1.0-rc2'
-    compile 'com.squareup:javapoet:1.7.0'
+    compile 'com.google.auto.service:auto-service:1.0-rc3'
+    compile 'com.squareup:javapoet:1.9.0'
     compile project(':annotation')
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'org.apache.commons:commons-collections4:4.1'
-    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.google.code.gson:gson:2.8.1'
 }
 
 sourceCompatibility = "1.7"

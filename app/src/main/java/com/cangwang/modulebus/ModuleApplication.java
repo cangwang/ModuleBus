@@ -14,7 +14,6 @@ import java.lang.reflect.Method;
 /**
  * Created by cangwang on 2017/2/25.
  */
-
 public class ModuleApplication extends Application{
     private static final String TAG="ModuleApplication";
 

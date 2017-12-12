@@ -276,6 +276,10 @@ public class ModuleBus {
         ModuleCenter.init(context);
     }
 
+    public static void init(Context context,String jsonName){
+        ModuleCenter.init(context,jsonName);
+    }
+
     public List<String> getModuleList(String templet) {
         return ModuleCenter.getModuleList(templet);
     }
