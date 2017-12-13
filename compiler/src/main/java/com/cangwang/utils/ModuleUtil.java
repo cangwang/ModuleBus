@@ -14,7 +14,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class ModuleUtil {
@@ -251,8 +250,9 @@ public class ModuleUtil {
         }
         String path = System.getProperty("user.dir") +"/"+moduleName + "/src/main/assets/center.json";
         File file =new File(path);
-        file.deleteOnExit();
-        file.createNewFile();
+        boolean deleteResult =file.delete();
+        boolean success = file.createNewFile();
+        logger.info("deleteResult = "+deleteResult+", path = "+path+",success = "+success);
     }
 
     public static void deleteRootCenter(){
@@ -282,5 +282,23 @@ public class ModuleUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static JsonArray listToJson(List<ModuleUnitBean> list){
+        JsonArray templetArray = new JsonArray();
+        for (ModuleUnitBean b:list){
+            templetArray.add(beanToObject(b));
+        }
+        return templetArray;
+    }
+
+    public static JsonObject beanToObject(ModuleUnitBean b){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("path",b.path);
+        jsonObject.addProperty("templet",b.templet);
+        jsonObject.addProperty("title",b.title);
+        jsonObject.addProperty("layoutLevel",b.layoutLevel);
+        jsonObject.addProperty("extraLevel",b.extraLevel);
+        return jsonObject;
     }
 }

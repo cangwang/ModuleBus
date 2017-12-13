@@ -29,13 +29,13 @@ public class ModuleUnitProcessor {
             for (Element element:modulesElements) {
                 ModuleUnit moduleUnit=element.getAnnotation(ModuleUnit.class);
                 ClassName name = ClassName.get(((TypeElement)element));
-                String address = name.packageName()+"."+name.simpleName();  //真实模块入口地址 包名+类名
+                String path = name.packageName()+"."+name.simpleName();  //真实模块入口地址 包名+类名
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("path",address);
+                jsonObject.addProperty("path",path);
                 jsonObject.addProperty("templet",moduleUnit.templet());
                 jsonObject.addProperty("title",moduleUnit.title());
-                jsonObject.addProperty("layout_level",moduleUnit.layoutlevel().getValue());
-                jsonObject.addProperty("extra_level",moduleUnit.extralevel());
+                jsonObject.addProperty("layoutLevel",moduleUnit.layoutlevel().getValue());
+                jsonObject.addProperty("extraLevel",moduleUnit.extralevel());
                 array.add(jsonObject);
             }
             logger.info(array.toString());

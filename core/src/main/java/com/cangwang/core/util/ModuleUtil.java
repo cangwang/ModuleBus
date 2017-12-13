@@ -6,6 +6,7 @@ import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class ModuleUtil {
     }
 
 
-    public static JSONArray getAssetJson(Context context,String jsonName){
+    public static JSONArray getAssetJsonArray(Context context,String jsonName){
         StringBuilder stringBuilder = new StringBuilder();
         try {
             AssetManager assetManager =  context.getAssets();
@@ -43,6 +44,24 @@ public class ModuleUtil {
                 stringBuilder.append(line);
             }
             return new JSONArray(stringBuilder.toString());
+        }catch (IOException e){
+            e.printStackTrace();
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static JSONObject getAssetJsonObject(Context context, String jsonName){
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            AssetManager assetManager =  context.getAssets();
+            BufferedReader bf = new BufferedReader(new InputStreamReader(assetManager.open(jsonName)));
+            String line;
+            while ((line = bf.readLine())!=null){
+                stringBuilder.append(line);
+            }
+            return new JSONObject(stringBuilder.toString());
         }catch (IOException e){
             e.printStackTrace();
         }catch (JSONException e){

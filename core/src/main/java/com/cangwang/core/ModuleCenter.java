@@ -3,6 +3,7 @@ package com.cangwang.core;
 import android.content.Context;
 import android.util.Log;
 
+import com.cangwang.annotation.ModuleUnit;
 import com.cangwang.bean.ModuleUnitBean;
 import com.cangwang.core.template.IModuleUnit;
 import com.cangwang.core.util.ModuleUtil;
@@ -16,6 +17,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -30,41 +32,67 @@ public class ModuleCenter {
     private static List<ModuleMeta> group= new ArrayList<>();
     private static Map<String,List<ModuleMeta>> sortgroup = new HashMap<>();
     private static List<ModuleUnitBean> moduleGroup = new ArrayList<>();
+    private static Map<String ,List<ModuleUnitBean>> templetList = new HashMap<>();
 
     public synchronized static void init(Context context){
-        JSONArray array = ModuleUtil.getAssetJson(context,"center.json");
-        if (array == null) return;
-        Log.e(TAG,"modulearray = "+array.toString());
-        int length = array.length();
-        try {
-            for (int i = 0;i<length;i++){
-                JSONObject o = array.getJSONObject(i);
-                ModuleUnitBean bean = new ModuleUnitBean(o.getString("path"),
-                        o.getString("templet"),
-                        o.getString("title"),
-                        o.getInt("layout_level"),
-                        o.getInt("extra_level"));
-                moduleGroup.add(bean);
-            }
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
+//        JSONArray array = ModuleUtil.getAssetJson(context,"center.json");
+//        if (array == null) return;
+//        Log.e(TAG,"modulearray = "+array.toString());
+//        int length = array.length();
+//        try {
+//            for (int i = 0;i<length;i++){
+//                JSONObject o = array.getJSONObject(i);
+//                ModuleUnitBean bean = new ModuleUnitBean(o.getString("path"),
+//                        o.getString("templet"),
+//                        o.getString("title"),
+//                        o.getInt("layout_level"),
+//                        o.getInt("extra_level"));
+//                moduleGroup.add(bean);
+//            }
+//        }catch (JSONException e){
+//            e.printStackTrace();
+//        }
+        init(context,"center");
     }
 
     public synchronized static void init(Context context,String jsonName){
-        JSONArray array = ModuleUtil.getAssetJson(context,jsonName+".json");
-        if (array == null) return;
-        Log.e(TAG,"modulearray = "+array.toString());
-        int length = array.length();
+//        JSONArray array = ModuleUtil.getAssetJson(context,jsonName+".json");
+//        if (array == null) return;
+//        Log.e(TAG,"modulearray = "+array.toString());
+//        int length = array.length();
+//        try {
+//            for (int i = 0;i<length;i++){
+//                JSONObject o = array.getJSONObject(i);
+//                ModuleUnitBean bean = new ModuleUnitBean(o.getString("path"),
+//                        o.getString("templet"),
+//                        o.getString("title"),
+//                        o.getInt("layout_level"),
+//                        o.getInt("extra_level"));
+//                moduleGroup.add(bean);
+//            }
+//        }catch (JSONException e){
+//            e.printStackTrace();
+//        }
+        JSONObject object = ModuleUtil.getAssetJsonObject(context,jsonName+".json");
+        if (object == null) return;
+        Log.e(TAG,"templet = "+object.toString());
         try {
-            for (int i = 0;i<length;i++){
-                JSONObject o = array.getJSONObject(i);
-                ModuleUnitBean bean = new ModuleUnitBean(o.getString("path"),
-                        o.getString("templet"),
-                        o.getString("title"),
-                        o.getInt("layout_level"),
-                        o.getInt("extra_level"));
-                moduleGroup.add(bean);
+            Iterator iterator = object.keys();
+            while (iterator.hasNext()){
+                String key = iterator.next().toString();
+                JSONArray array = object.getJSONArray(key);
+                List<ModuleUnitBean> list = new ArrayList<>();
+                int length = array.length();
+                for (int i = 0;i < length;i++){
+                    JSONObject o = array.getJSONObject(i);
+                    ModuleUnitBean bean = new ModuleUnitBean(o.getString("path"),
+                            o.getString("templet"),
+                            o.getString("title"),
+                            o.getInt("layoutLevel"),
+                            o.getInt("extraLevel"));
+                    list.add(bean);
+                }
+                templetList.put(key,list);
             }
         }catch (JSONException e){
             e.printStackTrace();
@@ -112,14 +140,22 @@ public class ModuleCenter {
     }
 
     public static List<String> getModuleList(String templet){
-        if (moduleGroup.isEmpty()) return null;
-        List<String> list = new ArrayList<>();
-        for (ModuleUnitBean bean: moduleGroup){
+//        if (moduleGroup.isEmpty()) return null;
+//        List<String> list = new ArrayList<>();
+//        for (ModuleUnitBean bean: moduleGroup){
+//            if (bean.templet.equals(templet)){
+//                list.add(bean.path);
+//            }
+//        }
+//        return list;
+        if (templetList.isEmpty()) return null;
+        List<String> moduleList = new ArrayList<>();
+        for (ModuleUnitBean bean: templetList.get(templet)) {
             if (bean.templet.equals(templet)){
-                list.add(bean.path);
+                moduleList.add(bean.path);
             }
         }
-        return list;
+        return moduleList;
     }
 
     public static List<ModuleMeta> getMouleList(String templet){

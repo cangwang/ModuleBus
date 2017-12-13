@@ -2,17 +2,24 @@ package com.cangwang.process;
 
 import com.cangwang.annotation.ModuleGroup;
 import com.cangwang.annotation.ModuleUnit;
+import com.cangwang.bean.ModuleUnitBean;
 import com.cangwang.utils.Logger;
 import com.cangwang.utils.ModuleUtil;
 import com.google.auto.service.AutoService;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -54,7 +61,7 @@ public class ModuleProcessor extends AbstractProcessor {
         Map<String, String> options = processingEnv.getOptions();
         if (MapUtils.isNotEmpty(options)) {
             applicationName = options.get("applicationName");
-            if (applicationName ==null) {
+            if (applicationName == null) {
                 moduleName = options.get("moduleName");
                 System.out.println("moduleName = " +moduleName);
             }else {
@@ -63,17 +70,41 @@ public class ModuleProcessor extends AbstractProcessor {
                     String path = System.getProperty("user.dir") +"/"+ applicationName + "/src/main/assets/center.json";
                     logger.info(path);
                     try {
+                        //先清理app center.json缓存数据
+                        ModuleUtil.createCenterJson(applicationName);
+                        //获取引用module的列表
                         List<String> moduleNameList = ModuleUtil.readSetting();
                         JsonArray jsonArray = new JsonArray();
-                        for (String name:moduleNameList){
-                            logger.info(name);
-                            String json = ModuleUtil.readJsonFile( System.getProperty("user.dir") +"/"+ name + "/src/main/assets/center.json");
-                            if (json.isEmpty()) continue;
-                            jsonArray.addAll(ModuleUtil.parserJsonArray(json));
+                        if (moduleNameList != null) {
+                            for (String name : moduleNameList) {
+                                //读取module center.json列表
+                                String json = ModuleUtil.readJsonFile(System.getProperty("user.dir") + "/" + name + "/src/main/assets/center.json");
+                                logger.info("json ="+json.toString());
+                                if (json.isEmpty()) continue;
+                                jsonArray.addAll(ModuleUtil.parserJsonArray(json));
+                            }
                         }
-                        ModuleUtil.createCenterJson(applicationName);
-                        ModuleUtil.writeJsonFile(path, jsonArray.toString());
-                        ModuleUtil.deleteRootCenter();
+                        logger.info("读取module center.json列表:"+jsonArray.toString());
+                        //转换为对象做类型排序
+                        Map<String,LinkedList<ModuleUnitBean>> map =new HashMap<>();
+                        for (int i = 0;i<jsonArray.size();i++){
+                            JsonObject o = jsonArray.get(i).getAsJsonObject();
+                            final ModuleUnitBean bean = ModuleUtil.gson.fromJson(o, ModuleUnitBean.class);
+                            if (map.containsKey(bean.templet)){
+                                map.get(bean.templet).add(bean);
+                            }else {
+                                LinkedList<ModuleUnitBean> list = new LinkedList<ModuleUnitBean>(){{add(bean);}};
+                                map.put(bean.templet,list);
+                            }
+                        }
+                        JsonObject o = new JsonObject();
+                        for (Map.Entry<String, LinkedList<ModuleUnitBean>> entry : map.entrySet()) {
+                            //排列层级
+                            Collections.sort(entry.getValue());
+                            o.add(entry.getKey(),ModuleUtil.listToJson(entry.getValue()));
+                        }
+                        //写入到center.json
+                        ModuleUtil.writeJsonFile(path, o.toString());
                     }catch (IOException e){
                         e.printStackTrace();
                     }

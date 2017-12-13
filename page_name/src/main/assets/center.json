@@ -3,15 +3,15 @@
       "path":"com.cangwang.page_name.PageNameExModule",
       "templet":"top",
       "title":"CangWang",
-      "layout_level":400,
-      "extra_level":0
+      "layoutLevel":400,
+      "extraLevel":0
    },
    {
       "path":"com.cangwang.page_name.PageNameExModule",
       "templet":"normal",
       "title":"CangWang",
-      "layout_level":500,
-      "extra_level":0
+      "layoutLevel":500,
+      "extraLevel":0
    }
 
 ]
