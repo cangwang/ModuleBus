@@ -67,8 +67,7 @@ public class ModuleProcessor extends AbstractProcessor {
             }else {
                 System.out.println("applicationName = " +applicationName);
                 if (applicationName != null ) {
-                    String path = System.getProperty("user.dir") +"/"+ applicationName + "/src/main/assets/center.json";
-                    logger.info(path);
+                    String path = ModuleUtil.getJsonAddress(applicationName);
                     try {
                         //先清理app center.json缓存数据
                         ModuleUtil.createCenterJson(applicationName);
@@ -78,8 +77,7 @@ public class ModuleProcessor extends AbstractProcessor {
                         if (moduleNameList != null) {
                             for (String name : moduleNameList) {
                                 //读取module center.json列表
-                                String json = ModuleUtil.readJsonFile(System.getProperty("user.dir") + "/" + name + "/src/main/assets/center.json");
-                                logger.info("json ="+json.toString());
+                                String json = ModuleUtil.readJsonFile(ModuleUtil.getJsonAddress(name));
                                 if (json.isEmpty()) continue;
                                 jsonArray.addAll(ModuleUtil.parserJsonArray(json));
                             }
@@ -134,6 +132,7 @@ public class ModuleProcessor extends AbstractProcessor {
             Set<? extends Element> moduleGroupElements = roundEnvironment.getElementsAnnotatedWith(ModuleGroup.class);
 
             try {
+                //遍历注解
                 logger.info(">>> Found moduleUnit, start... <<<");
                 JsonArray units = ModuleUnitProcessor.parseModules(moduleUnitElements, logger, mFiler, elements);
                 logger.info(">>> Found moduleGroup, start... <<<");
@@ -146,8 +145,9 @@ public class ModuleProcessor extends AbstractProcessor {
                     if (groups != null)
                         moduleArrary.addAll(groups);
                     if (moduleArrary.size() > 0) {
+                        //写入每个json文件
                         ModuleUtil.createCenterJson(moduleName);
-                        ModuleUtil.writeJsonFile(System.getProperty("user.dir") + "/" + moduleName + "/src/main/assets/center.json", moduleArrary.toString());
+                        ModuleUtil.writeJsonFile(ModuleUtil.getJsonAddress(moduleName), moduleArrary.toString());
                     }
                     logger.info(moduleArrary.toString());
                 }

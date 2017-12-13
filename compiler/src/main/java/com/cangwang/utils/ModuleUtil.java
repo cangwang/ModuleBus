@@ -45,7 +45,9 @@ public class ModuleUtil {
         return groupName.split(",");
     }
 
-    public static String centerPath = System.getProperty("user.dir")+"/center.json";
+    public static final String rootPath = System.getProperty("user.dir");
+    public static final String ceterFile = "/src/main/assets/center.json";
+    public static final String settingFile = System.getProperty("user.dir")+"/settings.gradle";
 
     public static Logger logger;
 
@@ -58,7 +60,6 @@ public class ModuleUtil {
      * @throws IOException
      */
     public static void writeJsonFile(String filePath,String sets) throws IOException{
-//        String oldset = formatJson(readJsonFile(filePath),false)+"\n";
         sets = formatJson(sets,true);
         logger.info(sets);
         writeFile(filePath,sets);
@@ -248,20 +249,15 @@ public class ModuleUtil {
             logger.info(directory +" is not exists,to create");
             dirFile.mkdir();
         }
-        String path = System.getProperty("user.dir") +"/"+moduleName + "/src/main/assets/center.json";
+        String path = getJsonAddress(moduleName);
         File file =new File(path);
         boolean deleteResult =file.delete();
         boolean success = file.createNewFile();
         logger.info("deleteResult = "+deleteResult+", path = "+path+",success = "+success);
     }
 
-    public static void deleteRootCenter(){
-        File file = new File(centerPath);
-        file.deleteOnExit();
-    }
-
     public static List<String> readSetting() throws IOException{
-        File file = new File( System.getProperty("user.dir")+"/settings.gradle");
+        File file = new File(settingFile);
         BufferedReader reader=null;
         String settingContent="";
         try {
@@ -300,5 +296,9 @@ public class ModuleUtil {
         jsonObject.addProperty("layoutLevel",b.layoutLevel);
         jsonObject.addProperty("extraLevel",b.extraLevel);
         return jsonObject;
+    }
+
+    public static String getJsonAddress(String moduleName){
+        return rootPath+"/"+moduleName+ceterFile;
     }
 }
