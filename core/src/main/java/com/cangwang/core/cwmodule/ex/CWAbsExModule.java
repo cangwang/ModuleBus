@@ -3,12 +3,13 @@ package com.cangwang.core.cwmodule.ex;
 import android.os.Bundle;
 
 import com.cangwang.core.cwmodule.CWModuleContext;
+import com.cangwang.model.ICWModule;
 
 /**
  * Created by cangwang on 2016/12/26.
  */
 
-public abstract class CWAbsExModule {
+public abstract class CWAbsExModule implements ICWModule{
 
     public abstract boolean init(CWModuleContext moduleContext, Bundle extend);
 

@@ -25,14 +25,11 @@ public class ModuleGroupProcessor  {
     public static JsonArray parseModulesGroup(Set<? extends Element> modulesElements, Logger logger, Filer mFiler, Elements elements) throws IOException{
         if (CollectionUtils.isNotEmpty(modulesElements)) {
             logger.info(">>> Found moduleGroup, size is " + modulesElements.size() + " <<<");
+            ModuleUnitProcessor.parseModuleFile(modulesElements,logger,mFiler,elements);
             for (Element element:modulesElements){
-                if (element!=null){
-                    ModuleGroup group = element.getAnnotation(ModuleGroup.class);
-                    if (group!=null){
-                        ModuleUnit[] units = group.value();
-                         return parseModules(units,element,logger,mFiler,elements);
-                    }
-                }
+                ModuleGroup group = element.getAnnotation(ModuleGroup.class);
+                ModuleUnit[] units = group.value();
+                return parseModules(units,element,logger,mFiler,elements);
             }
         }
         return null;

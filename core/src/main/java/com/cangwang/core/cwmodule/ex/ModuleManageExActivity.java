@@ -2,7 +2,6 @@ package com.cangwang.core.cwmodule.ex;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,17 +13,8 @@ import com.cangwang.core.ModuleBus;
 import com.cangwang.core.ModuleEvent;
 import com.cangwang.core.R;
 import com.cangwang.core.cwmodule.CWModuleContext;
-import com.cangwang.core.info.ModuleInfo;
 
 import java.util.List;
-
-
-//import io.reactivex.Observable;
-//import io.reactivex.android.schedulers.AndroidSchedulers;
-//import io.reactivex.annotations.NonNull;
-//import io.reactivex.functions.Consumer;
-//import io.reactivex.functions.Function;
-//import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by cangwang on 2017/6/15.
@@ -64,32 +54,6 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
         sVerticalViews.put(CWModuleContext.PLUGIN_CENTER_VIEW, pluginViewGroup);
         moduleContext.setViewGroups(sVerticalViews);
 
-//        Observable.fromIterable(moduleManager.getModuleNames())
-//                .map(new Function<String, ModuleInfo>() {
-//                    @Override
-//                    public ModuleInfo apply(@NonNull String s){
-//                        return new ModuleInfo(s, CWModuleExFactory.newModuleInstance(s));
-//                    }
-//                })
-////              .delay(10, TimeUnit.MILLISECONDS)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Consumer<ModuleInfo>() {
-//                    @Override
-//                    public void accept(@NonNull ModuleInfo elAbsModule){
-//                        try {
-//                            if(elAbsModule!=null){
-//                                long before = System.currentTimeMillis();
-//                                elAbsModule.module.init(moduleContext, null);
-//                                Log.d(TAG, "modulename: " + elAbsModule.getClass().getSimpleName() + " init time = " + (System.currentTimeMillis() - before) + "ms");
-//                                moduleManager.putModule(elAbsModule.name, elAbsModule.module);
-//                            }
-//                        }catch (Exception ex){
-//                            Log.e(TAG,ex.toString());
-//                        }
-//                    }
-//                });
-
         for (final String moduleName:moduleManager.getModuleNames()){
             moduleManager.getPool().execute(new Runnable() {
                 @Override
@@ -117,32 +81,36 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        moduleManager.onResume();
+        if (moduleManager !=null)
+            moduleManager.onResume();
     }
 
     @Override
     protected void onPause() {
+        if (moduleManager !=null)
+            moduleManager.onPause();
         super.onPause();
-        moduleManager.onPause();
     }
 
     @Override
     protected void onStop() {
+        if (moduleManager !=null)
+            moduleManager.onStop();
         super.onStop();
-        moduleManager.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-        moduleManager.onDestroy();
+        if (moduleManager !=null)
+            moduleManager.onDestroy();
         ModuleBus.getInstance().unregister(this);
+        super.onDestroy();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
         moduleManager.onConfigurationChanged(newConfig);
+        super.onConfigurationChanged(newConfig);
     }
 
     /**
