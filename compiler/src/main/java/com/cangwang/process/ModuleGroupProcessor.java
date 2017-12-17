@@ -33,9 +33,11 @@ public class ModuleGroupProcessor  {
             logger.info(">>> Found moduleGroup, size is " + modulesElements.size() + " <<<");
             for (Element element:modulesElements){
                 if (element!=null){
+                    //遍历moduleGroup
                     ModuleGroup group = element.getAnnotation(ModuleGroup.class);
                     if (group!=null){
                         ModuleUnit[] units = group.value();
+                        //解析ModuleUnit数据，并生成IModuleUnit文件
                         parseModules(units,element,logger,mFiler,elements);
                     }
                 }
