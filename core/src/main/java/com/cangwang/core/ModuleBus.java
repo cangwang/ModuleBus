@@ -8,6 +8,8 @@ import android.util.Log;
 
 import com.cangwang.core.info.MethodInfo;
 
+import org.json.JSONObject;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -276,8 +278,8 @@ public class ModuleBus {
         ModuleCenter.init(context);
     }
 
-    public static void init(Context context,String jsonName){
-        ModuleCenter.init(context,jsonName);
+    public static void init(Context context, JSONObject object){
+        ModuleCenter.init(context,object,true);
     }
 
     public List<String> getModuleList(String templet) {

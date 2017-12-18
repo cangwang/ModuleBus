@@ -23,6 +23,12 @@ android {
     }
 }
 
+tasks.whenTaskAdded { task ->
+    if (task.name.equals("lint")) {
+        task.enabled = false
+    }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {

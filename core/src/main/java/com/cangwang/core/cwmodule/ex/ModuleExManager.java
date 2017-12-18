@@ -20,6 +20,7 @@ import java.util.concurrent.Executors;
 public class ModuleExManager {
     private List<String> modules = new ArrayList<>();   //模块名字
     protected ArrayMap<String,CWAbsExModule> allModules = new ArrayMap<>();   //模块实体
+    private String template;
 
     public List<String> getModuleNames(){
         return modules;
@@ -27,6 +28,14 @@ public class ModuleExManager {
 
     public void moduleConfig(List<String> modules) {
         this.modules = modules;
+    }
+
+    public void moduleConfig(String template){
+        this.template = template;
+    }
+
+    public String getTemplate(){
+        return template;
     }
 
     private Handler handler;

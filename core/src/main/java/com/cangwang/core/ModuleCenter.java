@@ -33,6 +33,7 @@ public class ModuleCenter {
     private static Map<String,List<ModuleMeta>> sortgroup = new HashMap<>();
     private static List<ModuleUnitBean> moduleGroup = new ArrayList<>();
     private static Map<String ,List<ModuleUnitBean>> templetList = new HashMap<>();
+    public static boolean isFromNetWork =false;
 
     public synchronized static void init(Context context){
 //        JSONArray array = ModuleUtil.getAssetJson(context,"center.json");
@@ -52,28 +53,11 @@ public class ModuleCenter {
 //        }catch (JSONException e){
 //            e.printStackTrace();
 //        }
-        init(context,"center");
+        init(context,ModuleUtil.getAssetJsonObject(context,"center.json"),false);
     }
 
-    public synchronized static void init(Context context,String jsonName){
-//        JSONArray array = ModuleUtil.getAssetJson(context,jsonName+".json");
-//        if (array == null) return;
-//        Log.e(TAG,"modulearray = "+array.toString());
-//        int length = array.length();
-//        try {
-//            for (int i = 0;i<length;i++){
-//                JSONObject o = array.getJSONObject(i);
-//                ModuleUnitBean bean = new ModuleUnitBean(o.getString("path"),
-//                        o.getString("templet"),
-//                        o.getString("title"),
-//                        o.getInt("layout_level"),
-//                        o.getInt("extra_level"));
-//                moduleGroup.add(bean);
-//            }
-//        }catch (JSONException e){
-//            e.printStackTrace();
-//        }
-        JSONObject object = ModuleUtil.getAssetJsonObject(context,jsonName+".json");
+    public synchronized static void init(Context context,JSONObject object,boolean isFromNet){
+        isFromNetWork = isFromNet;
         if (object == null) return;
         Log.e(TAG,"templet = "+object.toString());
         try {

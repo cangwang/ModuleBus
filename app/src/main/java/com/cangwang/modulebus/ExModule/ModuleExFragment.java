@@ -29,7 +29,7 @@ public class ModuleExFragment extends ModuleManageExFragment {
 
 
     @Override
-    public List<String> moduleConfig() {
-        return ModuleBus.getInstance().getModuleList("normal");
+    public String moduleConfig() {
+        return "normal";
     }
 }

@@ -9,6 +9,8 @@ import com.cangwang.model.IModuleFactory;
 public class CWModuleExFactory {
     private static final String FACTORY_PATH = "com.cangwang.core.ModuleCenterFactory";
 
+    private static IModuleFactory instance;
+
     public static CWAbsExModule newModuleInstance(String name){
         if (name ==null || name.equals("")){
             return null;
@@ -32,20 +34,22 @@ public class CWModuleExFactory {
     }
 
     public static IModuleFactory getInstance(){
-        try{
-            Class<? extends IModuleFactory> factoryClazz = (Class<? extends IModuleFactory>) Class.forName(FACTORY_PATH);
-            if (factoryClazz !=null){
-                IModuleFactory instance = (IModuleFactory)factoryClazz.newInstance();
-                return instance;
+        if (instance == null) {
+            try {
+                Class<? extends IModuleFactory> factoryClazz = (Class<? extends IModuleFactory>) Class.forName(FACTORY_PATH);
+                if (factoryClazz != null) {
+                    instance = factoryClazz.newInstance();
+                    return instance;
+                }
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
             }
             return null;
-        }catch (ClassNotFoundException e){
-            e.printStackTrace();
-        }catch (InstantiationException e){
-            e.printStackTrace();
-        }catch (IllegalAccessException e){
-            e.printStackTrace();
-        }
-        return null;
+        }else
+            return instance;
     }
 }

@@ -12,9 +12,11 @@ import android.view.ViewGroup;
 
 import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleBus;
+import com.cangwang.core.ModuleCenter;
 import com.cangwang.core.ModuleEvent;
 import com.cangwang.core.R;
 import com.cangwang.core.cwmodule.CWModuleContext;
+import com.cangwang.model.ICWModule;
 
 import java.util.List;
 
@@ -59,27 +61,40 @@ public abstract class ModuleManageFragment extends Fragment {
         sVerticalViews.put(CWModuleContext.PLUGIN_CENTER_VIEW, pluginViewGroup);
         moduleContext.setViewGroups(sVerticalViews);
 
-        for (final String moduleName:moduleManager.getModuleNames()){
-            moduleManager.getPool().execute(new Runnable() {
-                @Override
-                public void run() {
-                    final CWAbsExModule module = CWModuleExFactory.newModuleInstance(moduleName);
-                    if (module!=null){
-                        moduleManager.getHandler().post(new Runnable() {
-                            @Override
-                            public void run() {
-                                long before = System.currentTimeMillis();
-                                module.init(moduleContext, null);
-                                Log.d(TAG, "modulename: " +moduleName + " init time = " + (System.currentTimeMillis() - before) + "ms");
-                                moduleManager.putModule(moduleName, module);
-                            }
-                        });
+        if (ModuleCenter.isFromNetWork) {  //在线加载
+            for (final String moduleName : ModuleBus.getInstance().getModuleList(moduleManager.getTemplate())) {
+                moduleManager.getPool().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        final CWAbsExModule module = CWModuleExFactory.newModuleInstance(moduleName);
+                        if (module != null) {
+                            moduleManager.getHandler().post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    long before = System.currentTimeMillis();
+                                    module.init(moduleContext, null);
+                                    Log.d(TAG, "modulename: " + moduleName + " init time = " + (System.currentTimeMillis() - before) + "ms");
+                                    moduleManager.putModule(moduleName, module);
+                                }
+                            });
+                        }
                     }
-                }
-            });
+                });
+            }
+        }else {   //本地缓存加载
+            CWAbsExModule module;
+            List<ICWModule> moduleList =CWModuleExFactory.getInstance().getTempleList(moduleManager.getTemplate());
+            if (moduleList == null || moduleList.isEmpty()) return;
+            for (ICWModule moduleIn : moduleList) {
+                module = (CWAbsExModule) moduleIn;
+                long before = System.currentTimeMillis();
+                module.init(moduleContext, null);
+                Log.d(TAG, "modulename: " + moduleIn.getClass().getCanonicalName() + " init time = " + (System.currentTimeMillis() - before) + "ms");
+                moduleManager.putModule(moduleIn.getClass().getCanonicalName(), module);
+            }
         }
     }
-    public abstract List<String> moduleConfig();
+    public abstract String moduleConfig();
 
     @Override
     public void onResume() {

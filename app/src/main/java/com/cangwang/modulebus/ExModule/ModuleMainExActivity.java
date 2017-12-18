@@ -19,8 +19,13 @@ public class ModuleMainExActivity extends ModuleManageExActivity{
         super.onCreate(savedInstanceState);
     }
 
+//    @Override
+//    public List<String> moduleConfig() {
+//        return ModuleBus.getInstance().getModuleList("top");
+//    }
+
     @Override
-    public List<String> moduleConfig() {
-        return ModuleBus.getInstance().getModuleList("top");
+    public String moduleConfig() {
+        return "top";
     }
 }

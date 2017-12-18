@@ -40,3 +40,9 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile project(':core')
 }
+
+tasks.whenTaskAdded { task ->
+    if (task.name.equals("lint")) {
+        task.enabled = false
+    }
+}

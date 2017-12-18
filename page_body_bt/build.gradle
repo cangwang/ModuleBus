@@ -39,3 +39,9 @@ dependencies {
     compile project(':base')
     annotationProcessor project(":compiler")
 }
+
+tasks.whenTaskAdded { task ->
+    if (task.name.equals("lint")) {
+        task.enabled = false
+    }
+}

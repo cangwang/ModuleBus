@@ -188,11 +188,12 @@ public class ModuleProcessor extends AbstractProcessor {
 
         logger.info("init factory");
 
-        TypeName templateMap = ParameterizedTypeName.get(ClassName.get(Map.class),
+        TypeName templateMap = ParameterizedTypeName.get(ClassName.get(HashMap.class),
                 ClassName.get(String.class),
                 ParameterizedTypeName.get(ClassName.get(List.class),ClassName.get(ICWModule.class)));
 
         FieldSpec.Builder fieldMapBuilder = FieldSpec.builder(templateMap,"moduleMap",Modifier.PRIVATE,STATIC);
+        fieldMapBuilder.initializer("new HashMap<>()");
         FieldSpec.Builder fieldInstanceBuilder = FieldSpec.builder(IModuleFactory.class, "sInstance", Modifier.PRIVATE, Modifier.STATIC);
         //添加loadInto方法
         MethodSpec.Builder getInstanceBuilder = MethodSpec.methodBuilder(ModuleUtil.METHOD_FACTROY_GET_INSTANCE)
@@ -214,18 +215,22 @@ public class ModuleProcessor extends AbstractProcessor {
                 .addStatement("return moduleMap.get(templateName)");
 
         CodeBlock.Builder code = CodeBlock.builder();
-        code.addStatement("List<ICWModule> list = new $T<>();",LinkedList.class);
+//        code.addStatement("List<ICWModule> list = new $T<>()",LinkedList.class);
 
+        int index=0;
         try {
             for (Map.Entry<String, LinkedList<ModuleUnitBean>> entry : map.entrySet()) {
                 //排列层级
                 Collections.sort(entry.getValue());
+                String key = entry.getKey();
+                code.addStatement("List<ICWModule> list$L = new $T<>()",index,LinkedList.class);
                 for (ModuleUnitBean b :entry.getValue()){
                     logger.info(b.path);
-                    code.addStatement("list.add(new $T().getModule());",ClassName.get(ModuleUtil.FACADE_PACKAGE,ModuleUtil.MODULE_UNIT+ModuleUtil.SEPARATOR+b.title));
+                    code.addStatement("list$L.add(new $T().getModule())",index,ClassName.get(ModuleUtil.FACADE_PACKAGE,ModuleUtil.MODULE_UNIT+ModuleUtil.SEPARATOR+b.title));
                 }
-                code.addStatement("moduleMap.put($S,list)",entry.getKey());
-                code.addStatement("list.clear();");
+                code.addStatement("moduleMap.put($S,list$L)",key,index);
+                index++;
+//                code.addStatement("list.clear();");
             }
         }catch (Exception e){
             logger.info(e.toString());
