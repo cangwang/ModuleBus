@@ -7,6 +7,6 @@ import java.util.List;
  */
 
 public interface IModuleFactory {
-    IModuleFactory getInstance();
-//    List<ICWModule> getTempleList(String templet);
+//    IModuleFactory getInstance();
+    List<ICWModule> getTempleList(String templet);
 }

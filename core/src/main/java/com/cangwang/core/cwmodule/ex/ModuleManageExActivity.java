@@ -13,6 +13,7 @@ import com.cangwang.core.ModuleBus;
 import com.cangwang.core.ModuleEvent;
 import com.cangwang.core.R;
 import com.cangwang.core.cwmodule.CWModuleContext;
+import com.cangwang.model.ICWModule;
 
 import java.util.List;
 
@@ -73,6 +74,15 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
                 }
             });
         }
+//        CWAbsExModule module;
+//        for (ICWModule moduleIn :CWModuleExFactory.getInstance().getTempleList("top")){
+//            module = (CWAbsExModule)moduleIn;
+//            long before = System.currentTimeMillis();
+//            module.init(moduleContext, null);
+//            Log.d(TAG, "modulename: " +moduleIn.getClass().getSimpleName() + " init time = " + (System.currentTimeMillis() - before) + "ms");
+//            moduleManager.putModule(moduleIn.getClass().getSimpleName(), module);
+//
+//        }
     }
 
 

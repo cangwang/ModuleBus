@@ -1,5 +1,7 @@
 package com.cangwang.core.cwmodule.ex;
 
+import com.cangwang.model.IModuleFactory;
+
 /**
  * Created by cangwang on 2017/6/16.
  */
@@ -26,22 +28,24 @@ public class CWModuleExFactory {
         }catch (IllegalAccessException e){
             e.printStackTrace();
         }
+        return null;
+    }
 
-//        try{
-//            Class<? extends CWAbsExModule> moduleClzz = (Class<? extends CWAbsExModule>) Class.forName(FACTORY_PATH);
-//            if (moduleClzz !=null){
-//                CWAbsExModule instance = (CWAbsExModule)moduleClzz.newInstance();
-//                return instance;
-//            }
-//            return null;
-//        }catch (ClassNotFoundException e){
-//            e.printStackTrace();
-//        }catch (InstantiationException e){
-//            e.printStackTrace();
-//        }catch (IllegalAccessException e){
-//            e.printStackTrace();
-//        }
-
+    public static IModuleFactory getInstance(){
+        try{
+            Class<? extends IModuleFactory> factoryClazz = (Class<? extends IModuleFactory>) Class.forName(FACTORY_PATH);
+            if (factoryClazz !=null){
+                IModuleFactory instance = (IModuleFactory)factoryClazz.newInstance();
+                return instance;
+            }
+            return null;
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }catch (InstantiationException e){
+            e.printStackTrace();
+        }catch (IllegalAccessException e){
+            e.printStackTrace();
+        }
         return null;
     }
 }

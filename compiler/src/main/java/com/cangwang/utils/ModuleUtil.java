@@ -36,6 +36,7 @@ public class ModuleUtil {
     public static final String IMODULE_FACTORY = MODULE_MODEL + ".IModuleFactory";
     public static final String METHOD_GET_MODULE = "getModule";
     public static final String METHOD_FACTROY_GET_INSTANCE = "getInstance";
+    public static final String METHOD_FACTROY_GET_TEMPLE_LIST = "getTempleList";
 
     public static final String NAME_OF_MODULEUNIT = MODULE_UNIT + SEPARATOR;
 

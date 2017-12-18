@@ -48,7 +48,7 @@ public class ModuleGroupProcessor  {
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("path",path);
                 jsonObject.addProperty("templet",moduleUnit.templet());
-                jsonObject.addProperty("title",moduleUnit.title());
+                jsonObject.addProperty("title",name.simpleName());
                 jsonObject.addProperty("layoutLevel",moduleUnit.layoutlevel().getValue());
                 jsonObject.addProperty("extraLevel",moduleUnit.extralevel());
                 array.add(jsonObject);

@@ -3,6 +3,7 @@ package com.cangwang.process;
 import com.cangwang.annotation.ModuleGroup;
 import com.cangwang.annotation.ModuleUnit;
 import com.cangwang.bean.ModuleUnitBean;
+import com.cangwang.model.ICWModule;
 import com.cangwang.model.IModuleFactory;
 import com.cangwang.utils.Logger;
 import com.cangwang.utils.ModuleUtil;
@@ -11,9 +12,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
+import com.squareup.javapoet.ParameterSpec;
+import com.squareup.javapoet.ParameterizedTypeName;
+import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -42,6 +47,10 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 
+import static javax.lang.model.element.Modifier.PRIVATE;
+import static javax.lang.model.element.Modifier.PUBLIC;
+import static javax.lang.model.element.Modifier.STATIC;
+
 /**
  * Created by cangwang on 2017/12/6.
  */
@@ -53,6 +62,8 @@ public class ModuleProcessor extends AbstractProcessor {
     private Elements elements;
     private String applicationName;
     private String moduleName;
+
+    private Map<String,LinkedList<ModuleUnitBean>> map =new HashMap<>();
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnvironment) {
@@ -100,9 +111,9 @@ public class ModuleProcessor extends AbstractProcessor {
 
             try {
                 //遍历注解
-                logger.info(">>> Found moduleUnit, start... <<<");
+                logger.info(">>> Found moduleUnit, start get jsonArray <<<");
                 JsonArray units = ModuleUnitProcessor.parseModules(moduleUnitElements, logger, mFiler, elements);
-                logger.info(">>> Found moduleGroup, start... <<<");
+                logger.info(">>> Found moduleGroup, start get jsonArray <<<");
                 JsonArray groups = ModuleGroupProcessor.parseModulesGroup(moduleGroupElements, logger, mFiler, elements);
 
                 if (moduleName != null) {
@@ -145,7 +156,7 @@ public class ModuleProcessor extends AbstractProcessor {
                 }
                 logger.info("读取"+path+" module center.json列表:"+jsonArray.toString());
                 //转换为对象做类型排序
-                Map<String,LinkedList<ModuleUnitBean>> map =new HashMap<>();
+//                Map<String,LinkedList<ModuleUnitBean>> map =new HashMap<>();
                 for (int i = 0;i<jsonArray.size();i++){
                     JsonObject o = jsonArray.get(i).getAsJsonObject();
                     final ModuleUnitBean bean = ModuleUtil.gson.fromJson(o, ModuleUnitBean.class);
@@ -173,20 +184,52 @@ public class ModuleProcessor extends AbstractProcessor {
         }
     }
 
-    public static void parseCenter(Set<? extends Element> modulesElements,Logger logger,Filer mFiler,Elements elements) throws IOException{
+    public void parseCenter(Set<? extends Element> modulesElements,Logger logger,Filer mFiler,Elements elements) throws IOException{
 
-        logger.info("init instance");
+        logger.info("init factory");
 
+        TypeName templateMap = ParameterizedTypeName.get(ClassName.get(Map.class),
+                ClassName.get(String.class),
+                ParameterizedTypeName.get(ClassName.get(List.class),ClassName.get(ICWModule.class)));
+
+        FieldSpec.Builder fieldMapBuilder = FieldSpec.builder(templateMap,"moduleMap",Modifier.PRIVATE,STATIC);
         FieldSpec.Builder fieldInstanceBuilder = FieldSpec.builder(IModuleFactory.class, "sInstance", Modifier.PRIVATE, Modifier.STATIC);
         //添加loadInto方法
         MethodSpec.Builder getInstanceBuilder = MethodSpec.methodBuilder(ModuleUtil.METHOD_FACTROY_GET_INSTANCE)
                 .returns(IModuleFactory.class)
-                .addAnnotation(Override.class)
-                .addModifiers(Modifier.PUBLIC)
+                .addModifiers(Modifier.PUBLIC,Modifier.STATIC)
                 .beginControlFlow("if (null == sInstance)")
                 .addStatement("sInstance = new ModuleCenterFactory()")
                 .endControlFlow()
                 .addStatement("return sInstance");
+
+        TypeName templateList = ParameterizedTypeName.get(ClassName.get(List.class),ClassName.get(ICWModule.class));
+        ParameterSpec templateName = ParameterSpec.builder(String.class, "templateName").build();
+
+        MethodSpec.Builder getModuleListBuilder = MethodSpec.methodBuilder(ModuleUtil.METHOD_FACTROY_GET_TEMPLE_LIST)
+                .addAnnotation(Override.class)
+                .addModifiers(Modifier.PUBLIC)
+                .addParameter(templateName)
+                .returns(templateList)
+                .addStatement("return moduleMap.get(templateName)");
+
+        CodeBlock.Builder code = CodeBlock.builder();
+        code.addStatement("List<ICWModule> list = new $T<>();",LinkedList.class);
+
+        try {
+            for (Map.Entry<String, LinkedList<ModuleUnitBean>> entry : map.entrySet()) {
+                //排列层级
+                Collections.sort(entry.getValue());
+                for (ModuleUnitBean b :entry.getValue()){
+                    logger.info(b.path);
+                    code.addStatement("list.add(new $T().getModule());",ClassName.get(ModuleUtil.FACADE_PACKAGE,ModuleUtil.MODULE_UNIT+ModuleUtil.SEPARATOR+b.title));
+                }
+                code.addStatement("moduleMap.put($S,list)",entry.getKey());
+                code.addStatement("list.clear();");
+            }
+        }catch (Exception e){
+            logger.info(e.toString());
+        }
 
 
         //构造java文件
@@ -196,7 +239,10 @@ public class ModuleProcessor extends AbstractProcessor {
                         .addSuperinterface(ClassName.get(elements.getTypeElement(ModuleUtil.IMODULE_FACTORY)))
                         .addModifiers(Modifier.PUBLIC)
                         .addField(fieldInstanceBuilder.build())
+                        .addField(fieldMapBuilder.build())
+                        .addStaticBlock(code.build())
                         .addMethod(getInstanceBuilder.build())
+                        .addMethod(getModuleListBuilder.build())
                         .build()
         ).build().writeTo(mFiler);
     }

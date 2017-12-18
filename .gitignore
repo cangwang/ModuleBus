@@ -8,5 +8,7 @@
 /captures
 /news
 *.iml
+/a
+/b
 
 local.properties
