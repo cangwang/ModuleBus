@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply from: "${rootProject.rootDir}/common_config.gradle"
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
@@ -35,7 +37,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     provided 'com.android.support:appcompat-v7:23.+'
     compile project(':annotation')
-    annotationProcessor project(":compiler")
+    kapt project(":compiler")
 }
 
 task clearJar(type: Delete) {

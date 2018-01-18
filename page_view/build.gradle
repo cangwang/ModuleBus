@@ -1,12 +1,15 @@
 apply plugin: 'com.android.library'
+apply from: "${rootProject.rootDir}/common_config.gradle"
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 25
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -29,13 +32,19 @@ tasks.whenTaskAdded { task ->
     }
 }
 
+kapt {
+    generateStubs true
+    arguments {
+        arg("moduleName",project.getName())
+    }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.0.1'
     testCompile 'junit:junit:4.12'
     compile project(':base')
-    annotationProcessor project(":compiler")
+    kapt project(":compiler")
 }
