@@ -10,15 +10,7 @@ import com.cangwang.utils.ModuleUtil
 import com.google.auto.service.AutoService
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import com.squareup.javapoet.ClassName
-import com.squareup.javapoet.CodeBlock
-import com.squareup.javapoet.FieldSpec
-import com.squareup.javapoet.JavaFile
-import com.squareup.javapoet.MethodSpec
-import com.squareup.javapoet.ParameterSpec
-import com.squareup.javapoet.ParameterizedTypeName
-import com.squareup.javapoet.TypeName
-import com.squareup.javapoet.TypeSpec
+import com.squareup.kotlinpoet.*
 
 import org.apache.commons.collections4.CollectionUtils
 import org.apache.commons.collections4.MapUtils
@@ -36,13 +28,9 @@ import javax.annotation.processing.Processor
 import javax.annotation.processing.RoundEnvironment
 import javax.lang.model.SourceVersion
 import javax.lang.model.element.Element
-import javax.lang.model.element.Modifier
 import javax.lang.model.element.TypeElement
 import javax.lang.model.util.Elements
 import javax.lang.model.util.Types
-
-import javax.lang.model.element.Modifier.STATIC
-
 /**
  * Created by cangwang on 2017/12/6.
  */
@@ -69,13 +57,15 @@ class ModuleProcessor : AbstractProcessor() {
         elements = processingEnv.elementUtils      // Get class meta.
         val options = processingEnv.options
         if (MapUtils.isNotEmpty(options)) {
-            applicationName = options["applicationName"]
-            if (applicationName == null) {
-                moduleName = options["moduleName"]
-                println("moduleName = " + moduleName!!)
-            } else {
-                println("applicationName = " + applicationName!!)
+//            applicationName = options["applicationName"]
+            if(options.get("applicationName")!=null) {
+                applicationName = options.get("applicationName")!!
+                println("applicationName = " + applicationName)
                 initAppJson()
+            }else if (options.get("moduleName")!=null){
+//                moduleName = options["moduleName"]
+                moduleName = options.get("moduleName")!!
+                println("moduleName = " + moduleName)
             }
         }
     }
@@ -186,28 +176,27 @@ class ModuleProcessor : AbstractProcessor() {
 
         logger.info("init factory")
 
-        val templateMap = ParameterizedTypeName.get(ClassName.get(HashMap<*, *>::class.java!!),
+        val templateMap = ParameterizedTypeName.get(ClassName.get(HashMap::class),
                 ClassName.get(String::class.java!!),
-                ParameterizedTypeName.get(ClassName.get(List<*>::class.java!!), ClassName.get(ICWModule::class.java!!)))
+                ParameterizedTypeName.get(ClassName.get(List::class), ClassName.get(ICWModule::class)))
 
-        val fieldMapBuilder = FieldSpec.builder(templateMap, "moduleMap", Modifier.PRIVATE, STATIC)
+        val fieldMapBuilder = PropertySpec.builder("moduleMap",templateMap, KModifier.PRIVATE)
         fieldMapBuilder.initializer("new HashMap<>()")
-        val fieldInstanceBuilder = FieldSpec.builder(IModuleFactory::class.java, "sInstance", Modifier.PRIVATE, Modifier.STATIC)
+        val fieldInstanceBuilder = PropertySpec.builder("sInstance", IModuleFactory::class, KModifier.PRIVATE)
         //添加loadInto方法
-        val getInstanceBuilder = MethodSpec.methodBuilder(ModuleUtil.METHOD_FACTROY_GET_INSTANCE)
+        val getInstanceBuilder = FunSpec.builder(ModuleUtil.METHOD_FACTROY_GET_INSTANCE)
                 .returns(IModuleFactory::class.java!!)
-                .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+                .addModifiers(KModifier.PUBLIC)
                 .beginControlFlow("if (null == sInstance)")
                 .addStatement("sInstance = new ModuleCenterFactory()")
                 .endControlFlow()
                 .addStatement("return sInstance")
 
-        val templateList = ParameterizedTypeName.get(ClassName.get(List<*>::class.java!!), ClassName.get(ICWModule::class.java!!))
-        val templateName = ParameterSpec.builder(String::class.java, "templateName").build()
+        val templateList = ParameterizedTypeName.get(ClassName.get(List::class), ClassName.get(ICWModule::class))
+        val templateName = ParameterSpec.builder("templateName",String::class).build()
 
-        val getModuleListBuilder = MethodSpec.methodBuilder(ModuleUtil.METHOD_FACTROY_GET_TEMPLE_LIST)
-                .addAnnotation(Override::class.java!!)
-                .addModifiers(Modifier.PUBLIC)
+        val getModuleListBuilder = FunSpec.builder(ModuleUtil.METHOD_FACTROY_GET_TEMPLE_LIST)
+                .addAnnotation(Override::class)
                 .addParameter(templateName)
                 .returns(templateList)
                 .addStatement("return moduleMap.get(templateName)")
@@ -220,7 +209,7 @@ class ModuleProcessor : AbstractProcessor() {
             for ((key, value) in map) {
                 //排列层级
                 Collections.sort(value)
-                code.addStatement("List<ICWModule> list\$L = new \$T<>()", index, LinkedList<*>::class.java)
+                code.addStatement("List<ICWModule> list\$L = new \$T<>()", index,LinkedList::class)
                 for (b in value) {
                     logger.info(b.path)
                     code.addStatement("list\$L.add(new \$T().getModule())", index, ClassName.get(ModuleUtil.FACADE_PACKAGE, ModuleUtil.MODULE_UNIT + ModuleUtil.SEPARATOR + b.title))
@@ -235,16 +224,16 @@ class ModuleProcessor : AbstractProcessor() {
 
 
         //构造java文件
-        JavaFile.builder(ModuleUtil.FACADE_PACKAGE,
-                TypeSpec.classBuilder("ModuleCenterFactory")
-                        .addJavadoc(ModuleUtil.WARNING_TIPS)
+        KotlinFile.builder(ModuleUtil.FACADE_PACKAGE,"ModuleCenterFactory")
+                .addType(TypeSpec.classBuilder("ModuleCenterFactory")
+                        .addKdoc(ModuleUtil.WARNING_TIPS)
                         .addSuperinterface(ClassName.get(elements!!.getTypeElement(ModuleUtil.IMODULE_FACTORY)))
-                        .addModifiers(Modifier.PUBLIC)
-                        .addField(fieldInstanceBuilder.build())
-                        .addField(fieldMapBuilder.build())
-                        .addStaticBlock(code.build())
-                        .addMethod(getInstanceBuilder.build())
-                        .addMethod(getModuleListBuilder.build())
+                        .addModifiers(KModifier.PUBLIC)
+                        .addProperty(fieldInstanceBuilder.build())
+                        .addProperty(fieldMapBuilder.build())
+//                        .addStaticBlock(code.build())
+                        .addFun(getInstanceBuilder.build())
+                        .addFun(getModuleListBuilder.build())
                         .build()
         ).build().writeTo(mFiler!!)
     }

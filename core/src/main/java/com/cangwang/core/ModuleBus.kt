@@ -13,6 +13,7 @@ import org.json.JSONObject
 import java.lang.reflect.Method
 import java.util.ArrayList
 import java.util.Arrays
+import kotlin.reflect.KClass
 
 /**
  * Created by zjl on 16/10/19.
@@ -25,16 +26,15 @@ class ModuleBus {
     private val moduleAct = ArrayMap<String, Any>()
 
 
-    fun register(client: Any?) {
+    fun register(client: KClass<Any>) {
         if (client == null) return
 
-        val orginalClass = client.javaClass ?: return
-
+        val orginalClass = client
 
         val methods = orginalClass!!.getMethods()
 
         for (method in methods) {
-            val event = method.getAnnotation(ModuleEvent::class.java)
+            val event = method.getAnnotation(ModuleEvent::class)
             if (event != null) {
                 val clientClass = event!!.coreClientClass()
 
@@ -57,7 +57,7 @@ class ModuleBus {
     //        moduleClients.put(clientClass,clientList);
     //    }
 
-    private fun addClient(clientClass: Class<*>, client: Any, m: Method) {
+    private fun addClient(clientClass: KClass<*>, client: Any, m: Method) {
         var clientMethodList: ArrayMap<String, ArrayList<Any>>? = moduleMethodClient[clientClass]
 
         if (clientMethodList == null) {
@@ -103,15 +103,15 @@ class ModuleBus {
         methods.put(m.name, MethodInfo(m.name, m, single))
     }
 
-    fun unregister(client: Any?) {
+    fun unregister(client: Class<*>) {
         if (client == null) return
 
-        val orginalClass = client.javaClass ?: return
+        val orginalClass = client
 
 
         val methods = orginalClass!!.getMethods()
         for (method in methods) {
-            val event = method.getAnnotation(ModuleEvent::class.java)
+            val event = method.getAnnotation(ModuleEvent::class)
             if (event != null) {
                 val clientClass = event!!.coreClientClass()
                 if (moduleEventMethods[clientClass] == null) return
@@ -135,7 +135,7 @@ class ModuleBus {
     //        return clientList;
     //    }
 
-    fun getClient(clientClass: Class<*>?, methodName: String?): ArrayList<Any>? {
+    fun getClient(clientClass: KClass<*>?, methodName: String?): ArrayList<Any>? {
         if (clientClass == null || methodName == null) return null
         return if (moduleMethodClient[clientClass] != null)
             moduleMethodClient[clientClass]!!.get(methodName)
@@ -143,7 +143,7 @@ class ModuleBus {
             null
     }
 
-    fun post(clientClass: Class<*>?, methodName: String?, vararg args: Any) {
+    fun post(clientClass: KClass<*>?, methodName: String?, vararg args: Bun) {
         if (clientClass == null || methodName == null || methodName.length == 0) return
 
         val clientList = getClient(clientClass, methodName) ?: return
@@ -176,7 +176,7 @@ class ModuleBus {
 
     }
 
-    fun postSingle(clientClass: Class<*>?, methodName: String?, vararg args: Any): Any? {
+    fun postSingle(clientClass: KClass<*>?, methodName: String?, vararg args: Any): Any? {
         if (clientClass == null || methodName == null || methodName.length == 0) return null
 
         val clientList = getClient(clientClass, methodName) ?: return null
@@ -217,17 +217,16 @@ class ModuleBus {
         return null
     }
 
-    @JvmOverloads
     fun startModuleActivity(`object`: Any, className: String?, bundle: Bundle? = null) {
         if (className == null) return
         moduleAct.put(className, `object`)
-        post(IBaseClient::class.java, "startModuleActivity", className, bundle)
+        post(IBaseClient::class, "startModuleActivity", className, bundle)
     }
 
 
     fun moduleResult(`object`: Any, data: Intent?) {
         if (data == null) return
-        post(IBaseClient::class.java, "moduleResult", moduleAct[`object`.javaClass.getName()], data)
+        post(IBaseClient::class, "moduleResult", moduleAct[`object`.javaClass.getName()], data)
     }
 
     fun setPackageName(name: String) {
@@ -257,20 +256,9 @@ class ModuleBus {
          * String methodName
          * Object methodClass
          */
-        private val moduleMethodClient = ArrayMap<Class<*>, ArrayMap<String, ArrayList<Any>>>()
+        private val moduleMethodClient = ArrayMap<KClass<*>, ArrayMap<String, ArrayList<Any>>>()
 
-        private var instance: ModuleBus? = null
-
-        fun getInstance(): ModuleBus {
-            if (instance == null) {
-                synchronized(ModuleBus::class.java) {
-                    if (instance == null) {
-                        instance = ModuleBus()
-                    }
-                }
-            }
-            return instance!!
-        }
+        var instance: ModuleBus = ModuleBus()
 
         fun init(context: Context) {
             ModuleCenter.init(context)

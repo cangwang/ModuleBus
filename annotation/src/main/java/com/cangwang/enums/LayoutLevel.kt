@@ -5,7 +5,7 @@ package com.cangwang.enums
  * Created by cangwang on 2017/8/31.
  */
 
-enum class LayoutLevel private constructor(val value: Int) {
+enum class LayoutLevel constructor(val value: Int) {
     VERY_HIGHT(100),
     HIGHT(200),
     NORMAL(300),

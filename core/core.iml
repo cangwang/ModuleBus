@@ -149,8 +149,10 @@
     <orderEntry type="library" name="com.android.support:support-annotations:23.4.0@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-vector-drawable-23.4.0" level="project" />
     <orderEntry type="library" name="com.android.support:support-v4-23.4.0" level="project" />
+    <orderEntry type="library" name="org.jetbrains:annotations:13.0@jar" level="project" />
     <orderEntry type="library" name="com.android.support:appcompat-v7-23.4.0" level="project" />
     <orderEntry type="library" name="com.android.support:animated-vector-drawable-23.4.0" level="project" />
+    <orderEntry type="library" name="org.jetbrains.kotlin:kotlin-stdlib:1.1.2-3@jar" level="project" />
     <orderEntry type="module" module-name="annotation" />
   </component>
 </module>
