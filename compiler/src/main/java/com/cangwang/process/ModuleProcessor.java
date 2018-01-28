@@ -96,7 +96,7 @@ public class ModuleProcessor extends AbstractProcessor {
         Set<String> annotations = new LinkedHashSet<>();
         annotations.add(ModuleUnit.class.getCanonicalName());
         annotations.add(ModuleGroup.class.getCanonicalName());
-        annotations.add(InjectBean.class.getCanonicalName());
+//        annotations.add(InjectBean.class.getCanonicalName());
         return annotations;
     }
 
@@ -110,7 +110,7 @@ public class ModuleProcessor extends AbstractProcessor {
         if(CollectionUtils.isNotEmpty(set)){
             Set<? extends Element> moduleUnitElements = roundEnvironment.getElementsAnnotatedWith(ModuleUnit.class);
             Set<? extends Element> moduleGroupElements = roundEnvironment.getElementsAnnotatedWith(ModuleGroup.class);
-            Set<? extends Element> injectBeanElements = roundEnvironment.getElementsAnnotatedWith(InjectBean.class);
+//            Set<? extends Element> injectBeanElements = roundEnvironment.getElementsAnnotatedWith(InjectBean.class);
             try {
                 //遍历注解
                 logger.info(">>> Found moduleUnit, start get jsonArray <<<");
@@ -132,7 +132,7 @@ public class ModuleProcessor extends AbstractProcessor {
                     logger.info(moduleArrary.toString());
                 }
 
-                InjectJarProcessor.parseModulesGroup(injectBeanElements, logger, mFiler, elements,types);
+//                InjectJarProcessor.parseModulesGroup(injectBeanElements, logger, mFiler, elements,types);
             } catch (Exception e) {
                 logger.error(e);
             }
