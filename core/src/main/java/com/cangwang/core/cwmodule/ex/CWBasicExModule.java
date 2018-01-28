@@ -10,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cangwang.core.MBaseApi;
+import com.cangwang.core.ModuleApiManager;
+import com.cangwang.core.ModuleBus;
 import com.cangwang.core.cwmodule.CWModuleContext;
 
 import java.util.ArrayList;
@@ -107,5 +110,15 @@ public class CWBasicExModule extends CWAbsExModule {
     public View initLayout(@LayoutRes int id, ViewGroup parentTop){
         own = LayoutInflater.from(context).inflate(id,parentTop,true);
         return own;
+    }
+
+    @Override
+    public void registerMApi(Class<? extends MBaseApi> key, MBaseApi value) {
+        ModuleApiManager.getInstance().putApi(key,value);
+    }
+
+    @Override
+    public void unregisterMApi(Class<? extends MBaseApi> key) {
+        ModuleApiManager.getInstance().removeApi(key);
     }
 }

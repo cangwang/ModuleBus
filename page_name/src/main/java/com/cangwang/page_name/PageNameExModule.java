@@ -1,13 +1,19 @@
 package com.cangwang.page_name;
 
 import android.app.Application;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.cangwang.annotation.ModuleGroup;
 import com.cangwang.annotation.ModuleUnit;
+import com.cangwang.api.PageNameApi;
 import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleBus;
 import com.cangwang.core.ModuleEvent;
@@ -23,7 +29,7 @@ import com.cangwang.enums.LayoutLevel;
         @ModuleUnit(templet = "top",layoutlevel = LayoutLevel.LOW),
         @ModuleUnit(templet = "normal",layoutlevel = LayoutLevel.VERY_LOW)
 })
-public class PageNameExModule extends CWBasicExModule implements ModuleImpl{
+public class PageNameExModule extends CWBasicExModule implements ModuleImpl,PageNameApi {
     private View pageNameView;
     private TextView pageTitle;
 
@@ -33,6 +39,7 @@ public class PageNameExModule extends CWBasicExModule implements ModuleImpl{
         this.moduleContext = moduleContext;
         initView();
         ModuleBus.getInstance().register(this);
+        registerMApi(PageNameApi.class,this);
         return true;
     }
 
@@ -46,10 +53,11 @@ public class PageNameExModule extends CWBasicExModule implements ModuleImpl{
     @Override
     public void onDestroy() {
         ModuleBus.getInstance().unregister(this);
+        unregisterMApi(PageNameApi.class);
         super.onDestroy();
     }
 
-    @ModuleEvent(coreClientClass = IBaseClient.class)
+    @Override
     public void changeNameTxt(String name){
         pageTitle.setText(name);
     }

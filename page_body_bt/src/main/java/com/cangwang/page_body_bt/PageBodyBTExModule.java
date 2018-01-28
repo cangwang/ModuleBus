@@ -7,7 +7,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.cangwang.annotation.ModuleUnit;
+import com.cangwang.api.PageNameApi;
 import com.cangwang.core.IBaseClient;
+import com.cangwang.core.ModuleApiManager;
 import com.cangwang.core.ModuleBus;
 import com.cangwang.core.cwmodule.CWModuleContext;
 import com.cangwang.core.cwmodule.ex.CWBasicExModule;
@@ -60,7 +62,8 @@ public class PageBodyBTExModule extends CWBasicExModule {
         changeNameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ModuleBus.getInstance().post(IBaseClient.class,"changeNameTxt","Cang_Wang");
+                ModuleApiManager.getInstance().getApi(PageNameApi.class).changeNameTxt("CangWang");
+//                ModuleBus.getInstance().post(IBaseClient.class,"changeNameTxt","Cang_Wang");
             }
         });
     }

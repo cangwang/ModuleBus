@@ -2,6 +2,7 @@ package com.cangwang.core.cwmodule.ex;
 
 import android.os.Bundle;
 
+import com.cangwang.core.MBaseApi;
 import com.cangwang.core.cwmodule.CWModuleContext;
 import com.cangwang.model.ICWModule;
 
@@ -30,4 +31,8 @@ public abstract class CWAbsExModule implements ICWModule{
     public abstract void detachView();
 
     public abstract void setVisible(boolean visible);
+
+    public abstract void registerMApi(Class<?extends MBaseApi> key, MBaseApi value);
+
+    public abstract void unregisterMApi(Class<?extends MBaseApi> key);
 }
