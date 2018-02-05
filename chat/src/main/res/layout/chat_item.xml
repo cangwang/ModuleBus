@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/chat_item"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:layout_marginBottom="3dp"
+    android:background="@drawable/chat_item_coner"
+    android:paddingLeft="10dp"
+    android:textSize="20dp"
+    android:text="abc"/>

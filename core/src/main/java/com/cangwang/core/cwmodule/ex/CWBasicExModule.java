@@ -34,6 +34,7 @@ public class CWBasicExModule extends CWAbsExModule {
     @Override
     public boolean init(CWModuleContext moduleContext, Bundle extend) {
         context = moduleContext.getActivity();
+        this.moduleContext = moduleContext;
         parentTop = moduleContext.getView(CWModuleContext.TOP_VIEW_GROUP);
         parentBottom = moduleContext.getView(CWModuleContext.BOTTOM_VIEW_GROUP);
         parentPlugin = moduleContext.getView(CWModuleContext.PLUGIN_CENTER_VIEW);

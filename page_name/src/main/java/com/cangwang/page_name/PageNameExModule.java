@@ -30,7 +30,6 @@ public class PageNameExModule extends CWBasicExModule implements ModuleImpl{
     @Override
     public boolean init(CWModuleContext moduleContext, Bundle extend) {
         super.init(moduleContext, extend);
-        this.moduleContext = moduleContext;
         initView();
         ModuleBus.getInstance().register(this);
         return true;
