@@ -1,22 +1,15 @@
 package com.cangwang.page_name;
 
 import android.app.Application;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.cangwang.annotation.ModuleGroup;
 import com.cangwang.annotation.ModuleUnit;
-import com.cangwang.api.PageNameApi;
-import com.cangwang.core.IBaseClient;
+import com.cangwang.base.api.PageNameApi;
 import com.cangwang.core.ModuleBus;
-import com.cangwang.core.ModuleEvent;
 import com.cangwang.core.cwmodule.CWModuleContext;
 import com.cangwang.core.cwmodule.ex.CWBasicExModule;
 import com.cangwang.core.util.ModuleImpl;

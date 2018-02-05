@@ -64,10 +64,13 @@ dependencies {
         embedded project(':page_view')
     }else{
         if (!project.ext.isDebug) {
-            compile project(':page_body')
-            compile project(':page_body_bt')
+//            compile project(':page_body')
+//            compile project(':page_body_bt')
             compile project(':page_name')
-            compile project(':page_view')
+//            compile project(':page_view')
+            compile project(':bottom')
+            compile project(':chat')
+
         }else{
             compile project(':core')
         }

@@ -6,12 +6,11 @@
       <module fileurl="file://$PROJECT_DIR$/annotation/annotation.iml" filepath="$PROJECT_DIR$/annotation/annotation.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/base/base.iml" filepath="$PROJECT_DIR$/base/base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bottom/bottom.iml" filepath="$PROJECT_DIR$/bottom/bottom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chat/chat.iml" filepath="$PROJECT_DIR$/chat/chat.iml" />
       <module fileurl="file://$PROJECT_DIR$/compiler/compiler.iml" filepath="$PROJECT_DIR$/compiler/compiler.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/page_body/page_body.iml" filepath="$PROJECT_DIR$/page_body/page_body.iml" />
-      <module fileurl="file://$PROJECT_DIR$/page_body_bt/page_body_bt.iml" filepath="$PROJECT_DIR$/page_body_bt/page_body_bt.iml" />
       <module fileurl="file://$PROJECT_DIR$/page_name/page_name.iml" filepath="$PROJECT_DIR$/page_name/page_name.iml" />
-      <module fileurl="file://$PROJECT_DIR$/page_view/page_view.iml" filepath="$PROJECT_DIR$/page_view/page_view.iml" />
     </modules>
   </component>
 </project>

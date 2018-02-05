@@ -11,12 +11,11 @@
             <option value="$PROJECT_DIR$/annotation" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/base" />
+            <option value="$PROJECT_DIR$/bottom" />
+            <option value="$PROJECT_DIR$/chat" />
             <option value="$PROJECT_DIR$/compiler" />
             <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/page_body" />
-            <option value="$PROJECT_DIR$/page_body_bt" />
             <option value="$PROJECT_DIR$/page_name" />
-            <option value="$PROJECT_DIR$/page_view" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

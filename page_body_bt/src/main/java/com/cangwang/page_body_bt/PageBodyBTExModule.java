@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.cangwang.annotation.ModuleUnit;
-import com.cangwang.api.PageNameApi;
+import com.cangwang.base.api.PageNameApi;
 import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleApiManager;
 import com.cangwang.core.ModuleBus;

@@ -1,6 +1,6 @@
 package com.cangwang.page_name;
 
-import com.cangwang.api.PageNameApi;
+import com.cangwang.base.api.PageNameApi;
 
 /**
  * Created by cangwang on 2018/1/28.

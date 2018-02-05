@@ -1,0 +1,10 @@
+[
+   {
+      "path":"com.cangwang.chat.ChatModule",
+      "templet":"top",
+      "title":"ChatModule",
+      "layoutLevel":400,
+      "extraLevel":0
+   }
+
+]

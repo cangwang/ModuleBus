@@ -1,4 +1,4 @@
-package com.cangwang.api;
+package com.cangwang.base.api;
 
 import com.cangwang.core.MBaseApi;
 
