@@ -3,4 +3,41 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="transparent">#00000000</color>
+    <color name="black">#000001</color>
+
+
+    <color name="commen_blue_1">#BBDEFB</color>
+    <color name="commen_blue_2">#90CAF9</color>
+    <color name="commen_blue_3">#64B5F6</color>
+    <color name="commen_blue_4">#42A5F5</color>
+    <color name="commen_blue_5">#2196F3</color>
+    <color name="commen_blue_6">#1E88E5</color>
+    <color name="commen_blue_7">#1976D2</color>
+    <color name="commen_blue_8">#1565C0</color>
+    <color name="commen_blue_9">#0D47A1</color>
+
+    <color name="commen_blue_A100">#82B1FF</color>
+    <color name="commen_blue_A200">#448aff</color>
+    <color name="commen_blue_A400">#2979ff</color>
+    <color name="commen_blue_A700">#2962ff</color>
+
+    <color name="common_pink_5">#e91e63</color>
+
+    <color name="common_light_green_1">#e8f5e9</color>
+    <color name="common_light_green_2">#c8e6c9</color>
+
+    <color name="common_cyan_1">#b2ebf2</color>
+    <color name="common_cyan_2">#80deea</color>
+    <color name="common_cyan_3">#4dd0e1</color>
+    <color name="common_cyan_4">#26c6da</color>
+    <color name="common_cyan_5">#00bcd4</color>
+    <color name="common_cyan_6">#00acc1</color>
+    <color name="common_cyan_7">#0097a7</color>
+    <color name="common_cyan_8">#00838f</color>
+    <color name="common_cyan_9">#006064</color>
+    <color name="common_cyan_A100">#84ffff</color>
+    <color name="common_cyan_A200">#18ffff</color>
+    <color name="common_cyan_A400">#00e5ff</color>
+    <color name="common_cyan_A700">#00b8d4</color>
 </resources>

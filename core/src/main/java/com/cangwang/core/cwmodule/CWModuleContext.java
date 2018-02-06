@@ -1,7 +1,7 @@
 package com.cangwang.core.cwmodule;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.util.SparseArrayCompat;
 import android.view.ViewGroup;
 
@@ -14,15 +14,15 @@ public class CWModuleContext {
     public static final int BOTTOM_VIEW_GROUP = 1;
     public static final int PLUGIN_CENTER_VIEW = 2;
 
-    private Activity context;
+    private FragmentActivity context;
     private Bundle saveInstance;
     private SparseArrayCompat<ViewGroup> viewGroups = new SparseArrayCompat<>();
 
-    public Activity getActivity(){
+    public FragmentActivity getActivity(){
         return context;
     }
 
-    public void setActivity(Activity component){
+    public void setActivity(FragmentActivity component){
         this.context = component;
     }
 

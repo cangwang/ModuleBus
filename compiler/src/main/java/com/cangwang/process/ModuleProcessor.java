@@ -1,6 +1,5 @@
 package com.cangwang.process;
 
-import com.cangwang.annotation.InjectBean;
 import com.cangwang.annotation.ModuleGroup;
 import com.cangwang.annotation.ModuleUnit;
 import com.cangwang.bean.ModuleUnitBean;
@@ -9,7 +8,6 @@ import com.cangwang.model.IModuleFactory;
 import com.cangwang.utils.Logger;
 import com.cangwang.utils.ModuleUtil;
 import com.google.auto.service.AutoService;
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.squareup.javapoet.ClassName;
@@ -25,9 +23,7 @@ import com.squareup.javapoet.TypeSpec;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -48,8 +44,6 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 
-import static javax.lang.model.element.Modifier.PRIVATE;
-import static javax.lang.model.element.Modifier.PUBLIC;
 import static javax.lang.model.element.Modifier.STATIC;
 
 /**
@@ -150,6 +144,7 @@ public class ModuleProcessor extends AbstractProcessor {
                 ModuleUtil.createCenterJson(applicationName);
                 //获取引用module的列表
                 List<String> moduleNameList = ModuleUtil.readSetting();
+                logger.info("读取 module list:"+moduleNameList.toString());
                 JsonArray jsonArray = new JsonArray();
                 if (moduleNameList != null) {
                     for (String name : moduleNameList) {

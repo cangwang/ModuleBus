@@ -8,6 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/anchor" />
             <option value="$PROJECT_DIR$/annotation" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/base" />
@@ -15,7 +16,9 @@
             <option value="$PROJECT_DIR$/chat" />
             <option value="$PROJECT_DIR$/compiler" />
             <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/page_name" />
+            <option value="$PROJECT_DIR$/live" />
+            <option value="$PROJECT_DIR$/seat" />
+            <option value="$PROJECT_DIR$/web" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

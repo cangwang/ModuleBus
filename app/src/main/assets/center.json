@@ -1,22 +1,11 @@
 {
-   "normal":
-   [
-      {
-         "path":"com.cangwang.page_name.PageNameExModule",
-         "templet":"normal",
-         "title":"PageNameExModule",
-         "layoutLevel":500,
-         "extraLevel":0
-      }
-
-   ],
    "top":
    [
       {
-         "path":"com.cangwang.page_name.PageNameExModule",
+         "path":"com.cangwang.live.LiveModule",
          "templet":"top",
-         "title":"PageNameExModule",
-         "layoutLevel":400,
+         "title":"LiveModule",
+         "layoutLevel":500,
          "extraLevel":0
       },
       {
@@ -31,6 +20,20 @@
          "templet":"top",
          "title":"InputModule",
          "layoutLevel":400,
+         "extraLevel":0
+      },
+      {
+         "path":"com.cangwang.anchor.AnchorModule",
+         "templet":"top",
+         "title":"AnchorModule",
+         "layoutLevel":200,
+         "extraLevel":0
+      },
+      {
+         "path":"com.cangwang.web.WebModule",
+         "templet":"top",
+         "title":"WebModule",
+         "layoutLevel":100,
          "extraLevel":0
       }
 

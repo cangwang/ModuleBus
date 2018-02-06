@@ -1,9 +1,9 @@
 package com.cangwang.core.cwmodule.ex;
 
-import android.app.Fragment;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.util.SparseArrayCompat;
 import android.util.Log;
 import android.view.LayoutInflater;

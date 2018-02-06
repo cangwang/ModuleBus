@@ -104,4 +104,16 @@ public class ModuleExManager {
             }
         }
     }
+
+    public boolean onBackPressed(){
+        boolean hasCallback =false;
+        for (CWAbsExModule module:allModules.values()) {
+            if (module != null) {
+                boolean isCall=module.onBackPress();
+                if (isCall)
+                    hasCallback =true;
+            }
+        }
+        return hasCallback;
+    }
 }

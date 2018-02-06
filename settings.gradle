@@ -1,1 +1,1 @@
-include ':app', ':base',  ':core', ':page_name', /*':page_body', ':page_body_bt', ':page_view',*/ ':compiler', ':annotation',':chat',':bottom'
+include ':app', ':base',  ':core', ':web', ':seat', ':live',/* ':page_name', */':anchor', /*':page_body', ':page_body_bt', ':page_view',*/ ':compiler', ':annotation',':chat',':bottom'

@@ -1,6 +1,5 @@
 package com.cangwang.core.cwmodule.ex;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.CallSuper;
@@ -12,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.cangwang.core.MBaseApi;
 import com.cangwang.core.ModuleApiManager;
-import com.cangwang.core.ModuleBus;
 import com.cangwang.core.cwmodule.CWModuleContext;
 
 import java.util.ArrayList;
@@ -23,8 +21,7 @@ import java.util.List;
  */
 
 public class CWBasicExModule extends CWAbsExModule {
-    public Activity context;
-    public FragmentActivity mContext;
+    public FragmentActivity context;
     public CWModuleContext moduleContext;
     public Handler handler;
     public ViewGroup parentTop;
@@ -79,6 +76,11 @@ public class CWBasicExModule extends CWAbsExModule {
     @Override
     public void onStop() {
 
+    }
+
+    @Override
+    public boolean onBackPress() {
+        return false;
     }
 
     @CallSuper

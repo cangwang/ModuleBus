@@ -1,0 +1,10 @@
+[
+   {
+      "path":"com.cangwang.web.WebModule",
+      "templet":"top",
+      "title":"WebModule",
+      "layoutLevel":100,
+      "extraLevel":0
+   }
+
+]

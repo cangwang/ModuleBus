@@ -53,8 +53,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:design:25.0.1'
-    compile 'com.android.support:appcompat-v7:25.0.1'
     annotationProcessor project(":compiler")
 
     if(project.ext.isLib) {
@@ -66,11 +64,14 @@ dependencies {
         if (!project.ext.isDebug) {
 //            compile project(':page_body')
 //            compile project(':page_body_bt')
-            compile project(':page_name')
+//            compile project(':page_name')
 //            compile project(':page_view')
             compile project(':bottom')
             compile project(':chat')
-
+            compile project(':anchor')
+            compile project(':web')
+            compile project(':seat')
+            compile project(':live')
         }else{
             compile project(':core')
         }

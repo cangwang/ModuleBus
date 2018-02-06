@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.util.SparseArrayCompat;
 import android.util.Log;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ import java.util.List;
  * Created by cangwang on 2017/6/15.
  */
 
-public abstract class ModuleManageActivity extends Activity{
+public abstract class ModuleManageActivity extends FragmentActivity {
     private final String TAG = "ModuleManageExActivity";
     private ViewGroup mTopViewGroup;
     private ViewGroup mBottomViewGroup;

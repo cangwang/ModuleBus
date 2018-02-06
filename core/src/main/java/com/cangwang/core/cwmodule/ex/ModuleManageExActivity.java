@@ -2,6 +2,10 @@ package com.cangwang.core.cwmodule.ex;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +31,7 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
     private ViewGroup mTopViewGroup;
     private ViewGroup mBottomViewGroup;
     private ViewGroup pluginViewGroup;
+    private ViewGroup rootLayout;
 
     private ModuleExManager moduleManager;
     private CWModuleContext moduleContext;
@@ -37,12 +42,17 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.module_rank_layout);
         ModuleBus.getInstance().register(this);
+        rootLayout = (ViewGroup)findViewById(R.id.root_layout);
         mTopViewGroup = (ViewGroup) findViewById(R.id.layout_top);
         mBottomViewGroup = (ViewGroup) findViewById(R.id.layout_bottom);
         pluginViewGroup = (ViewGroup) findViewById(R.id.layout_plugincenter);
         moduleManager = new ModuleExManager();
         moduleManager.moduleConfig(moduleConfig());
         initView(savedInstanceState);
+    }
+
+    public void setBackGroundResouce(int color){
+        rootLayout.setBackgroundResource(color);
     }
 
     public void initView(Bundle mSavedInstanceState){
@@ -126,6 +136,14 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
     public void onConfigurationChanged(Configuration newConfig) {
         moduleManager.onConfigurationChanged(newConfig);
         super.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!moduleManager.onBackPressed()){
+            super.onBackPressed();
+        }
+
     }
 
     /**

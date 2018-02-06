@@ -35,4 +35,6 @@ public abstract class CWAbsExModule implements ICWModule{
     public abstract void registerMApi(Class<?extends MBaseApi> key, MBaseApi value);
 
     public abstract void unregisterMApi(Class<?extends MBaseApi> key);
+
+    public abstract boolean onBackPress();
 }
