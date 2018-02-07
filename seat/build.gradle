@@ -11,7 +11,7 @@ android {
         versionName "1.0"
 
         // 资源前缀名,所有资源文件都必须加上这个前缀,以防止与其他插件的资源名字冲突
-        resourcePrefix "chat_"
+        resourcePrefix "seat_"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.cangwang.base.ui.CircleImageView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/seat_item"
+    android:layout_width="50dp"
+    android:layout_height="40dp"
+    android:layout_marginTop="20dp"
+    android:background="@drawable/launcher"
+    android:paddingLeft="10dp"/>

@@ -81,16 +81,19 @@ public class ChatModule extends CWBasicExModule implements ChatApi {
     public Runnable runChat = new Runnable() {
         @Override
         public void run() {
-            adapter.addMsg(new ChatMessage("cw","efg"+ (i++)));
-            if (isScolling)
-                chatRecyle.smoothScrollToPosition(adapter.getItemCount());
-            handler.postDelayed(runChat,1000);
+            if (i<50) {
+                adapter.addMsg(new ChatMessage("cw", "efg" + (i++)));
+                if (isScolling)
+                    chatRecyle.smoothScrollToPosition(adapter.getItemCount());
+                handler.postDelayed(runChat, 3000);
+            }
         }
     };
 
     @Override
     public boolean addChatMsg(String user, String text) {
         adapter.addMsg(new ChatMessage(user,text));
+        chatRecyle.smoothScrollToPosition(adapter.getItemCount());
         return true;
     }
 
