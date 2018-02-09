@@ -1,6 +1,8 @@
 package com.cangwang.anchor.dialog;
 
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -36,13 +38,13 @@ public class AnchorDialog extends DialogFragment{
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.setCanceledOnTouchOutside(true);
         dialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
         dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        return super.onCreateDialog(savedInstanceState);
+        return dialog;
     }
 
     @Nullable

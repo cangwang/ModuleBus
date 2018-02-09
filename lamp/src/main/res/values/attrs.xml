@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="lamp_HeartLayout">
+        <attr name="lamp_initX" format="dimension" />
+        <attr name="lamp_initY" format="dimension" />
+        <attr name="lamp_xRand" format="dimension" />
+        <attr name="lamp_animLengthRand" format="dimension" />
+        <attr name="lamp_xPointFactor" format="dimension" />
+        <attr name="lamp_animLength" format="dimension" />
+        <attr name="lamp_heart_width" format="dimension" />
+        <attr name="lamp_heart_height" format="dimension" />
+        <attr name="lamp_bezierFactor" format="integer" />
+        <attr name="lamp_anim_duration" format="integer" />
+    </declare-styleable>
+</resources>

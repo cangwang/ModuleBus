@@ -2,12 +2,14 @@ package com.cangwang.web;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import com.cangwang.annotation.ModuleUnit;
 import com.cangwang.base.api.WebApi;
 import com.cangwang.base.util.ViewUtil;
+import com.cangwang.core.MBaseApi;
 import com.cangwang.core.ModuleApiManager;
 import com.cangwang.core.cwmodule.CWModuleContext;
 import com.cangwang.core.cwmodule.ex.CWBasicExModule;
@@ -56,4 +58,5 @@ public class WebModule extends CWBasicExModule implements WebApi{
         }
         return false;
     }
+
 }

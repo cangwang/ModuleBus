@@ -33,17 +33,20 @@ import android.net.Uri;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import com.cangwang.base.R;
+import android.graphics.Outline;
+import android.graphics.Rect;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.view.View;
+import android.view.ViewOutlineProvider;
 
-/**
- * 废弃，有OOM的风险，请使用ImageManager
- */
 public class CircleImageView extends AppCompatImageView {
-    private static final String TAG = "CircleImageView";
+
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;
 
     private static final Bitmap.Config BITMAP_CONFIG = Bitmap.Config.ARGB_8888;
@@ -51,7 +54,7 @@ public class CircleImageView extends AppCompatImageView {
 
     private static final int DEFAULT_BORDER_WIDTH = 0;
     private static final int DEFAULT_BORDER_COLOR = Color.BLACK;
-    private static final int DEFAULT_FILL_COLOR = Color.TRANSPARENT;
+    private static final int DEFAULT_CIRCLE_BACKGROUND_COLOR = Color.TRANSPARENT;
     private static final boolean DEFAULT_BORDER_OVERLAY = false;
 
     private final RectF mDrawableRect = new RectF();
@@ -60,11 +63,11 @@ public class CircleImageView extends AppCompatImageView {
     private final Matrix mShaderMatrix = new Matrix();
     private final Paint mBitmapPaint = new Paint();
     private final Paint mBorderPaint = new Paint();
-    private final Paint mFillPaint = new Paint();
+    private final Paint mCircleBackgroundPaint = new Paint();
 
     private int mBorderColor = DEFAULT_BORDER_COLOR;
     private int mBorderWidth = DEFAULT_BORDER_WIDTH;
-    private int mFillColor = DEFAULT_FILL_COLOR;
+    private int mCircleBackgroundColor = DEFAULT_CIRCLE_BACKGROUND_COLOR;
 
     private Bitmap mBitmap;
     private BitmapShader mBitmapShader;
@@ -99,7 +102,15 @@ public class CircleImageView extends AppCompatImageView {
         mBorderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_civ_border_width, DEFAULT_BORDER_WIDTH);
         mBorderColor = a.getColor(R.styleable.CircleImageView_civ_border_color, DEFAULT_BORDER_COLOR);
         mBorderOverlay = a.getBoolean(R.styleable.CircleImageView_civ_border_overlay, DEFAULT_BORDER_OVERLAY);
-        mFillColor = a.getColor(R.styleable.CircleImageView_civ_fill_color, DEFAULT_FILL_COLOR);
+
+        // Look for deprecated civ_fill_color if civ_circle_background_color is not set
+        if (a.hasValue(R.styleable.CircleImageView_civ_circle_background_color)) {
+            mCircleBackgroundColor = a.getColor(R.styleable.CircleImageView_civ_circle_background_color,
+                    DEFAULT_CIRCLE_BACKGROUND_COLOR);
+        } else if (a.hasValue(R.styleable.CircleImageView_civ_fill_color)) {
+            mCircleBackgroundColor = a.getColor(R.styleable.CircleImageView_civ_fill_color,
+                    DEFAULT_CIRCLE_BACKGROUND_COLOR);
+        }
 
         a.recycle();
 
@@ -109,6 +120,10 @@ public class CircleImageView extends AppCompatImageView {
     private void init() {
         super.setScaleType(SCALE_TYPE);
         mReady = true;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setOutlineProvider(new OutlineProvider());
+        }
 
         if (mSetupPending) {
             setup();
@@ -146,8 +161,8 @@ public class CircleImageView extends AppCompatImageView {
             return;
         }
 
-        if (mFillColor != Color.TRANSPARENT) {
-            canvas.drawCircle(mDrawableRect.centerX(), mDrawableRect.centerY(), mDrawableRadius, mFillPaint);
+        if (mCircleBackgroundColor != Color.TRANSPARENT) {
+            canvas.drawCircle(mDrawableRect.centerX(), mDrawableRect.centerY(), mDrawableRadius, mCircleBackgroundPaint);
         }
         canvas.drawCircle(mDrawableRect.centerX(), mDrawableRect.centerY(), mDrawableRadius, mBitmapPaint);
         if (mBorderWidth > 0) {
@@ -195,16 +210,34 @@ public class CircleImageView extends AppCompatImageView {
         setBorderColor(getContext().getResources().getColor(borderColorRes));
     }
 
+    public int getCircleBackgroundColor() {
+        return mCircleBackgroundColor;
+    }
+
+    public void setCircleBackgroundColor(@ColorInt int circleBackgroundColor) {
+        if (circleBackgroundColor == mCircleBackgroundColor) {
+            return;
+        }
+
+        mCircleBackgroundColor = circleBackgroundColor;
+        mCircleBackgroundPaint.setColor(circleBackgroundColor);
+        invalidate();
+    }
+
+    public void setCircleBackgroundColorResource(@ColorRes int circleBackgroundRes) {
+        setCircleBackgroundColor(getContext().getResources().getColor(circleBackgroundRes));
+    }
+
     /**
      * Return the color drawn behind the circle-shaped drawable.
      *
      * @return The color drawn behind the drawable
      *
-     * @deprecated Fill color support is going to be removed in the future
+     * @deprecated Use {@link #getCircleBackgroundColor()} instead.
      */
     @Deprecated
     public int getFillColor() {
-        return mFillColor;
+        return getCircleBackgroundColor();
     }
 
     /**
@@ -213,17 +246,11 @@ public class CircleImageView extends AppCompatImageView {
      *
      * @param fillColor The color to be drawn behind the drawable
      *
-     * @deprecated Fill color support is going to be removed in the future
+     * @deprecated Use {@link #setCircleBackgroundColor(int)} instead.
      */
     @Deprecated
     public void setFillColor(@ColorInt int fillColor) {
-        if (fillColor == mFillColor) {
-            return;
-        }
-
-        mFillColor = fillColor;
-        mFillPaint.setColor(fillColor);
-        invalidate();
+        setCircleBackgroundColor(fillColor);
     }
 
     /**
@@ -233,11 +260,11 @@ public class CircleImageView extends AppCompatImageView {
      * @param fillColorRes The color resource to be resolved to a color and
      *                     drawn behind the drawable
      *
-     * @deprecated Fill color support is going to be removed in the future
+     * @deprecated Use {@link #setCircleBackgroundColorResource(int)} instead.
      */
     @Deprecated
     public void setFillColorResource(@ColorRes int fillColorRes) {
-        setFillColor(getContext().getResources().getColor(fillColorRes));
+        setCircleBackgroundColorResource(fillColorRes);
     }
 
     public int getBorderWidth() {
@@ -339,18 +366,16 @@ public class CircleImageView extends AppCompatImageView {
 
             if (drawable instanceof ColorDrawable) {
                 bitmap = Bitmap.createBitmap(COLORDRAWABLE_DIMENSION, COLORDRAWABLE_DIMENSION, BITMAP_CONFIG);
-//                ImageManager.instance().put(bitmap);// FIXME: 2017-07-15 防止OOM
             } else {
                 bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), BITMAP_CONFIG);
-//                ImageManager.instance().put(bitmap);// FIXME: 2017-07-15 防止OOM
             }
+
             Canvas canvas = new Canvas(bitmap);
             drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
             drawable.draw(canvas);
             return bitmap;
         } catch (Exception e) {
-//            e.printStackTrace();
-            Log.e(TAG, "getBitmapFromDrawable Exception", e);
+            e.printStackTrace();
             return null;
         }
     }
@@ -389,9 +414,9 @@ public class CircleImageView extends AppCompatImageView {
         mBorderPaint.setColor(mBorderColor);
         mBorderPaint.setStrokeWidth(mBorderWidth);
 
-        mFillPaint.setStyle(Paint.Style.FILL);
-        mFillPaint.setAntiAlias(true);
-        mFillPaint.setColor(mFillColor);
+        mCircleBackgroundPaint.setStyle(Paint.Style.FILL);
+        mCircleBackgroundPaint.setAntiAlias(true);
+        mCircleBackgroundPaint.setColor(mCircleBackgroundColor);
 
         mBitmapHeight = mBitmap.getHeight();
         mBitmapWidth = mBitmap.getWidth();
@@ -441,6 +466,18 @@ public class CircleImageView extends AppCompatImageView {
         mShaderMatrix.postTranslate((int) (dx + 0.5f) + mDrawableRect.left, (int) (dy + 0.5f) + mDrawableRect.top);
 
         mBitmapShader.setLocalMatrix(mShaderMatrix);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private class OutlineProvider extends ViewOutlineProvider {
+
+        @Override
+        public void getOutline(View view, Outline outline) {
+            Rect bounds = new Rect();
+            mBorderRect.roundOut(bounds);
+            outline.setRoundRect(bounds, bounds.width() / 2.0f);
+        }
+
     }
 
 }
