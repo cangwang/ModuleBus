@@ -28,12 +28,12 @@ public class WebModule extends CWBasicExModule implements WebApi{
     public boolean init(CWModuleContext moduleContext, Bundle extend) {
         super.init(moduleContext, extend);
         initView();
-        ModuleApiManager.getInstance().putApi(WebApi.class,this);
+        registerMApi(WebApi.class,this);
         return true;
     }
 
     private void initView(){
-        webLayout = LayoutInflater.from(context).inflate(R.layout.web_layout,parentTop,true);
+        setContentView(R.layout.web_layout,parentTop);
     }
 
     @Override
@@ -59,4 +59,9 @@ public class WebModule extends CWBasicExModule implements WebApi{
         return false;
     }
 
+    @Override
+    public void onDestroy() {
+        unregisterMApi(WebApi.class);
+        super.onDestroy();
+    }
 }

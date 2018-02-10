@@ -28,11 +28,13 @@ public class CWBasicExModule extends CWAbsExModule {
     public ViewGroup parentBottom;
     public ViewGroup parentPlugin;
     public View own;
+    private boolean isShow=false;
     public List<View> viewList = new ArrayList<>();
 
     @CallSuper
     @Override
     public boolean init(CWModuleContext moduleContext, Bundle extend) {
+        this.moduleContext = moduleContext;
         context = moduleContext.getActivity();
         parentTop = moduleContext.getView(CWModuleContext.TOP_VIEW_GROUP);
         parentBottom = moduleContext.getView(CWModuleContext.BOTTOM_VIEW_GROUP);
@@ -41,10 +43,25 @@ public class CWBasicExModule extends CWAbsExModule {
         return true;
     }
 
-    public <T extends View> T genericFindViewById(int id) {
+    public void setContentView(@LayoutRes int layoutResID){
+        setContentView(layoutResID,parentPlugin);
+    }
+
+    public void setContentView(@LayoutRes int layoutResID,ViewGroup viewGroup){
+        setContentView(layoutResID,viewGroup,true);
+    }
+
+    public void setContentView(@LayoutRes int layoutResID,ViewGroup viewGroup, boolean attachToRoot){
+        own = LayoutInflater.from(context).inflate(layoutResID,viewGroup,attachToRoot);
+        isShow = true;
+    }
+
+    public <T extends View> T findViewById(int id) {
         //return返回view时,加上泛型T
+        if (context ==null) return null;
         T view = (T) context.findViewById(id);
-        viewList.add(view);
+        if (viewList!=null && view !=null)
+            viewList.add(view);
         return view;
     }
 
@@ -97,7 +114,14 @@ public class CWBasicExModule extends CWAbsExModule {
     @CallSuper
     @Override
     public void onDestroy() {
-
+        context =null;
+        moduleContext =null;
+        handler =null;
+        parentTop = null;
+        parentBottom = null;
+        parentPlugin =null;
+        own = null;
+        viewList =null;
     }
 
     @Override
@@ -107,12 +131,13 @@ public class CWBasicExModule extends CWAbsExModule {
             viewGroup = (ViewGroup) viewList.get(0).getParent();
             viewGroup.setVisibility(visible?View.VISIBLE:View.GONE);
         }
+        isShow = visible;
     }
 
-    public View initLayout(@LayoutRes int id, ViewGroup parentTop){
-        own = LayoutInflater.from(context).inflate(id,parentTop,true);
-        return own;
+    public boolean isVisible(){
+        return isShow;
     }
+
 
     @Override
     public void registerMApi(Class<? extends MBaseApi> key, MBaseApi value) {
@@ -122,5 +147,9 @@ public class CWBasicExModule extends CWAbsExModule {
     @Override
     public void unregisterMApi(Class<? extends MBaseApi> key) {
         ModuleApiManager.getInstance().removeApi(key);
+    }
+
+    public void setOnClickListener(View.OnClickListener listener){
+        own.setOnClickListener(listener);
     }
 }

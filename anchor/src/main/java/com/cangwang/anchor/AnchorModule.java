@@ -39,10 +39,10 @@ public class AnchorModule extends CWBasicExModule implements AnchorApi{
     }
 
     private void initView(){
-        anchorLayout = LayoutInflater.from(context).inflate(R.layout.anchor_title_layout,parentTop,true);
-        anchorImg = (ImageView) anchorLayout.findViewById(R.id.anchor_img);
-        anchorName = (TextView) anchorLayout.findViewById(R.id.anchor_name);
-        anchorCareBtn = (ImageView) anchorLayout.findViewById(R.id.anchor_care_btn);
+        setContentView(R.layout.anchor_title_layout,parentPlugin);
+        anchorImg = findViewById(R.id.anchor_img);
+        anchorName = findViewById(R.id.anchor_name);
+        anchorCareBtn = findViewById(R.id.anchor_care_btn);
 
         anchorCareBtn.setOnClickListener(new View.OnClickListener() {
             @Override

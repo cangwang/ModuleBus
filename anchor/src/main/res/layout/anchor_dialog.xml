@@ -12,11 +12,19 @@
         android:layout_height="300dp"
         android:background="@drawable/anchor_coner">
         <ImageView
+            android:id="@+id/anchor_close"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            />
+        <com.cangwang.base.ui.CircleImageView
             android:id="@+id/anchor_card_img"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:src="@drawable/anchor_img"/>
         <TextView
             android:id="@+id/anchor_card_name"

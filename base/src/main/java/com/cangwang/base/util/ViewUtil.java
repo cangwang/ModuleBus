@@ -45,4 +45,19 @@ public class ViewUtil {
             manager.executePendingTransactions();
         return fragment;
     }
+
+    public static void hide(FragmentManager manager,Fragment fm){
+        FragmentTransaction transaction = manager.beginTransaction();  //Activity中
+        if(fm != null){
+            transaction.hide(fm);
+        }
+    }
+
+    public static void show(FragmentManager manager,Fragment fm){
+        FragmentTransaction transaction = manager.beginTransaction();  //Activity中
+        if(fm != null){
+            transaction.show(fm);
+
+        }
+    }
 }

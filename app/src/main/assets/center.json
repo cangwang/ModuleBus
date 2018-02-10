@@ -23,9 +23,16 @@
          "extraLevel":0
       },
       {
-         "path":"com.cangwang.bottom.InputModule",
+         "path":"com.cangwang.bottom.BottomModule",
          "templet":"top",
-         "title":"InputModule",
+         "title":"BottomModule",
+         "layoutLevel":400,
+         "extraLevel":0
+      },
+      {
+         "path":"com.cangwang.lamp.LampModule",
+         "templet":"top",
+         "title":"LampModule",
          "layoutLevel":400,
          "extraLevel":0
       },
@@ -40,6 +47,13 @@
          "path":"com.cangwang.web.WebModule",
          "templet":"top",
          "title":"WebModule",
+         "layoutLevel":100,
+         "extraLevel":0
+      },
+      {
+         "path":"cangwang.com.slide.SlideModule",
+         "templet":"top",
+         "title":"SlideModule",
          "layoutLevel":100,
          "extraLevel":0
       }

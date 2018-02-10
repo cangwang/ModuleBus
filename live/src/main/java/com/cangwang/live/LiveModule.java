@@ -25,6 +25,6 @@ public class LiveModule extends CWBasicExModule{
     }
 
     private void initView(){
-        liveLayout = LayoutInflater.from(context).inflate(R.layout.live_layout,parentBottom,true);
+        setContentView(R.layout.live_layout,parentBottom);
     }
 }

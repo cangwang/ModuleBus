@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cangwang.anchor.R;
@@ -29,6 +30,7 @@ public class AnchorDialog extends DialogFragment{
     public static boolean isAnchorDialogShow;
     public static final String TAG= "AnchorDialog";
     private TextView blogAdress;
+    private ImageView closeBtn;
 
     public static AnchorDialog newInstance(){
         return new AnchorDialog();
@@ -56,6 +58,13 @@ public class AnchorDialog extends DialogFragment{
             @Override
             public void onClick(View v) {
                 ModuleApiManager.getInstance().getApi(WebApi.class).loadWeb(blogAdress.getText().toString(),"Canwang主页");
+                dismiss();
+            }
+        });
+        closeBtn = (ImageView)rootView.findViewById(R.id.anchor_close);
+        closeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 dismiss();
             }
         });

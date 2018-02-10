@@ -27,7 +27,6 @@ import java.util.List;
         @ModuleUnit(templet = "top",layoutlevel = LayoutLevel.LOW),
 })
 public class ChatModule extends CWBasicExModule implements ChatApi {
-    private View chatLayout;
     private RecyclerView chatRecyle;
     private ChatAdapter adapter;
 
@@ -39,13 +38,13 @@ public class ChatModule extends CWBasicExModule implements ChatApi {
         super.init(moduleContext, extend);
         initView();
         initData();
-        ModuleApiManager.getInstance().putApi(ChatApi.class,this);
+        registerMApi(ChatApi.class,this);
         return true;
     }
 
     private void initView(){
-        chatLayout = LayoutInflater.from(context).inflate(R.layout.chat_layout,parentPlugin,true);
-        chatRecyle = (RecyclerView) chatLayout.findViewById(R.id.chat_recyle);
+        setContentView(R.layout.chat_layout);
+        chatRecyle = findViewById(R.id.chat_recyle);
         adapter = new ChatAdapter(context);
         chatRecyle.setLayoutManager(new LinearLayoutManager(context));
         chatRecyle.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -91,6 +90,18 @@ public class ChatModule extends CWBasicExModule implements ChatApi {
     };
 
     @Override
+    public void onResume() {
+        super.onResume();
+        handler.post(runChat);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        handler.removeCallbacks(runChat);
+    }
+
+    @Override
     public boolean addChatMsg(String user, String text) {
         adapter.addMsg(new ChatMessage(user,text));
         chatRecyle.smoothScrollToPosition(adapter.getItemCount());
@@ -100,6 +111,7 @@ public class ChatModule extends CWBasicExModule implements ChatApi {
     @Override
     public void onDestroy() {
         handler.removeCallbacks(runChat);
+        unregisterMApi(ChatApi.class);
         super.onDestroy();
     }
 }

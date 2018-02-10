@@ -37,8 +37,8 @@ public class SeatModule extends CWBasicExModule{
     }
 
     public void initView(){
-        seatLayout = LayoutInflater.from(context).inflate(R.layout.seat_layout,parentPlugin,true);
-        seatRecyle = (RecyclerView) seatLayout.findViewById(R.id.seat_recyle);
+        setContentView(R.layout.seat_layout);
+        seatRecyle = findViewById(R.id.seat_recyle);
         seatRecyle.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         adapter = new SeatAdapter(context);
         seatRecyle.setAdapter(adapter);

@@ -1,8 +1,8 @@
 [
    {
-      "path":"com.cangwang.bottom.BottomModule",
+      "path":"com.cangwang.lamp.LampModule",
       "templet":"top",
-      "title":"BottomModule",
+      "title":"LampModule",
       "layoutLevel":400,
       "extraLevel":0
    }

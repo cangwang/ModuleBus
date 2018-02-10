@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import com.cangwang.modulebus.ExModule.ModuleMainExActivity;
 
 /**
+ * 启动页
  * Created by cangwang on 2017/2/26.
  */
 

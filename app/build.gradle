@@ -72,6 +72,8 @@ dependencies {
             compile project(':web')
             compile project(':seat')
             compile project(':live')
+            compile project(':lamp')
+            compile project(':slide')
         }else{
             compile project(':core')
         }
