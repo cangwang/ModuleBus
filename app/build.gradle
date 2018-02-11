@@ -74,6 +74,7 @@ dependencies {
             compile project(':live')
             compile project(':lamp')
             compile project(':slide')
+            compile project(':splash')
         }else{
             compile project(':core')
         }

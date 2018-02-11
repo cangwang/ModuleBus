@@ -24,18 +24,20 @@ public class CWBasicExModule extends CWAbsExModule {
     public FragmentActivity context;
     public CWModuleContext moduleContext;
     public Handler handler;
-    public ViewGroup parentTop;
-    public ViewGroup parentBottom;
-    public ViewGroup parentPlugin;
-    public View own;
+    protected ViewGroup parentTop;
+    protected ViewGroup parentBottom;
+    protected ViewGroup parentPlugin;
+    private View own;
     private boolean isShow=false;
-    public List<View> viewList = new ArrayList<>();
+    private List<View> viewList = new ArrayList<>();
+    private LayoutInflater inflater;
 
     @CallSuper
     @Override
     public boolean init(CWModuleContext moduleContext, Bundle extend) {
         this.moduleContext = moduleContext;
         context = moduleContext.getActivity();
+        inflater = moduleContext.getInflater();
         parentTop = moduleContext.getView(CWModuleContext.TOP_VIEW_GROUP);
         parentBottom = moduleContext.getView(CWModuleContext.BOTTOM_VIEW_GROUP);
         parentPlugin = moduleContext.getView(CWModuleContext.PLUGIN_CENTER_VIEW);
@@ -48,11 +50,13 @@ public class CWBasicExModule extends CWAbsExModule {
     }
 
     public void setContentView(@LayoutRes int layoutResID,ViewGroup viewGroup){
-        setContentView(layoutResID,viewGroup,true);
+        setContentView(layoutResID,viewGroup,false);
     }
 
     public void setContentView(@LayoutRes int layoutResID,ViewGroup viewGroup, boolean attachToRoot){
-        own = LayoutInflater.from(context).inflate(layoutResID,viewGroup,attachToRoot);
+        own = inflater.inflate(layoutResID,viewGroup,attachToRoot);
+        if (own!=null && viewGroup !=null)
+            viewGroup.addView(own);
         isShow = true;
     }
 
@@ -138,6 +142,13 @@ public class CWBasicExModule extends CWAbsExModule {
         return isShow;
     }
 
+    public void showModule() {
+        own.setVisibility(View.VISIBLE);
+    }
+
+    public void hideModule(){
+        own.setVisibility(View.GONE);
+    }
 
     @Override
     public void registerMApi(Class<? extends MBaseApi> key, MBaseApi value) {

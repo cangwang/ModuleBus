@@ -27,7 +27,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ExModule.ModuleExActivity">
+        <activity android:name=".ExModule.ModuleExActivity"
+            android:configChanges="orientation">
             <intent-filter>
                 <action android:name="com.cangwang.moduleExFg" />
 

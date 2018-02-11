@@ -1,7 +1,6 @@
 package com.cangwang.live;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import com.cangwang.annotation.ModuleUnit;
@@ -15,13 +14,18 @@ import com.cangwang.enums.LayoutLevel;
  */
 @ModuleUnit(templet = "top",layoutlevel = LayoutLevel.VERY_LOW)
 public class LiveModule extends CWBasicExModule{
-    private View liveLayout;
 
     @Override
     public boolean init(CWModuleContext moduleContext, Bundle extend) {
         super.init(moduleContext, extend);
         initView();
         return true;
+    }
+
+    @Override
+    public void onOrientationChanges(boolean isLandscape) {
+        super.onOrientationChanges(isLandscape);
+
     }
 
     private void initView(){

@@ -1,7 +1,6 @@
 package com.cangwang.web;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Bundle;
@@ -11,10 +10,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -43,10 +43,19 @@ public class WebFragment extends Fragment{
 
     private View view;
 
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        if (enter) {
+            return AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_from_bottom);
+        } else {
+            return AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_to_bottom);
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = LayoutInflater.from(getContext()).inflate(R.layout.web_fragment,container,false);
+        view = inflater.inflate(R.layout.web_fragment,container,false);
         initUI();
         return view;
     }

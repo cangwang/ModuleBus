@@ -3,6 +3,7 @@ package com.cangwang.core.cwmodule;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.util.SparseArrayCompat;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 /**
@@ -17,6 +18,13 @@ public class CWModuleContext {
     private FragmentActivity context;
     private Bundle saveInstance;
     private SparseArrayCompat<ViewGroup> viewGroups = new SparseArrayCompat<>();
+    private LayoutInflater inflater;
+
+    public LayoutInflater getInflater() {
+        if(context!=null)
+            inflater = LayoutInflater.from(context);
+        return inflater;
+    }
 
     public FragmentActivity getActivity(){
         return context;
@@ -24,6 +32,7 @@ public class CWModuleContext {
 
     public void setActivity(FragmentActivity component){
         this.context = component;
+        inflater = LayoutInflater.from(context);
     }
 
     public Bundle getSaveInstance(){

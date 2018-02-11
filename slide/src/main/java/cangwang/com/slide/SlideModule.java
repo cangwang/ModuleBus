@@ -19,7 +19,6 @@ import com.cangwang.enums.LayoutLevel;
 @ModuleUnit(templet = "top",layoutlevel = LayoutLevel.VERY_HIGHT)
 public class SlideModule extends CWBasicExModule implements SlideApi{
     private Fragment slideFragment;
-    private View slideLayout;
 
     @Override
     public boolean init(CWModuleContext moduleContext, Bundle extend) {
@@ -31,21 +30,18 @@ public class SlideModule extends CWBasicExModule implements SlideApi{
 
     public void initView(){
         setContentView(R.layout.slide_layout);
-        slideLayout = findViewById(R.id.slide_module);
-        slideLayout.setOnClickListener(new View.OnClickListener() {
+        setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 hide();
             }
         });
-        slideLayout.setVisibility(View.GONE);
-//        setVisible(false);
+        hideModule();
     }
 
     @Override
     public void show() {
-        slideLayout.setVisibility(View.VISIBLE);
-//        setVisible(true);
+        showModule();
         if (slideFragment == null){
             slideFragment = ViewUtil.replaceFragment(context,R.id.slide_frg,context.getSupportFragmentManager(),null,SlideFragment.class,SlideFragment.TAG);
         }else {
@@ -55,8 +51,7 @@ public class SlideModule extends CWBasicExModule implements SlideApi{
 
     @Override
     public void hide() {
-        slideLayout.setVisibility(View.GONE);
-//        setVisible(false);
+        hideModule();
         if (slideFragment !=null){
             ViewUtil.hide(context.getSupportFragmentManager(),slideFragment);
         }
@@ -67,5 +62,14 @@ public class SlideModule extends CWBasicExModule implements SlideApi{
         unregisterMApi(SlideApi.class);
         slideFragment = null;
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onBackPress() {
+        if (slideFragment!=null) {
+            hide();
+            return true;
+        }
+        return false;
     }
 }

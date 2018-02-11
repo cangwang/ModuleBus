@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--文字描边-->
+    <declare-styleable name="splash_StrokeTextView">
+        <attr name="splash_outerColor" format="color|reference" />
+        <attr name="splash_innnerColor" format="color|reference" />
+    </declare-styleable>
+</resources>

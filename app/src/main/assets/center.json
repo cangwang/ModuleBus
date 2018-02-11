@@ -37,6 +37,13 @@
          "extraLevel":0
       },
       {
+         "path":"com.cangwang.splash.SplashModule",
+         "templet":"top",
+         "title":"SplashModule",
+         "layoutLevel":300,
+         "extraLevel":0
+      },
+      {
          "path":"com.cangwang.anchor.AnchorModule",
          "templet":"top",
          "title":"AnchorModule",

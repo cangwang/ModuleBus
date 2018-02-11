@@ -3,7 +3,6 @@ package com.cangwang.core.cwmodule.ex;
 import android.content.res.Configuration;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.MainThread;
 import android.support.v4.util.ArrayMap;
 
 import com.cangwang.core.util.ModuleUtil;

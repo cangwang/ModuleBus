@@ -6,6 +6,7 @@ import android.view.View;
 import com.cangwang.annotation.ModuleGroup;
 import com.cangwang.annotation.ModuleUnit;
 import com.cangwang.base.api.SlideApi;
+import com.cangwang.base.api.SplashApi;
 import com.cangwang.base.ui.CircleImageView;
 import com.cangwang.core.ModuleApiManager;
 import com.cangwang.core.cwmodule.CWModuleContext;
@@ -61,6 +62,13 @@ public class BottomModule extends CWBasicExModule{
             @Override
             public void onClick(View view) {
                 ModuleApiManager.getInstance().getApi(SlideApi.class).show();
+            }
+        });
+        giftBtn = findViewById(R.id.bottom_gift);
+        giftBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ModuleApiManager.getInstance().getApi(SplashApi.class).splash();
             }
         });
     }

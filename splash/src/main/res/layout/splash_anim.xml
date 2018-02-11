@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/animation_person_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="39dp"
+        android:layout_gravity="left"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/bg_giftlayout">
+
+        <ImageView
+            android:id="@+id/gift_userheader_iv"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:layout_margin="3dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ember" />
+
+        <TextView
+            android:id="@+id/gift_usernickname_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/gift_userheader_iv"
+            android:text="库日天"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/gift_usersign_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/gift_usernickname_tv"
+            android:layout_below="@id/gift_usernickname_tv"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:text="送一个超级无敌"
+            android:textColor="#ffea79"
+            android:textSize="11sp" />
+
+        <ImageView
+            android:id="@+id/animation_gift"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/gift_usersign_tv"
+            android:background="@mipmap/diamond2x" />
+    </RelativeLayout>
+
+
+
+    <ImageView
+        android:id="@+id/animation_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:src="@drawable/light_star_anim" />
+
+
+    <com.cangwang.splash.view.StrokeTextView
+        android:id="@+id/animation_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="185dp"
+        android:layout_marginTop="12dp"
+        android:text="x 1"
+        android:textColor="#0076ff"
+        android:textSize="24sp"
+        app:splash_innnerColor="#ffffff"
+        app:splash_outerColor="#0076ff" />
+
+</FrameLayout>
