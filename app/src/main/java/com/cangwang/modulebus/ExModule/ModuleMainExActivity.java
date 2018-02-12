@@ -1,14 +1,14 @@
 package com.cangwang.modulebus.ExModule;
 
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.Window;
 import android.view.WindowManager;
 
+import com.cangwang.base.util.ViewUtil;
 import com.cangwang.core.cwmodule.ex.ModuleManageExActivity;
 import com.cangwang.modulebus.R;
+import com.cangwang.template.TemplateFragment;
 
 /**
  * Created by cangwang on 2017/6/15.
@@ -31,6 +31,7 @@ public class ModuleMainExActivity extends ModuleManageExActivity{
         }
         super.onCreate(savedInstanceState);
         setBackGroundResouce(R.color.black);
+        ViewUtil.replaceFragment(this,R.id.layout_plugincenter,getSupportFragmentManager(),null,TemplateFragment.class,TemplateFragment.TAG);
     }
 
     @Override
@@ -40,6 +41,6 @@ public class ModuleMainExActivity extends ModuleManageExActivity{
 
     @Override
     public String moduleConfig() {
-        return "top";
+        return "video";
     }
 }

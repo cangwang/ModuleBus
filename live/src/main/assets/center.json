@@ -1,7 +1,7 @@
 [
    {
       "path":"com.cangwang.live.LiveModule",
-      "templet":"top",
+      "templet":"video",
       "title":"LiveModule",
       "layoutLevel":500,
       "extraLevel":0

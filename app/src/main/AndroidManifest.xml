@@ -21,17 +21,17 @@
         <activity android:name=".ExModule.ModuleMainExActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
-                <action android:name="com.cangwang.main" />
+                <!--<action android:name="com.cangwang.main" />-->
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
         <activity android:name=".ExModule.ModuleExActivity"
-            android:configChanges="orientation">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
-                <action android:name="com.cangwang.moduleExFg" />
-
+                <!--<action android:name="com.cangwang.moduleExFg" />-->
+                <action android:name="com.cangwang.main" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

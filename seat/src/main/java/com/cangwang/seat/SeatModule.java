@@ -3,8 +3,6 @@ package com.cangwang.seat;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 
 import com.cangwang.annotation.ModuleGroup;
 import com.cangwang.annotation.ModuleUnit;
@@ -24,7 +22,6 @@ import java.util.List;
         @ModuleUnit(templet = "top",layoutlevel = LayoutLevel.LOW),
 })
 public class SeatModule extends CWBasicExModule{
-    private View seatLayout;
     private RecyclerView seatRecyle;
     private SeatAdapter adapter;
 

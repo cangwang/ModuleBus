@@ -132,5 +132,6 @@
     <orderEntry type="module" module-name="seat" exported="" />
     <orderEntry type="module" module-name="core" exported="" />
     <orderEntry type="module" module-name="chat" exported="" />
+    <orderEntry type="module" module-name="template" exported="" />
   </component>
 </module>

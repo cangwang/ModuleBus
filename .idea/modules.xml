@@ -15,8 +15,8 @@
       <module fileurl="file://$PROJECT_DIR$/live/live.iml" filepath="$PROJECT_DIR$/live/live.iml" />
       <module fileurl="file://$PROJECT_DIR$/seat/seat.iml" filepath="$PROJECT_DIR$/seat/seat.iml" />
       <module fileurl="file://$PROJECT_DIR$/slide/slide.iml" filepath="$PROJECT_DIR$/slide/slide.iml" />
-      <module fileurl="file://D:\source\ModuleBus\slide\slide.iml" filepath="D:\source\ModuleBus\slide\slide.iml" />
       <module fileurl="file://$PROJECT_DIR$/splash/splash.iml" filepath="$PROJECT_DIR$/splash/splash.iml" />
+      <module fileurl="file://$PROJECT_DIR$/template/template.iml" filepath="$PROJECT_DIR$/template/template.iml" />
       <module fileurl="file://$PROJECT_DIR$/web/web.iml" filepath="$PROJECT_DIR$/web/web.iml" />
     </modules>
   </component>

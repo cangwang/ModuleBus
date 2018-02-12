@@ -12,7 +12,7 @@ import com.cangwang.enums.LayoutLevel;
  * 视频模块
  * Created by cangwang on 2018/2/6.
  */
-@ModuleUnit(templet = "top",layoutlevel = LayoutLevel.VERY_LOW)
+@ModuleUnit(templet = "video",layoutlevel = LayoutLevel.VERY_LOW)
 public class LiveModule extends CWBasicExModule{
 
     @Override

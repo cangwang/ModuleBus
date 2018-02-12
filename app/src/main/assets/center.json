@@ -2,13 +2,6 @@
    "top":
    [
       {
-         "path":"com.cangwang.live.LiveModule",
-         "templet":"top",
-         "title":"LiveModule",
-         "layoutLevel":500,
-         "extraLevel":0
-      },
-      {
          "path":"com.cangwang.seat.SeatModule",
          "templet":"top",
          "title":"SeatModule",
@@ -62,6 +55,17 @@
          "templet":"top",
          "title":"SlideModule",
          "layoutLevel":100,
+         "extraLevel":0
+      }
+
+   ],
+   "video":
+   [
+      {
+         "path":"com.cangwang.live.LiveModule",
+         "templet":"video",
+         "title":"LiveModule",
+         "layoutLevel":500,
          "extraLevel":0
       }
 

@@ -18,7 +18,16 @@ public class CWModuleContext {
     private FragmentActivity context;
     private Bundle saveInstance;
     private SparseArrayCompat<ViewGroup> viewGroups = new SparseArrayCompat<>();
+    private String templateName;
     private LayoutInflater inflater;
+
+    public String getTemplateName() {
+        return templateName;
+    }
+
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName;
+    }
 
     public LayoutInflater getInflater() {
         if(context!=null)

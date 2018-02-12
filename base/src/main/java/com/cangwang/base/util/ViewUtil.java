@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.ViewGroup;
 
 /**
  * Created by cangwang on 2018/2/6.
@@ -60,4 +61,8 @@ public class ViewUtil {
 
         }
     }
+
+//    public static Fragment addExFragment(Activity act, ViewGroup viewGroup, FragmentManager manager, Bundle bundle, Class<? extends Fragment> cls, String tag){
+//
+//    }
 }

@@ -2,10 +2,6 @@ package com.cangwang.core.cwmodule.ex;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -65,6 +61,7 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
         sVerticalViews.put(CWModuleContext.BOTTOM_VIEW_GROUP, mBottomViewGroup);
         sVerticalViews.put(CWModuleContext.PLUGIN_CENTER_VIEW, pluginViewGroup);
         moduleContext.setViewGroups(sVerticalViews);
+        moduleContext.setTemplateName(moduleConfig());
 
         if (ModuleCenter.isFromNetWork) {  //在线加载
             for (final String moduleName : ModuleBus.getInstance().getModuleList(moduleManager.getTemplate())) {
@@ -143,7 +140,6 @@ public abstract class ModuleManageExActivity extends AppCompatActivity{
         if (!moduleManager.onBackPressed()){
             super.onBackPressed();
         }
-
     }
 
     /**
