@@ -14,6 +14,7 @@ import com.cangwang.core.ModuleCenter;
 import com.cangwang.core.ModuleEvent;
 import com.cangwang.core.R;
 import com.cangwang.core.cwmodule.CWModuleContext;
+import com.cangwang.core.cwmodule.api.BackPressStack;
 import com.cangwang.model.ICWModule;
 
 import java.util.List;
@@ -67,7 +68,7 @@ public abstract class ModuleManageActivity extends FragmentActivity {
                                 @Override
                                 public void run() {
                                     long before = System.currentTimeMillis();
-                                    module.init(moduleContext, null);
+                                    module.onCreate(moduleContext, null);
                                     Log.d(TAG, "modulename: " + moduleName + " init time = " + (System.currentTimeMillis() - before) + "ms");
                                     moduleManager.putModule(moduleName, module);
                                 }
@@ -83,7 +84,7 @@ public abstract class ModuleManageActivity extends FragmentActivity {
             for (ICWModule moduleIn : moduleList) {
                 module = (CWAbsExModule) moduleIn;
                 long before = System.currentTimeMillis();
-                module.init(moduleContext, null);
+                module.onCreate(moduleContext, null);
                 Log.d(TAG, "modulename: " + moduleIn.getClass().getCanonicalName() + " init time = " + (System.currentTimeMillis() - before) + "ms");
                 moduleManager.putModule(moduleIn.getClass().getCanonicalName(), module);
             }
@@ -124,6 +125,14 @@ public abstract class ModuleManageActivity extends FragmentActivity {
         moduleManager.onConfigurationChanged(newConfig);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (moduleManager.onBackPressed()){
+            return;
+        }
+        super.onBackPressed();
+    }
+
     /**
      * 添加模块
      * @param moduleName
@@ -143,7 +152,7 @@ public abstract class ModuleManageActivity extends FragmentActivity {
                 module = CWModuleExFactory.newModuleInstance(moduleName);
             }
             if (moduleContext !=null &&module!=null){
-                boolean result = module.init(moduleContext,extend);
+                boolean result = module.onCreate(moduleContext,extend);
                 if (listener!=null)
                     listener.laodResult(result);  //监听回调
                 if (result)

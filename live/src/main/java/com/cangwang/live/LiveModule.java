@@ -16,8 +16,8 @@ import com.cangwang.enums.LayoutLevel;
 public class LiveModule extends CWBasicExModule{
 
     @Override
-    public boolean init(CWModuleContext moduleContext, Bundle extend) {
-        super.init(moduleContext, extend);
+    public boolean onCreate(CWModuleContext moduleContext, Bundle extend) {
+        super.onCreate(moduleContext, extend);
         initView();
         return true;
     }
@@ -25,7 +25,6 @@ public class LiveModule extends CWBasicExModule{
     @Override
     public void onOrientationChanges(boolean isLandscape) {
         super.onOrientationChanges(isLandscape);
-
     }
 
     private void initView(){

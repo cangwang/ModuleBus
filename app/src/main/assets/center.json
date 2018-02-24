@@ -56,6 +56,13 @@
          "title":"SlideModule",
          "layoutLevel":100,
          "extraLevel":0
+      },
+      {
+         "path":"com.cangwang.gift.GiftModule",
+         "templet":"top",
+         "title":"GiftModule",
+         "layoutLevel":100,
+         "extraLevel":0
       }
 
    ],

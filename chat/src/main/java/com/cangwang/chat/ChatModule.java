@@ -34,8 +34,8 @@ public class ChatModule extends CWBasicExModule implements ChatApi {
     private boolean isScolling =false;
 
     @Override
-    public boolean init(CWModuleContext moduleContext, Bundle extend) {
-        super.init(moduleContext, extend);
+    public boolean onCreate(CWModuleContext moduleContext, Bundle extend) {
+        super.onCreate(moduleContext, extend);
         initView();
         initData();
         registerMApi(ChatApi.class,this);

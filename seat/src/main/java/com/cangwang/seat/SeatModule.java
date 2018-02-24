@@ -26,8 +26,8 @@ public class SeatModule extends CWBasicExModule{
     private SeatAdapter adapter;
 
     @Override
-    public boolean init(CWModuleContext moduleContext, Bundle extend) {
-        super.init(moduleContext, extend);
+    public boolean onCreate(CWModuleContext moduleContext, Bundle extend) {
+        super.onCreate(moduleContext, extend);
         initView();
         initData();
         return true;

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.cangwang.lamp.view.HeartLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/heart_layout"
         android:layout_width="100dp"
         android:layout_height="200dp"

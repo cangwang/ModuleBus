@@ -11,9 +11,11 @@ import com.cangwang.core.cwmodule.ex.CWBasicExModule;
 import com.cangwang.enums.LayoutLevel;
 import com.cangwang.lamp.view.HeartLayout;
 
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 氛围灯气泡
@@ -28,8 +30,8 @@ public class LampModule extends CWBasicExModule{
     private HeartLayout mHeartLayout;
 
     @Override
-    public boolean init(CWModuleContext moduleContext, Bundle extend) {
-        super.init(moduleContext, extend);
+    public boolean onCreate(CWModuleContext moduleContext, Bundle extend) {
+        super.onCreate(moduleContext, extend);
         initView();
         return true;
     }

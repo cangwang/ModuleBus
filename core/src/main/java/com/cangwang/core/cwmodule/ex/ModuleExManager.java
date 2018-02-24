@@ -4,11 +4,15 @@ import android.content.res.Configuration;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.util.ArrayMap;
+import android.util.Log;
 
+import com.cangwang.core.cwmodule.api.BackPressStack;
+import com.cangwang.core.cwmodule.api.ModuleBackpress;
 import com.cangwang.core.util.ModuleUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -106,12 +110,16 @@ public class ModuleExManager {
 
     public boolean onBackPressed(){
         boolean hasCallback =false;
-        for (CWAbsExModule module:allModules.values()) {
-            if (module != null) {
-                boolean isCall=module.onBackPress();
-                if (isCall)
-                    hasCallback =true;
-            }
+//        for (CWAbsExModule module:allModules.values()) {
+//            if (module != null) {
+//                boolean isCall=module.onBackPress();
+//                if (isCall)
+//                    hasCallback =true;
+//            }
+//        }
+        if (BackPressStack.getInstance().getStack().size() >0){
+            Log.e("ModuleExManager","peek "+BackPressStack.getInstance().getStack().toString());
+            hasCallback =BackPressStack.getInstance().getStack().peek().onBackPress();
         }
         return hasCallback;
     }

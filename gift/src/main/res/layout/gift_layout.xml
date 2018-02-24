@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@null"
+    android:layout_alignParentBottom="true"
+    android:orientation="vertical">
+    <com.cangwang.gift.view.MyViewPager
+        android:id="@+id/gift_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#bb000000"
+        android:layout_above="@+id/gift_radio_group"
+        >
+    </com.cangwang.gift.view.MyViewPager>
+    <RadioGroup
+        android:id="@+id/gift_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="#bb000000"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+        <RadioButton
+            android:layout_width="5dp"
+            android:button="@null"
+            android:background="@drawable/bg_radio"
+            android:layout_marginRight="5dp"
+            android:layout_height="5dp" />
+        <RadioButton
+            android:layout_width="5dp"
+            android:button="@null"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/bg_radio"
+            android:layout_height="5dp" />
+        <RadioButton
+            android:layout_width="5dp"
+            android:button="@null"
+            android:background="@drawable/bg_radio"
+            android:layout_height="5dp" />
+    </RadioGroup>
+</RelativeLayout>

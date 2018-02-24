@@ -12,7 +12,7 @@ import com.cangwang.model.ICWModule;
 
 public abstract class CWAbsExModule implements ICWModule{
 
-    public abstract boolean init(CWModuleContext moduleContext, Bundle extend);
+    public abstract boolean onCreate(CWModuleContext moduleContext, Bundle extend);
 
     public abstract void onSaveInstanceState(Bundle outState);
 
@@ -35,6 +35,4 @@ public abstract class CWAbsExModule implements ICWModule{
     public abstract void registerMApi(Class<?extends MBaseApi> key, MBaseApi value);
 
     public abstract void unregisterMApi(Class<?extends MBaseApi> key);
-
-    public abstract boolean onBackPress();
 }

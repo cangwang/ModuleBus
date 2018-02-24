@@ -9,6 +9,7 @@ import com.cangwang.annotation.ModuleUnit;
 import com.cangwang.base.api.SlideApi;
 import com.cangwang.base.util.ViewUtil;
 import com.cangwang.core.cwmodule.CWModuleContext;
+import com.cangwang.core.cwmodule.api.ModuleBackpress;
 import com.cangwang.core.cwmodule.ex.CWBasicExModule;
 import com.cangwang.enums.LayoutLevel;
 
@@ -17,13 +18,13 @@ import com.cangwang.enums.LayoutLevel;
  * Created by canwang on 2018/2/10.
  */
 @ModuleUnit(templet = "top",layoutlevel = LayoutLevel.VERY_HIGHT)
-public class SlideModule extends CWBasicExModule implements SlideApi{
+public class SlideModule extends CWBasicExModule implements SlideApi,ModuleBackpress{
     private Fragment slideFragment;
+    private boolean isInit =false;
 
     @Override
-    public boolean init(CWModuleContext moduleContext, Bundle extend) {
-        super.init(moduleContext, extend);
-        initView();
+    public boolean onCreate(CWModuleContext moduleContext, Bundle extend) {
+        super.onCreate(moduleContext, extend);
         registerMApi(SlideApi.class,this);
         return true;
     }
@@ -33,14 +34,17 @@ public class SlideModule extends CWBasicExModule implements SlideApi{
         setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 hide();
             }
         });
-        hideModule();
+        isInit = true;
     }
 
     @Override
     public void show() {
+        if (!isInit)
+            initView();
         showModule();
         if (slideFragment == null){
             slideFragment = ViewUtil.replaceFragment(context,R.id.slide_frg,context.getSupportFragmentManager(),null,SlideFragment.class,SlideFragment.TAG);
@@ -61,6 +65,7 @@ public class SlideModule extends CWBasicExModule implements SlideApi{
     public void onDestroy() {
         unregisterMApi(SlideApi.class);
         slideFragment = null;
+        isInit =false;
         super.onDestroy();
     }
 
@@ -68,8 +73,7 @@ public class SlideModule extends CWBasicExModule implements SlideApi{
     public boolean onBackPress() {
         if (slideFragment!=null) {
             hide();
-            return true;
         }
-        return false;
+        return true;
     }
 }

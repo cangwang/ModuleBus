@@ -32,8 +32,8 @@ public class SplashModule extends CWBasicExModule implements SplashApi{
     List<GiftSendModel> giftSendModelList = new ArrayList<GiftSendModel>();
 
     @Override
-    public boolean init(CWModuleContext moduleContext, Bundle extend) {
-        super.init(moduleContext, extend);
+    public boolean onCreate(CWModuleContext moduleContext, Bundle extend) {
+        super.onCreate(moduleContext, extend);
         initView();
         registerMApi(SplashApi.class,this);
         return true;

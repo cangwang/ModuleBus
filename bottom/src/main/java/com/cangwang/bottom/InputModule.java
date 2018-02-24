@@ -12,9 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cangwang.annotation.ModuleUnit;
+import com.cangwang.base.api.BottomApi;
 import com.cangwang.base.api.ChatApi;
 import com.cangwang.core.ModuleApiManager;
 import com.cangwang.core.cwmodule.CWModuleContext;
+import com.cangwang.core.cwmodule.api.ModuleBackpress;
 import com.cangwang.core.cwmodule.ex.CWBasicExModule;
 import com.cangwang.enums.LayoutLevel;
 
@@ -23,13 +25,13 @@ import com.cangwang.enums.LayoutLevel;
  */
 
 //@ModuleUnit(templet = "top",layoutlevel = LayoutLevel.LOW)
-public class InputModule extends CWBasicExModule{
+public class InputModule extends CWBasicExModule implements ModuleBackpress {
     private EditText inputText;
     private ImageView inputBtn;
 
     @Override
-    public boolean init(CWModuleContext moduleContext, Bundle extend) {
-        super.init(moduleContext, extend);
+    public boolean onCreate(CWModuleContext moduleContext, Bundle extend) {
+        super.onCreate(moduleContext, extend);
         initView();
         return true;
     }
@@ -66,6 +68,23 @@ public class InputModule extends CWBasicExModule{
                 return true;
             }
         });
+    }
+
+    @Override
+    public boolean onBackPress() {
+       hideModule();
+       ModuleApiManager.getInstance().getApi(BottomApi.class).show();
+       return true;
+    }
+
+    @Override
+    public void hideModule() {
+        super.hideModule();
+    }
+
+    @Override
+    public void showModule() {
+        super.showModule();
     }
 
     @Override

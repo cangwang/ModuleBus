@@ -40,5 +40,6 @@ dependencies {
     compile project(':lamp')
     compile project(':slide')
     compile project(':splash')
+    compile project(':gift')
     annotationProcessor project(":compiler")
 }

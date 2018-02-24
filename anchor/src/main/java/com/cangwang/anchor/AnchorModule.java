@@ -31,8 +31,8 @@ public class AnchorModule extends CWBasicExModule implements AnchorApi{
     private ImageView anchorCareBtn;
 
     @Override
-    public boolean init(CWModuleContext moduleContext, Bundle extend) {
-        super.init(moduleContext, extend);
+    public boolean onCreate(CWModuleContext moduleContext, Bundle extend) {
+        super.onCreate(moduleContext, extend);
         initView();
         ModuleApiManager.getInstance().putApi(AnchorApi.class,this);
         return true;

@@ -121,17 +121,18 @@
     <orderEntry type="library" exported="" scope="TEST" name="javax.annotation:javax.annotation-api:1.2@jar" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:recyclerview-v7-25.0.1" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-vector-drawable-25.0.1" level="project" />
-    <orderEntry type="module" module-name="lamp" exported="" />
-    <orderEntry type="module" module-name="bottom" exported="" />
     <orderEntry type="module" module-name="splash" exported="" />
     <orderEntry type="module" module-name="live" exported="" />
     <orderEntry type="module" module-name="anchor" exported="" />
-    <orderEntry type="module" module-name="base" exported="" />
     <orderEntry type="module" module-name="web" exported="" />
+    <orderEntry type="module" module-name="gift" exported="" />
+    <orderEntry type="module" module-name="chat" exported="" />
+    <orderEntry type="module" module-name="template" exported="" />
+    <orderEntry type="module" module-name="lamp" exported="" />
+    <orderEntry type="module" module-name="bottom" exported="" />
+    <orderEntry type="module" module-name="base" exported="" />
     <orderEntry type="module" module-name="slide" exported="" />
     <orderEntry type="module" module-name="seat" exported="" />
     <orderEntry type="module" module-name="core" exported="" />
-    <orderEntry type="module" module-name="chat" exported="" />
-    <orderEntry type="module" module-name="template" exported="" />
   </component>
 </module>

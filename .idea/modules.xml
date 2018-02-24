@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/chat/chat.iml" filepath="$PROJECT_DIR$/chat/chat.iml" />
       <module fileurl="file://$PROJECT_DIR$/compiler/compiler.iml" filepath="$PROJECT_DIR$/compiler/compiler.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gift/gift.iml" filepath="$PROJECT_DIR$/gift/gift.iml" />
       <module fileurl="file://$PROJECT_DIR$/lamp/lamp.iml" filepath="$PROJECT_DIR$/lamp/lamp.iml" />
       <module fileurl="file://$PROJECT_DIR$/live/live.iml" filepath="$PROJECT_DIR$/live/live.iml" />
       <module fileurl="file://$PROJECT_DIR$/seat/seat.iml" filepath="$PROJECT_DIR$/seat/seat.iml" />

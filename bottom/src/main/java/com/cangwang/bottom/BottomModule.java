@@ -5,11 +5,14 @@ import android.view.View;
 
 import com.cangwang.annotation.ModuleGroup;
 import com.cangwang.annotation.ModuleUnit;
+import com.cangwang.base.api.BottomApi;
+import com.cangwang.base.api.GiftApi;
 import com.cangwang.base.api.SlideApi;
 import com.cangwang.base.api.SplashApi;
 import com.cangwang.base.ui.CircleImageView;
 import com.cangwang.core.ModuleApiManager;
 import com.cangwang.core.cwmodule.CWModuleContext;
+import com.cangwang.core.cwmodule.api.ModuleBackpress;
 import com.cangwang.core.cwmodule.ex.CWBasicExModule;
 import com.cangwang.enums.LayoutLevel;
 
@@ -20,7 +23,7 @@ import com.cangwang.enums.LayoutLevel;
 @ModuleGroup({
         @ModuleUnit(templet = "top",layoutlevel = LayoutLevel.LOW),
 })
-public class BottomModule extends CWBasicExModule{
+public class BottomModule extends CWBasicExModule implements BottomApi{
     private CircleImageView moreBtn;
     private CircleImageView chatBtn;
     private CircleImageView giftBtn;
@@ -28,9 +31,10 @@ public class BottomModule extends CWBasicExModule{
     private InputModule ipM;
 
     @Override
-    public boolean init(CWModuleContext moduleContext, Bundle extend) {
-        super.init(moduleContext, extend);
+    public boolean onCreate(CWModuleContext moduleContext, Bundle extend) {
+        super.onCreate(moduleContext, extend);
         initView();
+        registerMApi(BottomApi.class,this);
         return true;
     }
 
@@ -50,7 +54,7 @@ public class BottomModule extends CWBasicExModule{
                 bottomLayout.setVisibility(View.GONE);
                 if (ipM ==null){
                     ipM = new InputModule();
-                    ipM.init(moduleContext,null);
+                    ipM.onCreate(moduleContext,null);
                 }else {
                     ipM.setVisible(true);
                 }
@@ -68,25 +72,32 @@ public class BottomModule extends CWBasicExModule{
         giftBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ModuleApiManager.getInstance().getApi(SplashApi.class).splash();
+//                ModuleApiManager.getInstance().getApi(SplashApi.class).splash();
+                ModuleApiManager.getInstance().getApi(GiftApi.class).show();
             }
         });
     }
 
-    @Override
-    public boolean onBackPress() {
-        if (ipM!=null && ipM.isVisible()){
-            ipM.setVisible(false);
-            if (bottomLayout.getVisibility() == View.GONE)
-                bottomLayout.setVisibility(View.VISIBLE);
-            return true;
-        }
-        return false;
-    }
+//    @Override
+//    public boolean onBackPress() {
+//        if (ipM!=null && ipM.isVisible()){
+//            ipM.setVisible(false);
+//            if (bottomLayout.getVisibility() == View.GONE)
+//                bottomLayout.setVisibility(View.VISIBLE);
+//            return true;
+//        }
+//        return false;
+//    }
 
     @Override
     public void onDestroy() {
         ipM =null;
         super.onDestroy();
+    }
+
+    @Override
+    public void show() {
+        if (bottomLayout.getVisibility() == View.GONE)
+            bottomLayout.setVisibility(View.VISIBLE);
     }
 }

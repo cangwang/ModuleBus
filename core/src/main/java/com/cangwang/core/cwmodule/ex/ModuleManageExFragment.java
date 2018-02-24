@@ -73,7 +73,7 @@ public abstract class ModuleManageExFragment extends Fragment{
                                 @Override
                                 public void run() {
                                     long before = System.currentTimeMillis();
-                                    module.init(moduleContext, null);
+                                    module.onCreate(moduleContext, null);
                                     Log.d(TAG, "modulename: " + moduleName + " init time = " + (System.currentTimeMillis() - before) + "ms");
                                     moduleManager.putModule(moduleName, module);
                                 }
@@ -89,7 +89,7 @@ public abstract class ModuleManageExFragment extends Fragment{
             for (ICWModule moduleIn : moduleList) {
                 module = (CWAbsExModule) moduleIn;
                 long before = System.currentTimeMillis();
-                module.init(moduleContext, null);
+                module.onCreate(moduleContext, null);
                 Log.d(TAG, "modulename: " + moduleIn.getClass().getCanonicalName() + " init time = " + (System.currentTimeMillis() - before) + "ms");
                 moduleManager.putModule(moduleIn.getClass().getCanonicalName(), module);
             }
@@ -147,7 +147,7 @@ public abstract class ModuleManageExFragment extends Fragment{
                 module = CWModuleExFactory.newModuleInstance(moduleName);
             }
             if (moduleContext !=null &&module!=null){
-                boolean result = module.init(moduleContext,extend);
+                boolean result = module.onCreate(moduleContext,extend);
                 if (listener!=null)
                     listener.laodResult(result);
                 if (result)

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gift_catogary_names">
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+        <item>6</item>
+        <item>8</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>80</item>
+        <item>100</item>
+        <item>500</item>
+        <item>666</item>
+        <item>888</item>
+        <item>999</item>
+        <item>1333</item>
+        <item>2000</item>
+        <item>5000</item>
+        <item>6666</item>
+        <item>8888</item>
+        <item>9999</item>
+        <item>10000</item>
+        <item>50000</item>
+    </string-array>
+    <integer-array name="gift_catogary_resourceIds">
+        <item>@drawable/yipitiezhi001</item>
+        <item>@drawable/yipitiezhi002</item>
+        <item>@drawable/yipitiezhi003</item>
+        <item>@drawable/yipitiezhi004</item>
+        <item>@drawable/yipitiezhi005</item>
+        <item>@drawable/yipitiezhi006</item>
+        <item>@drawable/yipitiezhi007</item>
+        <item>@drawable/yipitiezhi008</item>
+        <item>@drawable/yipitiezhi009</item>
+        <item>@drawable/yipitiezhi010</item>
+        <item>@drawable/yipitiezhi011</item>
+        <item>@drawable/yipitiezhi012</item>
+        <item>@drawable/yipitiezhi013</item>
+        <item>@drawable/yipitiezhi014</item>
+        <item>@drawable/yipitiezhi015</item>
+        <item>@drawable/yipitiezhi016</item>
+        <item>@drawable/yipitiezhi017</item>
+        <item>@drawable/yipitiezhi018</item>
+        <item>@drawable/yipitiezhi019</item>
+        <item>@drawable/yipitiezhi020</item>
+        <item>@drawable/yipitiezhi021</item>
+        <item>@drawable/yipitiezhi022</item>
+        <item>@drawable/yipitiezhi023</item>
+        <item>@drawable/yipitiezhi024</item>
+        <item>@drawable/yipitiezhi025</item>
+    </integer-array>
+
+
+</resources>
