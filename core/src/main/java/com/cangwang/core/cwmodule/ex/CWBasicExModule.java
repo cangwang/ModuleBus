@@ -40,6 +40,7 @@ public class CWBasicExModule extends CWAbsExModule {
     private List<View> viewList;
     private LayoutInflater inflater;
     private Stack<ModuleBackpress> stack;
+    public String templateName;
 
     @CallSuper
     @Override
@@ -51,6 +52,7 @@ public class CWBasicExModule extends CWAbsExModule {
         parentBottom = moduleContext.getView(CWModuleContext.BOTTOM_VIEW_GROUP);
         parentPlugin = moduleContext.getView(CWModuleContext.PLUGIN_CENTER_VIEW);
         handler = new Handler();
+        templateName = moduleContext.getTemplateName();
         viewList = new ArrayList<>();
         stack = BackPressStack.getInstance().getStack();
         return true;
