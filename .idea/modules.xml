@@ -6,11 +6,14 @@
       <module fileurl="file://$PROJECT_DIR$/anchor/anchor.iml" filepath="$PROJECT_DIR$/anchor/anchor.iml" />
       <module fileurl="file://$PROJECT_DIR$/annotation/annotation.iml" filepath="$PROJECT_DIR$/annotation/annotation.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\source\ModuleBus\app\app.iml" filepath="D:\source\ModuleBus\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/base/base.iml" filepath="$PROJECT_DIR$/base/base.iml" />
+      <module fileurl="file://D:\source\ModuleBus\base\base.iml" filepath="D:\source\ModuleBus\base\base.iml" />
       <module fileurl="file://$PROJECT_DIR$/bottom/bottom.iml" filepath="$PROJECT_DIR$/bottom/bottom.iml" />
       <module fileurl="file://$PROJECT_DIR$/chat/chat.iml" filepath="$PROJECT_DIR$/chat/chat.iml" />
       <module fileurl="file://$PROJECT_DIR$/compiler/compiler.iml" filepath="$PROJECT_DIR$/compiler/compiler.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
+      <module fileurl="file://D:\source\ModuleBus\core\core.iml" filepath="D:\source\ModuleBus\core\core.iml" />
       <module fileurl="file://$PROJECT_DIR$/gift/gift.iml" filepath="$PROJECT_DIR$/gift/gift.iml" />
       <module fileurl="file://$PROJECT_DIR$/lamp/lamp.iml" filepath="$PROJECT_DIR$/lamp/lamp.iml" />
       <module fileurl="file://$PROJECT_DIR$/live/live.iml" filepath="$PROJECT_DIR$/live/live.iml" />
