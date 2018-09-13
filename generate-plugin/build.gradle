@@ -1,0 +1,44 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+def groupId = 'com.cangwang.plugins'
+def artifactId = 'generate'
+def version = '1.0.0'
+
+def localReleaseDest = "${buildDir}/release/${version}"
+
+dependencies{
+    compile gradleApi()
+    compile localGroovy()
+    compile 'com.android.tools.build:gradle:3.1.4'
+    compile 'org.javassist:javassist:3.20.0-GA'
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.groupId = groupId
+            pom.artifactId = artifactId
+            pom.version = version
+            // Add other pom properties here if you want (developer details / licenses)
+            repository(url: "file://${localReleaseDest}")
+        }
+    }
+}
+
+
+task zipRelease(type: Zip) {
+    from localReleaseDest
+    destinationDir buildDir
+    archiveName "release-${version}.zip"
+}
+
+task generateRelease {
+    doLast {
+        println "Release ${version} can be found at ${localReleaseDest}/"
+        println "Release ${version} zipped can be found ${buildDir}/release-${version}.zip"
+    }
+}
+
+generateRelease.dependsOn(uploadArchives)
+generateRelease.dependsOn(zipRelease)

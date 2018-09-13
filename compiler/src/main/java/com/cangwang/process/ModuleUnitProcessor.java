@@ -66,6 +66,7 @@ public class ModuleUnitProcessor {
 
         for (Element element:modulesElements){
             ClassName name = ClassName.get(((TypeElement)element));
+
             loadIntoMethodOfRootBuilder.addStatement("return new $T()", (TypeElement)element);
 
             //构造java文件

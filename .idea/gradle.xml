@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/chat" />
             <option value="$PROJECT_DIR$/compiler" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/generate-plugin" />
             <option value="$PROJECT_DIR$/gift" />
             <option value="$PROJECT_DIR$/lamp" />
             <option value="$PROJECT_DIR$/live" />
