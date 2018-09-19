@@ -53,7 +53,7 @@ class GenerateUtil {
                             if (c.interfaces != null){
                                 for (CtClass inter :c.interfaces){
                                     if (inter.packageName+"."+inter.name == IMODULE_BEAN){
-                                        set.add(CtInfo(inter.packageName,filePath))
+                                        set.add(CtInfo(inter,inter.packageName,filePath))
                                     }
                                 }
                             }
