@@ -14,14 +14,26 @@ dependencies{
     compile 'org.javassist:javassist:3.20.0-GA'
 }
 
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            pom.groupId = groupId
+//            pom.artifactId = artifactId
+//            pom.version = version
+//            // Add other pom properties here if you want (developer details / licenses)
+//            repository(url: "file://${localReleaseDest}")
+//        }
+//    }
+//}
+
 uploadArchives {
     repositories {
         mavenDeployer {
             pom.groupId = groupId
             pom.artifactId = artifactId
             pom.version = version
-            // Add other pom properties here if you want (developer details / licenses)
-            repository(url: "file://${localReleaseDest}")
+            //本地的Maven地址设置为D:/repos
+            repository(url: uri('../repo'))
         }
     }
 }

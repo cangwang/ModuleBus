@@ -1,9 +1,14 @@
 package com.cangwang.generate
 
-import android.util.ArraySet
+import groovyjarjarasm.asm.ClassVisitor
 import javassist.ClassPool
 import javassist.CtClass
 import org.gradle.api.Project
+import org.objectweb.asm.AnnotationVisitor
+import org.objectweb.asm.ClassReader
+
+import java.util.jar.JarEntry
+import java.util.jar.JarFile
 
 
 /**
@@ -13,6 +18,7 @@ class GenerateUtil {
     private final static ClassPool pool = ClassPool.getDefault()
     private final static String IMODULE_BEAN = "com.cangwang.core.bean.IModuleBean"
     private final static String IMODULE_ANNOTATION = "com.cangwang.annotation.ModuleBean"
+    def jarSet = [] as Set<CtInfo>
 
     static boolean isAndroidPlugin(Project project) {
         if (project.plugins.findPlugin("com.android.application") || project.plugins.findPlugin("android") ||
@@ -36,7 +42,7 @@ class GenerateUtil {
         pool.appendClassPath(path)
         //project.android.bootClasspath 加入android.jar，否则找不到android相关的所有类
         pool.appendClassPath(project.android.bootClasspath[0].toString())
-        ArraySet<CtInfo> set = ArraySet()
+        def set = [] as Set<CtInfo>
         File dir = new File(path)
         if (dir.isDirectory()){
             dir.eachFileRecurse {
@@ -56,11 +62,10 @@ class GenerateUtil {
                                         set.add(CtInfo(inter,inter.packageName,filePath))
                                     }
                                 }
-                            }
-                            if (c.annotations != null){
+                            } else if (c.annotations != null){
                                 for (CtClass an :c.annotations){
                                     if (an.packageName+"."+an.name == IMODULE_ANNOTATION){
-                                        set.add(CtInfo(inter.packageName,filePath))
+                                        set.add(CtInfo(an.packageName,filePath))
                                     }
                                 }
                             }
@@ -75,8 +80,84 @@ class GenerateUtil {
         return set
     }
 
+    static Set<CtInfo> getNeedFromJar(String path, File file,String packageName, Project project) {
+        pool.appendClassPath(path)
+        //project.android.bootClasspath 加入android.jar，否则找不到android相关的所有类
+        pool.appendClassPath(project.android.bootClasspath[0].toString())
+        def set = [] as Set<CtInfo>
+        JarFile jarFile = new JarFile(file)
+        Enumeration<JarEntry> entries = jarFile.entries()
+        while (entries.hasMoreElements()) {
+            JarEntry entry = entries.nextElement()
+            String filename = entry.getName()
+            if (filterClass(filename)) continue
+
+            InputStream stream = jarFile.getInputStream(entry)
+            if (stream != null) {
+                ClassReader c = new ClassReader(stream.bytes)
+                if (c.interfaces != null && c.interfaces.size() > 0){
+                    for (String inter :c.interfaces){
+                        if (c.packageName+"."+inter == IMODULE_BEAN){
+                            FileOutputStream outputStream = new FileOutputStream(GenerateTransform.MainAddress+"/"+c.className)
+                            outputStream.write(stream)
+                        }
+                    }
+                }
+
+                ClassVisitor cv =  ClassVisitor()
+                c.accept(cv,0)
+                AnnotationVisitor av = cv.visitAnnotation(IMODULE_ANNOTATION,false)
+                if (av!= null ){
+                    FileOutputStream outputStream = new FileOutputStream(GenerateTransform.MainAddress+"/"+c.className)
+                    outputStream.write(stream)
+                }
+                stream.close()
+            }
+        }
+        return set
+    }
+
+    public static boolean filterClass(String filename) {
+        if (!filename.endsWith(".class")
+                || filename.contains('R$')
+                || filename.contains('R.class')
+                || filename.contains("BuildConfig.class")) {
+            return true
+        }
+
+        return false
+    }
+
     static String getClassName(int index, String filePath) {
         int end = filePath.length() - 6 // .class = 6
         return filePath.substring(index, end).replace('\\', '.').replace('/', '.')
+    }
+
+    private static File generateReleaseJar(File classesDir, def argFiles, def classPath, def target, def source) {
+        def classpathSeparator = ";"
+        if (!System.properties['os.name'].toLowerCase().contains('windows')) {
+            classpathSeparator = ":"
+        }
+        def p
+        if (classPath.size() == 0) {  //解压
+            p = ("javac -encoding UTF-8 -target " + target + " -source " + source + " -d . " + argFiles.join(' ')).execute(null, classesDir)
+        } else {
+            p = ("javac -encoding UTF-8 -target " + target + " -source " + source + " -d . -classpath " + classPath.join(classpathSeparator) + " " + argFiles.join(' ')).execute(null, classesDir)
+        }
+
+        def result = p.waitFor()
+        if (result != 0) {
+            throw new RuntimeException("Failure to convert java source to bytecode: \n" + p.err.text)
+        }
+
+        p = "jar cvf outputs/classes.jar -C classes . ".execute(null, classesDir.parentFile)  //读取java文件
+        result = p.waitFor()
+        p.destroy()
+        p = null
+        if (result != 0) {
+            throw new RuntimeException("failure to package classes.jar: \n" + p.err.text)
+        }
+
+        return new File(classesDir.parentFile, 'outputs/classes.jar')  //返回classes.jar文件
     }
 }

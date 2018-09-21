@@ -6,6 +6,7 @@ if(project.ext.isLib){
 }else {
     apply plugin: 'com.android.application'
 }
+//apply plugin: "generate"
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
