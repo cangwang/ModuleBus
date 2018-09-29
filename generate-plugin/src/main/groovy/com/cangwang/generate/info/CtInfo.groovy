@@ -1,4 +1,4 @@
-package com.cangwang.generate
+package com.cangwang.generate.info
 
 import javassist.CtClass
 

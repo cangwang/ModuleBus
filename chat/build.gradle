@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply from: "${rootProject.rootDir}/common_config.gradle"
-
 android {
     compileSdkVersion project.ext.compileSdkVersion
     buildToolsVersion project.ext.buildToolsVersion
@@ -37,3 +36,5 @@ dependencies {
     compile project(':base')
     annotationProcessor project(":compiler")
 }
+
+apply plugin: "generate"

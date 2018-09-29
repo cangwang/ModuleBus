@@ -1,4 +1,4 @@
-package com.cangwang.generate
+package com.cangwang.generate.util
 
 import org.objectweb.asm.AnnotationVisitor
 import org.objectweb.asm.ClassVisitor

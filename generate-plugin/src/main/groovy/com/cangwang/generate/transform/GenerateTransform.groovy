@@ -1,13 +1,14 @@
-package com.cangwang.generate
+package com.cangwang.generate.transform
 
 import com.android.build.api.transform.Context
-import com.android.build.api.transform.DirectoryInput
 import com.android.build.api.transform.QualifiedContent
 import com.android.build.api.transform.Transform
 import com.android.build.api.transform.TransformException
 import com.android.build.api.transform.TransformInput
 import com.android.build.api.transform.TransformOutputProvider
 import com.android.build.gradle.internal.pipeline.TransformManager
+import com.cangwang.generate.util.GenerateUtil
+import com.cangwang.generate.info.CtInfo
 import org.apache.commons.io.FileUtils
 import org.gradle.api.Project
 
@@ -43,7 +44,8 @@ class GenerateTransform extends Transform{
                 //先遍历jar
                 try {
                     input.jarInputs.each {
-                        infoSet.addAll(GenerateUtil.getNeedFromJar(it.file.getAbsolutePath(),it.file,"com",project))
+//                        infoSet.addAll(GenerateUtil.getNeedFromJar(it.file.getAbsolutePath(),it.file,"com",project))
+                        GenerateUtil.getNeedFromJar(it.file.getAbsolutePath(),it.file,"com",project)
 
 //                        String outputFileName = it.name.replace(".jar", "") + '-' + it.file.path.hashCode()
 //                        def output = outputProvider.getContentLocation(outputFileName, it.contentTypes, it.scopes, Format.JAR)
@@ -53,9 +55,10 @@ class GenerateTransform extends Transform{
                     project.logger.err e.getMessage()
                 }
                 //对类型为“文件夹”的input进行遍历
-                input.directoryInputs.each { DirectoryInput directoryInput ->
+                input.directoryInputs.each { /*DirectoryInput directoryInput ->*/
                     //文件夹里面包含的是我们手写的类以及R.class、BuildConfig.class以及R$XXX.class等
-                    infoSet.addAll(GenerateUtil.getNeed(it.file.getAbsolutePath(),"com",project))
+//                    infoSet.addAll(GenerateUtil.getNeed(it.file.getAbsolutePath(),"com",project))
+                    GenerateUtil.getNeed(it.file.getAbsolutePath(),"com",project)
                     // 获取output目录
 //                    def dest = outputProvider.getContentLocation(directoryInput.name,
 //                            directoryInput.contentTypes, directoryInput.scopes,
@@ -97,23 +100,6 @@ class GenerateTransform extends Transform{
 
     @Override
     Set<? super QualifiedContent.Scope> getScopes() {
-//        def name = QualifiedContent.Scope.PROJECT_LOCAL_DEPS.name()
-//        def deprecated = QualifiedContent.Scope.PROJECT_LOCAL_DEPS.getClass()
-//                .getField(name).getAnnotation(Deprecated.class)
-//
-//        if (deprecated == null) {
-//            println "cannot find QualifiedContent.Scope.PROJECT_LOCAL_DEPS Deprecated.class "
-//            return ImmutableSet.<QualifiedContent.Scope> of(QualifiedContent.Scope.PROJECT
-//                    , QualifiedContent.Scope.PROJECT_LOCAL_DEPS
-//                    , QualifiedContent.Scope.EXTERNAL_LIBRARIES
-//                    , QualifiedContent.Scope.SUB_PROJECTS
-//                    , QualifiedContent.Scope.SUB_PROJECTS_LOCAL_DEPS)
-//        } else {
-//            println "find QualifiedContent.Scope.PROJECT_LOCAL_DEPS Deprecated.class "
-//            return ImmutableSet.<QualifiedContent.Scope> of(QualifiedContent.Scope.PROJECT
-//                    , QualifiedContent.Scope.EXTERNAL_LIBRARIES
-//                    , QualifiedContent.Scope.SUB_PROJECTS)
-//        }
         return TransformManager.SCOPE_FULL_PROJECT
     }
 

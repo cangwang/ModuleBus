@@ -9,13 +9,6 @@
          "extraLevel":0
       },
       {
-         "path":"com.cangwang.chat.ChatModule",
-         "templet":"top",
-         "title":"ChatModule",
-         "layoutLevel":400,
-         "extraLevel":0
-      },
-      {
          "path":"com.cangwang.bottom.BottomModule",
          "templet":"top",
          "title":"BottomModule",

@@ -23,7 +23,7 @@ buildscript {
         classpath "gradle.plugin.com.dorongold.plugins:task-tree:1.3"
         classpath 'cz.malohlava:visteg:1.0.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-//        classpath 'com.cangwang.plugins:generate:1.0.0'
+        classpath 'com.cangwang.plugins:generate:1.0.0'
 //        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 //        NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
