@@ -1,5 +1,5 @@
 apply plugin: 'groovy'
-apply plugin: 'maven'
+//apply plugin: 'maven'
 
 def groupId = 'com.cangwang.plugins'
 def artifactId = 'generate'
@@ -8,11 +8,11 @@ def version = '1.0.0'
 def localReleaseDest = "${buildDir}/release/${version}"
 
 dependencies{
-    compile gradleApi()
-    compile localGroovy()
-    compile 'com.android.tools.build:gradle:3.1.4'
-    compile 'org.javassist:javassist:3.20.0-GA'
-    compile 'org.ow2.asm:asm:6.0'
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'com.android.tools.build:gradle:3.1.4'
+    implementation 'org.javassist:javassist:3.20.0-GA'
+    implementation 'org.ow2.asm:asm:7.0'
 }
 
 //uploadArchives {
@@ -27,17 +27,17 @@ dependencies{
 //    }
 //}
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            pom.groupId = groupId
-            pom.artifactId = artifactId
-            pom.version = version
-            //本地的Maven地址设置为D:/repos
-            repository(url: uri('../repo'))
-        }
-    }
-}
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            pom.groupId = groupId
+//            pom.artifactId = artifactId
+//            pom.version = version
+//            //本地的Maven地址设置为D:/repos
+//            repository(url: uri('../repo'))
+//        }
+//    }
+//}
 
 
 task zipRelease(type: Zip) {
@@ -53,5 +53,5 @@ task generateRelease {
     }
 }
 
-generateRelease.dependsOn(uploadArchives)
+//generateRelease.dependsOn(uploadArchives)
 generateRelease.dependsOn(zipRelease)

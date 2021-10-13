@@ -1,12 +1,12 @@
 package com.cangwang.seat.recycle;
 
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.cangwang.base.api.AnchorApi;
 import com.cangwang.base.ui.CircleImageView;

@@ -2,11 +2,11 @@ package com.cangwang.modulebus;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.cangwang.modulebus.ExModule.ModuleExActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.cangwang.modulebus.ExModule.ModuleMainExActivity;
 
 /**
@@ -14,7 +14,7 @@ import com.cangwang.modulebus.ExModule.ModuleMainExActivity;
  * Created by cangwang on 2017/2/26.
  */
 
-public class AdviceActivity extends AppCompatActivity{
+public class AdviceActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);

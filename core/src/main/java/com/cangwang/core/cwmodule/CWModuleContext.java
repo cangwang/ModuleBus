@@ -1,14 +1,12 @@
 package com.cangwang.core.cwmodule;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.util.SparseArrayCompat;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.cangwang.core.cwmodule.api.ModuleBackpress;
+import androidx.collection.SparseArrayCompat;
+import androidx.fragment.app.FragmentActivity;
 
-import java.util.Stack;
 
 /**
  * Created by cangwang on 2016/12/26.

@@ -3,23 +3,23 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ModuleBus.iml" filepath="$PROJECT_DIR$/ModuleBus.iml" />
-      <module fileurl="file://$PROJECT_DIR$/anchor/anchor.iml" filepath="$PROJECT_DIR$/anchor/anchor.iml" />
-      <module fileurl="file://$PROJECT_DIR$/annotation/annotation.iml" filepath="$PROJECT_DIR$/annotation/annotation.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/base/base.iml" filepath="$PROJECT_DIR$/base/base.iml" />
-      <module fileurl="file://$PROJECT_DIR$/bottom/bottom.iml" filepath="$PROJECT_DIR$/bottom/bottom.iml" />
-      <module fileurl="file://$PROJECT_DIR$/chat/chat.iml" filepath="$PROJECT_DIR$/chat/chat.iml" />
-      <module fileurl="file://$PROJECT_DIR$/compiler/compiler.iml" filepath="$PROJECT_DIR$/compiler/compiler.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/generate-plugin/generate-plugin.iml" filepath="$PROJECT_DIR$/generate-plugin/generate-plugin.iml" />
-      <module fileurl="file://$PROJECT_DIR$/gift/gift.iml" filepath="$PROJECT_DIR$/gift/gift.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lamp/lamp.iml" filepath="$PROJECT_DIR$/lamp/lamp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/live/live.iml" filepath="$PROJECT_DIR$/live/live.iml" />
-      <module fileurl="file://$PROJECT_DIR$/seat/seat.iml" filepath="$PROJECT_DIR$/seat/seat.iml" />
-      <module fileurl="file://$PROJECT_DIR$/slide/slide.iml" filepath="$PROJECT_DIR$/slide/slide.iml" />
-      <module fileurl="file://$PROJECT_DIR$/splash/splash.iml" filepath="$PROJECT_DIR$/splash/splash.iml" />
-      <module fileurl="file://$PROJECT_DIR$/template/template.iml" filepath="$PROJECT_DIR$/template/template.iml" />
-      <module fileurl="file://$PROJECT_DIR$/web/web.iml" filepath="$PROJECT_DIR$/web/web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/anchor/ModuleBus.anchor.iml" filepath="$PROJECT_DIR$/.idea/modules/anchor/ModuleBus.anchor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/annotation/ModuleBus.annotation.iml" filepath="$PROJECT_DIR$/.idea/modules/annotation/ModuleBus.annotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ModuleBus.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ModuleBus.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/base/ModuleBus.base.iml" filepath="$PROJECT_DIR$/.idea/modules/base/ModuleBus.base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bottom/ModuleBus.bottom.iml" filepath="$PROJECT_DIR$/.idea/modules/bottom/ModuleBus.bottom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/chat/ModuleBus.chat.iml" filepath="$PROJECT_DIR$/.idea/modules/chat/ModuleBus.chat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/compiler/ModuleBus.compiler.iml" filepath="$PROJECT_DIR$/.idea/modules/compiler/ModuleBus.compiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/ModuleBus.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/ModuleBus.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/generate-plugin/ModuleBus.generate-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/generate-plugin/ModuleBus.generate-plugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gift/ModuleBus.gift.iml" filepath="$PROJECT_DIR$/.idea/modules/gift/ModuleBus.gift.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lamp/ModuleBus.lamp.iml" filepath="$PROJECT_DIR$/.idea/modules/lamp/ModuleBus.lamp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/live/ModuleBus.live.iml" filepath="$PROJECT_DIR$/.idea/modules/live/ModuleBus.live.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/seat/ModuleBus.seat.iml" filepath="$PROJECT_DIR$/.idea/modules/seat/ModuleBus.seat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/slide/ModuleBus.slide.iml" filepath="$PROJECT_DIR$/.idea/modules/slide/ModuleBus.slide.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/splash/ModuleBus.splash.iml" filepath="$PROJECT_DIR$/.idea/modules/splash/ModuleBus.splash.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/template/ModuleBus.template.iml" filepath="$PROJECT_DIR$/.idea/modules/template/ModuleBus.template.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/web/ModuleBus.web.iml" filepath="$PROJECT_DIR$/.idea/modules/web/ModuleBus.web.iml" />
     </modules>
   </component>
 </project>

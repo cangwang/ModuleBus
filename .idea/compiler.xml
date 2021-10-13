@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <resourceExtensions />
-    <wildcardResourcePatterns>
-      <entry name="!?*.java" />
-      <entry name="!?*.form" />
-      <entry name="!?*.class" />
-      <entry name="!?*.groovy" />
-      <entry name="!?*.scala" />
-      <entry name="!?*.flex" />
-      <entry name="!?*.kt" />
-      <entry name="!?*.clj" />
-      <entry name="!?*.aj" />
-    </wildcardResourcePatterns>
-    <annotationProcessing>
-      <profile default="true" name="Default" enabled="false">
-        <processorPath useClasspath="true" />
-      </profile>
-    </annotationProcessing>
+    <bytecodeTargetLevel target="1.7">
+      <module name="ModuleBus.anchor" target="11" />
+      <module name="ModuleBus.app" target="11" />
+      <module name="ModuleBus.base" target="11" />
+      <module name="ModuleBus.bottom" target="11" />
+      <module name="ModuleBus.chat" target="11" />
+      <module name="ModuleBus.core" target="11" />
+      <module name="ModuleBus.generate-plugin" target="11" />
+      <module name="ModuleBus.gift" target="11" />
+      <module name="ModuleBus.lamp" target="11" />
+      <module name="ModuleBus.live" target="11" />
+      <module name="ModuleBus.seat" target="11" />
+      <module name="ModuleBus.slide" target="11" />
+      <module name="ModuleBus.splash" target="11" />
+      <module name="ModuleBus.template" target="11" />
+      <module name="ModuleBus.web" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

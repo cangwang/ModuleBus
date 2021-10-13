@@ -3,16 +3,15 @@ package com.cangwang.core.cwmodule.ex;
 import android.content.res.Configuration;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v4.util.ArrayMap;
 import android.util.Log;
 
+import androidx.collection.ArrayMap;
+
 import com.cangwang.core.cwmodule.api.BackPressStack;
-import com.cangwang.core.cwmodule.api.ModuleBackpress;
 import com.cangwang.core.util.ModuleUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

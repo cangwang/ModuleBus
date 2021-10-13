@@ -1,9 +1,10 @@
 package com.cangwang.gift.view;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * author：Administrator on 2016/12/26 17:32

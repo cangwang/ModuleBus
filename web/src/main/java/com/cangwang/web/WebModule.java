@@ -1,8 +1,8 @@
 package com.cangwang.web;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.View;
+
+import androidx.fragment.app.Fragment;
 
 import com.cangwang.annotation.ModuleUnit;
 import com.cangwang.base.api.WebApi;

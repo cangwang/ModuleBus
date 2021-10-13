@@ -2,11 +2,12 @@ package com.cangwang.core.cwmodule.ex;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.util.SparseArrayCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.collection.SparseArrayCompat;
 
 import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleBus;
@@ -23,7 +24,7 @@ import java.util.List;
  * Created by cangwang on 2017/6/15.
  */
 
-public abstract class ModuleManageExActivity extends AppCompatActivity{
+public abstract class ModuleManageExActivity extends AppCompatActivity {
     private final String TAG = "ModuleManageExActivity";
     private ViewGroup mTopViewGroup;
     private ViewGroup mBottomViewGroup;

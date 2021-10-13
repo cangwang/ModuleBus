@@ -1,0 +1,5 @@
+R_DEF: Internal format may change without notice
+local
+id page_view_title
+layout page_view_layout
+string app_name

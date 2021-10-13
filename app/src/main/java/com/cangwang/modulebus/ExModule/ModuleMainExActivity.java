@@ -2,8 +2,9 @@ package com.cangwang.modulebus.ExModule;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.WindowManager;
+
+import androidx.annotation.Nullable;
 
 import com.cangwang.base.util.ViewUtil;
 import com.cangwang.core.cwmodule.ex.ModuleManageExActivity;

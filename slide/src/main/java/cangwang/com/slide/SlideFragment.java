@@ -1,19 +1,20 @@
 package cangwang.com.slide;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 /**侧边弹框
  * Created by cangwang on 2018/2/10.
  */
 
-public class SlideFragment extends Fragment{
+public class SlideFragment extends Fragment {
     public static final String TAG = "SlideFragment";
     private View view;
 

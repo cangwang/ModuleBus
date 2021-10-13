@@ -4,8 +4,6 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +12,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 
 import com.cangwang.anchor.R;
 import com.cangwang.base.api.WebApi;
@@ -24,7 +25,7 @@ import com.cangwang.core.ModuleApiManager;
  * Created by cangwang on 2018/2/6.
  */
 
-public class AnchorDialog extends DialogFragment{
+public class AnchorDialog extends DialogFragment {
 
     private View rootView;
     public static boolean isAnchorDialogShow;

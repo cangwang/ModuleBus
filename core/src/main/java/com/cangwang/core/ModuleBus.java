@@ -3,8 +3,9 @@ package com.cangwang.core;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.util.ArrayMap;
 import android.util.Log;
+
+import androidx.collection.ArrayMap;
 
 import com.cangwang.core.info.MethodInfo;
 
@@ -29,7 +30,7 @@ public class ModuleBus {
      * String methodName；
      * MethodInfo method info
      */
-    private static ArrayMap<Object,ArrayMap<String,MethodInfo>> moduleEventMethods = new ArrayMap<>();
+    private static ArrayMap<Object, ArrayMap<String,MethodInfo>> moduleEventMethods = new ArrayMap<>();
 //    private static ArrayMap<Class<?>,ArrayList<Object>> moduleClients = new ArrayMap<>();
 
     /**

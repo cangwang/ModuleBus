@@ -33,7 +33,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':base')
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api project(':base')
     annotationProcessor project(":compiler")
 }

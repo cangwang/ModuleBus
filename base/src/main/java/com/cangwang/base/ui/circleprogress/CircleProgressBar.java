@@ -4,6 +4,7 @@ package com.cangwang.base.ui.circleprogress;
  * Created by cangwang on 2017/3/31.
  */
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -16,11 +17,12 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.net.Uri;
-import android.support.annotation.ColorRes;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.animation.Animation;
+
+import androidx.annotation.ColorRes;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.view.ViewCompat;
 
 import com.cangwang.base.R;
 
@@ -164,6 +166,7 @@ public class CircleProgressBar extends AppCompatImageView {
         }
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
@@ -302,6 +305,7 @@ public class CircleProgressBar extends AppCompatImageView {
     /**
      * Update the background color of the mBgCircle image view.
      */
+    @SuppressLint("ResourceType")
     public void setBackgroundColor(@ColorRes int colorRes) {
         if (getBackground() instanceof ShapeDrawable) {
             final Resources res = getResources();

@@ -32,9 +32,10 @@ repositories{
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    provided 'com.android.support:appcompat-v7:23.+'
-    compile project(':annotation')
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api project(':annotation')
+    api 'androidx.appcompat:appcompat:1.3.1'
+    api 'androidx.fragment:fragment:1.3.6'
     annotationProcessor project(":compiler")
 }
 

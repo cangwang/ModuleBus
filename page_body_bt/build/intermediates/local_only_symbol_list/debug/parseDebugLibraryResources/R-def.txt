@@ -1,0 +1,7 @@
+R_DEF: Internal format may change without notice
+local
+id change_name
+id page_body_top
+layout page_body_bt
+layout page_body_bts
+string app_name

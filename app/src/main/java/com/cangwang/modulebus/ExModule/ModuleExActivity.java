@@ -2,9 +2,10 @@ package com.cangwang.modulebus.ExModule;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.cangwang.base.util.ViewUtil;
 import com.cangwang.modulebus.R;
@@ -14,7 +15,7 @@ import com.cangwang.template.TemplateFragment;
  * Created by cangwang on 2017/6/15.
  */
 
-public class ModuleExActivity extends AppCompatActivity{
+public class ModuleExActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

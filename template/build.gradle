@@ -33,15 +33,15 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':bottom')
-    compile project(':chat')
-    compile project(':anchor')
-    compile project(':web')
-    compile project(':seat')
-    compile project(':lamp')
-    compile project(':slide')
-    compile project(':splash')
-    compile project(':gift')
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api project(':bottom')
+    api project(':chat')
+    api project(':anchor')
+    api project(':web')
+    api project(':seat')
+    api project(':lamp')
+    api project(':slide')
+    api project(':splash')
+    api project(':gift')
     annotationProcessor project(":compiler")
 }
