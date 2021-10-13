@@ -3,16 +3,16 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ModuleBus.iml" filepath="$PROJECT_DIR$/ModuleBus.iml" />
-      <module fileurl="file://$PROJECT_DIR$/a/a.iml" filepath="$PROJECT_DIR$/a/a.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/b/b.iml" filepath="$PROJECT_DIR$/b/b.iml" />
-      <module fileurl="file://$PROJECT_DIR$/base/base.iml" filepath="$PROJECT_DIR$/base/base.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/news/news.iml" filepath="$PROJECT_DIR$/news/news.iml" />
-      <module fileurl="file://$PROJECT_DIR$/page_body/page_body.iml" filepath="$PROJECT_DIR$/page_body/page_body.iml" />
-      <module fileurl="file://$PROJECT_DIR$/page_body_bt/page_body_bt.iml" filepath="$PROJECT_DIR$/page_body_bt/page_body_bt.iml" />
-      <module fileurl="file://$PROJECT_DIR$/page_name/page_name.iml" filepath="$PROJECT_DIR$/page_name/page_name.iml" />
-      <module fileurl="file://$PROJECT_DIR$/page_view/page_view.iml" filepath="$PROJECT_DIR$/page_view/page_view.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/a/ModuleBus.a.iml" filepath="$PROJECT_DIR$/.idea/modules/a/ModuleBus.a.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ModuleBus.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ModuleBus.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/b/ModuleBus.b.iml" filepath="$PROJECT_DIR$/.idea/modules/b/ModuleBus.b.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/base/ModuleBus.base.iml" filepath="$PROJECT_DIR$/.idea/modules/base/ModuleBus.base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/ModuleBus.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/ModuleBus.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/news/ModuleBus.news.iml" filepath="$PROJECT_DIR$/.idea/modules/news/ModuleBus.news.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/page_body/ModuleBus.page_body.iml" filepath="$PROJECT_DIR$/.idea/modules/page_body/ModuleBus.page_body.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/page_body_bt/ModuleBus.page_body_bt.iml" filepath="$PROJECT_DIR$/.idea/modules/page_body_bt/ModuleBus.page_body_bt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/page_name/ModuleBus.page_name.iml" filepath="$PROJECT_DIR$/.idea/modules/page_name/ModuleBus.page_name.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/page_view/ModuleBus.page_view.iml" filepath="$PROJECT_DIR$/.idea/modules/page_view/ModuleBus.page_view.iml" />
     </modules>
   </component>
 </project>

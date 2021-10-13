@@ -2,13 +2,11 @@ package com.cangwang.core.cwmodule;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.util.ArrayMap;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.collection.ArrayMap;
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
@@ -16,7 +14,7 @@ import java.util.ArrayList;
  * Created by cangwang on 2016/12/26.
  */
 
-public abstract class ModuleManageFragment extends Fragment{
+public abstract class ModuleManageFragment extends Fragment {
     private FragmentModuleManager moduleManager;
 
     @Override

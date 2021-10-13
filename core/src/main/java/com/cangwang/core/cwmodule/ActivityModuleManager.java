@@ -2,10 +2,13 @@ package com.cangwang.core.cwmodule;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.util.ArrayMap;
-import android.support.v4.util.SparseArrayCompat;
+
 import android.util.Log;
 import android.view.ViewGroup;
+
+
+import androidx.collection.ArrayMap;
+import androidx.collection.SparseArrayCompat;
 
 import java.util.ArrayList;
 
@@ -16,7 +19,7 @@ import java.util.ArrayList;
 public class ActivityModuleManager extends ModuleManager{
     private static final String TAG = "ActivityModuleManager";
 
-    public void initModules(Bundle saveInstance, Activity activity,ArrayMap<String,ArrayList<Integer>> modules){
+    public void initModules(Bundle saveInstance, Activity activity, ArrayMap<String,ArrayList<Integer>> modules){
         if (activity == null || modules == null) return;
         moduleConfig(modules);
         initModules(saveInstance,activity);

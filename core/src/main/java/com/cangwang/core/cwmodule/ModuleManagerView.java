@@ -2,9 +2,10 @@ package com.cangwang.core.cwmodule;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.util.ArrayMap;
 import android.view.View;
+
+import androidx.collection.ArrayMap;
+import androidx.fragment.app.FragmentActivity;
 
 import java.util.ArrayList;
 

@@ -2,8 +2,9 @@ package com.cangwang.core.cwmodule;
 
 import android.content.res.Configuration;
 import android.os.Handler;
-import android.support.v4.util.ArrayMap;
 
+
+import androidx.collection.ArrayMap;
 
 import com.cangwang.core.util.ModuleUtil;
 

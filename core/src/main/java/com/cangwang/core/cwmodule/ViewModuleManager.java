@@ -2,11 +2,12 @@ package com.cangwang.core.cwmodule;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.util.ArrayMap;
-import android.support.v4.util.SparseArrayCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.collection.ArrayMap;
+import androidx.collection.SparseArrayCompat;
 
 import com.cangwang.core.util.ModuleUtil;
 
@@ -30,7 +31,7 @@ public class ViewModuleManager extends ModuleManager{
         //获取配置
         for(final String moduleName:getModules().keySet()){
             if (ModuleUtil.empty(moduleName)) return;
-            pool.execute(new Runnable() {
+            getPool().execute(new Runnable() {
                 @Override
                 public void run() {
                     Log.d(TAG,"ViewModuleManager init module name: "+ moduleName);

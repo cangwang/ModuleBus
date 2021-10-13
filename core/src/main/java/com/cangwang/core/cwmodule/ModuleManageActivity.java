@@ -2,12 +2,12 @@ package com.cangwang.core.cwmodule;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
-import android.support.v4.util.ArrayMap;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ViewTreeObserver;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.collection.ArrayMap;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Created by cangwang on 2016/12/26.
  */
 
-public abstract class ModuleManageActivity extends AppCompatActivity{
+public abstract class ModuleManageActivity extends AppCompatActivity {
 
     private ActivityModuleManager moduleManager;
 

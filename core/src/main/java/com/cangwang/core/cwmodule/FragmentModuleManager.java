@@ -2,11 +2,12 @@ package com.cangwang.core.cwmodule;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.util.ArrayMap;
-import android.support.v4.util.SparseArrayCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.collection.ArrayMap;
+import androidx.collection.SparseArrayCompat;
 
 import com.cangwang.core.util.ModuleUtil;
 
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 public class FragmentModuleManager extends ModuleManager{
     private static final String TAG = "FragmentModuleManager";
 
-    public void initModules(Bundle saveInstance, Activity activity,View rootView,ArrayMap<String,ArrayList<Integer>> modules){
+    public void initModules(Bundle saveInstance, Activity activity, View rootView, ArrayMap<String,ArrayList<Integer>> modules){
         if (activity == null || modules == null) return;
         moduleConfig(modules);
         initModules(saveInstance,activity,rootView);
