@@ -9,58 +9,8 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0fa228a4-5a94-40f4-bce0-2ce148cc3cf7" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="0fa228a4-5a94-40f4-bce0-2ce148cc3cf7" name="Default" comment="update version">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ModuleBus.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ModuleBus.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a/a.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/a/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/a/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a/src/debug/java/com/cangwang/a/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/a/src/debug/java/com/cangwang/a/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a/src/main/java/com/cangwang/a/FragmentA.java" beforeDir="false" afterPath="$PROJECT_DIR$/a/src/main/java/com/cangwang/a/FragmentA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cangwang/modulebus/AdaviceActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cangwang/modulebus/AdaviceActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cangwang/modulebus/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cangwang/modulebus/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cangwang/modulebus/ModuleExampleActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cangwang/modulebus/ModuleExampleActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cangwang/modulebus/ModuleExampleFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cangwang/modulebus/ModuleExampleFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cangwang/modulebus/ModuleMainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cangwang/modulebus/ModuleMainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cangwang/modulebus/ViewPagerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cangwang/modulebus/ViewPagerAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b/b.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/b/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/b/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b/src/main/java/com/cangwang/b/BActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/b/src/main/java/com/cangwang/b/BActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b/src/main/java/com/cangwang/b/FragmentB.java" beforeDir="false" afterPath="$PROJECT_DIR$/b/src/main/java/com/cangwang/b/FragmentB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/base.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/base/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common_config.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/common_config.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/core/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/core.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/ModuleBus.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/ModuleBus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/cwmodule/ActivityModuleManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/cwmodule/ActivityModuleManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/cwmodule/ELBasicModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/cwmodule/ELBasicModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/cwmodule/ELModuleContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/cwmodule/ELModuleContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/cwmodule/FragmentModuleManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/cwmodule/FragmentModuleManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/cwmodule/ModuleManageActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/cwmodule/ModuleManageActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/cwmodule/ModuleManageFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/cwmodule/ModuleManageFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/cwmodule/ModuleManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/cwmodule/ModuleManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/cwmodule/ModuleManagerView.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/cwmodule/ModuleManagerView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/cwmodule/ViewModuleManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/cangwang/core/cwmodule/ViewModuleManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/news/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/page_body/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/page_body/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/page_body/src/main/java/com/cangwang/service/BodyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/page_body/src/main/java/com/cangwang/service/BodyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/page_body_bt/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/page_body_bt/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/page_name/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/page_name/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/page_view/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/page_view/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -313,6 +263,14 @@
       <option name="presentableId" value="Default" />
       <updated>1490341059785</updated>
     </task>
+    <task id="LOCAL-00001" summary="update version">
+      <created>1634094944428</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1634094944428</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -323,27 +281,39 @@
       <collection />
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update version" />
+    <option name="LAST_COMMIT_MESSAGE" value="update version" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="2397" y="266" key="#PSD" timestamp="1634094392522">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2397" y="266" key="#PSD/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634094392522" />
-    <state width="1877" height="281" key="GridCell.Tab.0.bottom" timestamp="1634094747400">
+    <state x="2478" y="87" key="CommitChangelistDialog2" timestamp="1634094939647">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634094747400" />
-    <state width="1877" height="281" key="GridCell.Tab.0.center" timestamp="1634094747400">
+    <state x="2478" y="87" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634094939647" />
+    <state width="1877" height="281" key="GridCell.Tab.0.bottom" timestamp="1634095142493">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="281" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634094747400" />
-    <state width="1877" height="281" key="GridCell.Tab.0.left" timestamp="1634094747400">
+    <state width="1877" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634095142493" />
+    <state width="1877" height="281" key="GridCell.Tab.0.center" timestamp="1634095142493">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="281" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634094747400" />
-    <state width="1877" height="281" key="GridCell.Tab.0.right" timestamp="1634094747400">
+    <state width="1877" height="281" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634095142493" />
+    <state width="1877" height="281" key="GridCell.Tab.0.left" timestamp="1634095142493">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="281" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634094747400" />
+    <state width="1877" height="281" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634095142493" />
+    <state width="1877" height="281" key="GridCell.Tab.0.right" timestamp="1634095142493">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="281" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634095142493" />
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1634095174876">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634095174876" />
     <state x="2582" y="118" width="596" height="804" key="find.popup" timestamp="1634094587227">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
