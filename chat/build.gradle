@@ -1,5 +1,8 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply from: "${rootProject.rootDir}/common_config.gradle"
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion project.ext.compileSdkVersion
     buildToolsVersion project.ext.buildToolsVersion
@@ -15,11 +18,6 @@ android {
         resourcePrefix "chat_"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [ moduleName : project.getName() ]
-            }
-        }
     }
 
     buildTypes {
@@ -31,10 +29,19 @@ android {
 
 }
 
+kapt {
+    arguments {
+        arg("moduleName", project.getName())
+    }
+}
+
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api project(':base')
-    annotationProcessor project(":compiler")
+    kapt project(":compiler")
+}
+repositories {
+    mavenCentral()
 }
 
 //apply plugin: "generate"

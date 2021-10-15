@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply from: "${rootProject.rootDir}/common_config.gradle"
 
 android {
@@ -44,4 +45,7 @@ dependencies {
     api project(':splash')
     api project(':gift')
     annotationProcessor project(":compiler")
+}
+repositories {
+    mavenCentral()
 }

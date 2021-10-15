@@ -5,6 +5,7 @@ if(isDebug) {
     apply plugin: 'com.android.library'
 }
 apply from: "${rootProject.rootDir}/common_config.gradle"
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
@@ -37,11 +38,16 @@ dependencies {
     api 'io.reactivex.rxjava2:rxjava:2.1.11'
     api 'androidx.recyclerview:recyclerview:1.2.1'
     api 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    api "androidx.core:core-ktx:1.6.0"
     api project(':core')
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 tasks.whenTaskAdded { task ->
     if (task.name.equals("lint")) {
         task.enabled = false
     }
+}
+repositories {
+    mavenCentral()
 }

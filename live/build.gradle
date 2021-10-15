@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply from: "${rootProject.rootDir}/common_config.gradle"
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
@@ -33,11 +34,16 @@ android {
 
 }
 
+kapt {
+    arguments {
+        arg("moduleName", project.getName())
+    }
+}
+
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api project(':base')
-    annotationProcessor project(":compiler")
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    kapt project(":compiler")
 }
 repositories {
     mavenCentral()

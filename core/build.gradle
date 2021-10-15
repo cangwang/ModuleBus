@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply from: "${rootProject.rootDir}/common_config.gradle"
 
 android {
@@ -29,6 +30,7 @@ repositories{
     flatDir{
         dirs 'libs'
     }
+    mavenCentral()
 }
 
 dependencies {
@@ -37,6 +39,8 @@ dependencies {
     api 'androidx.appcompat:appcompat:1.3.1'
     api 'androidx.fragment:fragment:1.3.6'
     annotationProcessor project(":compiler")
+    api "androidx.core:core-ktx:1.6.0"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 task clearJar(type: Delete) {

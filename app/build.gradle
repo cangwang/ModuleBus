@@ -6,6 +6,9 @@ if(project.ext.isLib){
 }else {
     apply plugin: 'com.android.application'
 }
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
 //apply plugin: "generate"
 
 android {
@@ -20,12 +23,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [ applicationName : project.getName() ]
-            }
-        }
     }
     buildTypes {
         release {
@@ -51,7 +48,7 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    annotationProcessor project(":compiler")
+//    kapt project(":compiler")
 
     if(project.ext.isLib) {
         embedded project(':page_body')
