@@ -45,7 +45,7 @@ abstract class ModuleManageActivity : FragmentActivity() {
         sVerticalViews.put(CWModuleContext.Companion.PLUGIN_CENTER_VIEW, pluginViewGroup)
         moduleContext.viewGroups = sVerticalViews
         val moduleNames = ModuleBus.instance?.getModuleList(moduleManager.template)
-        if (moduleNames != null && moduleNames.isNotEmpty()) {  //在线加载
+        if (ModuleCenter.isFromNetWork && moduleNames != null && moduleNames.isNotEmpty()) {  //在线加载
             for (moduleName in moduleNames) {
                 moduleManager.getPool().execute {
                     val module = CWModuleExFactory.newModuleInstance(moduleName)

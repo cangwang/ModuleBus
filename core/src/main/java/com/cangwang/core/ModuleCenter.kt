@@ -23,23 +23,6 @@ object ModuleCenter {
     var isFromNetWork = false
     @Synchronized
     fun init(context: Context) {
-//        JSONArray array = ModuleUtil.getAssetJson(context,"center.json");
-//        if (array == null) return;
-//        Log.e(TAG,"modulearray = "+array.toString());
-//        int length = array.length();
-//        try {
-//            for (int i = 0;i<length;i++){
-//                JSONObject o = array.getJSONObject(i);
-//                ModuleUnitBean bean = new ModuleUnitBean(o.getString("path"),
-//                        o.getString("templet"),
-//                        o.getString("title"),
-//                        o.getInt("layout_level"),
-//                        o.getInt("extra_level"));
-//                moduleGroup.add(bean);
-//            }
-//        }catch (JSONException e){
-//            e.printStackTrace();
-//        }
         init(context, ModuleUtil.getAssetJsonObject(context, "center.json"), false)
     }
 
@@ -57,11 +40,12 @@ object ModuleCenter {
                 val length = array.length()
                 for (i in 0 until length) {
                     val o = array.getJSONObject(i)
-                    val bean = ModuleUnitBean(o.getString("path"),
-                            o.getString("templet"),
-                            o.getString("title"),
-                            o.getInt("layoutLevel"),
-                            o.getInt("extraLevel"))
+                    val bean = ModuleUnitBean(o.optString("path"),
+                            o.optString("templet"),
+                            o.optString("title"),
+                            o.optInt("layoutLevel"),
+                            o.optInt("inflateLevel"),
+                            o.optInt("extraLevel"))
                     list.add(bean)
                 }
                 templetList[key] = list

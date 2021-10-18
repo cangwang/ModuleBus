@@ -2,7 +2,6 @@ package com.cangwang.process;
 
 import com.cangwang.annotation.ModuleUnit;
 import com.cangwang.model.ICWModule;
-import com.cangwang.model.ModuleMeta;
 import com.cangwang.utils.Logger;
 import com.cangwang.utils.ModuleUtil;
 import com.google.gson.JsonArray;
@@ -10,15 +9,10 @@ import com.google.gson.JsonObject;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
-import com.squareup.javapoet.ParameterSpec;
-import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeSpec;
 
 import org.apache.commons.collections4.CollectionUtils;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import javax.annotation.processing.Filer;
 
@@ -40,7 +34,7 @@ public class ModuleUnitProcessor {
             parseModuleFile(modulesElements,logger,mFiler,elements);
             JsonArray array = new JsonArray();
             for (Element element:modulesElements) {
-                ModuleUnit moduleUnit=element.getAnnotation(ModuleUnit.class);
+                ModuleUnit moduleUnit= element.getAnnotation(ModuleUnit.class);
                 ClassName name = ClassName.get(((TypeElement)element));
                 String path = name.packageName()+"."+name.simpleName();  //真实模块入口地址 包名+类名
                 JsonObject jsonObject = new JsonObject();
@@ -48,6 +42,7 @@ public class ModuleUnitProcessor {
                 jsonObject.addProperty("templet",moduleUnit.templet());
                 jsonObject.addProperty("title",name.simpleName());
                 jsonObject.addProperty("layoutLevel",moduleUnit.layoutlevel().getValue());
+                jsonObject.addProperty("inflateLevel", moduleUnit.inflateLevel());
                 jsonObject.addProperty("extraLevel",moduleUnit.extralevel());
                 array.add(jsonObject);
             }

@@ -48,17 +48,20 @@ abstract class ModuleManageExFragment : Fragment() {
         sVerticalViews.put(CWModuleContext.PLUGIN_CENTER_VIEW, pluginViewGroup)
         moduleContext.viewGroups = sVerticalViews
         moduleContext.templateName = moduleConfig()
-        val moduleNames = ModuleBus.instance?.getModuleList(moduleManager.template)
-        if (moduleNames != null && moduleNames.isNotEmpty()) {  //在线加载
-            for (moduleName in moduleNames) {
-                moduleManager.getPool().execute {
-                    val module = CWModuleExFactory.newModuleInstance(moduleName)
-                    if (module != null) {
-                        moduleManager.getHandler().post {
-                            val before = System.currentTimeMillis()
-                            module.onCreate(moduleContext, null)
-                            Log.d(TAG, "modulename: " + moduleName + " init time = " + (System.currentTimeMillis() - before) + "ms")
-                            moduleManager.putModule(moduleName, module)
+
+        if (ModuleCenter.isFromNetWork) {  //在线加载
+            val moduleNames = ModuleBus.instance?.getModuleList(moduleManager.template)
+            if (moduleNames != null && moduleNames.isNotEmpty()) {
+                for (moduleName in moduleNames) {
+                    moduleManager.getPool().execute {
+                        val module = CWModuleExFactory.newModuleInstance(moduleName)
+                        if (module != null) {
+                            moduleManager.getHandler().post {
+                                val before = System.currentTimeMillis()
+                                module.onCreate(moduleContext, null)
+                                Log.d(TAG, "modulename: " + moduleName + " init time = " + (System.currentTimeMillis() - before) + "ms")
+                                moduleManager.putModule(moduleName, module)
+                            }
                         }
                     }
                 }

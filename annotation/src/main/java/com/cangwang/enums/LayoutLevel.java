@@ -5,7 +5,7 @@ package com.cangwang.enums;
  * Created by cangwang on 2017/8/31.
  */
 
-public enum  LayoutLevel {
+public enum LayoutLevel {
     VERY_HIGHT(100),
     HIGHT(200),
     NORMAL(300),

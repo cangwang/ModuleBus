@@ -13,6 +13,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/ModuleBus.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/ModuleBus.core.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/generate-plugin/ModuleBus.generate-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/generate-plugin/ModuleBus.generate-plugin.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/gift/ModuleBus.gift.iml" filepath="$PROJECT_DIR$/.idea/modules/gift/ModuleBus.gift.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlinannotation/ModuleBus.kotlinannotation.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlinannotation/ModuleBus.kotlinannotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlincompiler/ModuleBus.kotlincompiler.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlincompiler/ModuleBus.kotlincompiler.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lamp/ModuleBus.lamp.iml" filepath="$PROJECT_DIR$/.idea/modules/lamp/ModuleBus.lamp.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/live/ModuleBus.live.iml" filepath="$PROJECT_DIR$/.idea/modules/live/ModuleBus.live.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/seat/ModuleBus.seat.iml" filepath="$PROJECT_DIR$/.idea/modules/seat/ModuleBus.seat.iml" />

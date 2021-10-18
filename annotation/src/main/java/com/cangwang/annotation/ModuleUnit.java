@@ -17,5 +17,6 @@ public @interface ModuleUnit {
     String templet() default "normal";
     String title() default "CangWang";
     LayoutLevel layoutlevel() default LayoutLevel.NORMAL;
+    int inflateLevel() default -1;
     int extralevel() default 0;
 }

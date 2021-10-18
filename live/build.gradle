@@ -18,11 +18,6 @@ android {
         resourcePrefix "live_"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [ moduleName : project.getName() ]
-            }
-        }
     }
 
     buildTypes {

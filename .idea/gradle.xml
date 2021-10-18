@@ -21,6 +21,8 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/generate-plugin" />
             <option value="$PROJECT_DIR$/gift" />
+            <option value="$PROJECT_DIR$/kotlinannotation" />
+            <option value="$PROJECT_DIR$/kotlincompiler" />
             <option value="$PROJECT_DIR$/lamp" />
             <option value="$PROJECT_DIR$/live" />
             <option value="$PROJECT_DIR$/seat" />

@@ -54,7 +54,7 @@ abstract class ModuleManageExActivity : AppCompatActivity() {
         moduleContext.viewGroups = sVerticalViews
         moduleContext.templateName = moduleConfig()
         val moduleNames = ModuleBus.instance?.getModuleList(moduleManager.template)
-        if (moduleNames != null && moduleNames.isNotEmpty()) {  //在线加载
+        if (ModuleCenter.isFromNetWork && moduleNames != null && moduleNames.isNotEmpty()) {  //在线加载
             for (moduleName in moduleNames) {
                 moduleManager.getPool().execute {
                     val module = CWModuleExFactory.newModuleInstance(moduleName)

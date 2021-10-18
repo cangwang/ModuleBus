@@ -6,12 +6,9 @@ import com.cangwang.utils.Logger;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.squareup.javapoet.ClassName;
-
 import org.apache.commons.collections4.CollectionUtils;
-
 import java.io.IOException;
 import java.util.Set;
-
 import javax.annotation.processing.Filer;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
@@ -44,13 +41,14 @@ public class ModuleGroupProcessor  {
             for (int i = 0;i<modulesElements.length;i++) {
                 moduleUnit=modulesElements[i];
                 ClassName name = ClassName.get(((TypeElement)element));
-                String path = name.packageName()+"."+name.simpleName();  //真实模块入口地址 包名+类名
+                String path = name.packageName() + "." + name.simpleName();  //真实模块入口地址 包名+类名
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("path",path);
-                jsonObject.addProperty("templet",moduleUnit.templet());
-                jsonObject.addProperty("title",name.simpleName());
-                jsonObject.addProperty("layoutLevel",moduleUnit.layoutlevel().getValue());
-                jsonObject.addProperty("extraLevel",moduleUnit.extralevel());
+                jsonObject.addProperty("templet", moduleUnit.templet());
+                jsonObject.addProperty("title", name.simpleName());
+                jsonObject.addProperty("layoutLevel", moduleUnit.layoutlevel().getValue());
+                jsonObject.addProperty("inflateLevel", moduleUnit.inflateLevel());
+                jsonObject.addProperty("extraLevel", moduleUnit.extralevel());
                 array.add(jsonObject);
             }
             logger.info(array.toString());

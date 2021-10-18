@@ -111,17 +111,19 @@ class WebFragment : Fragment() {
         webSettings.domStorageEnabled = true
         webSettings.defaultTextEncodingName = "UTF-8"
         web!!.webViewClient = object : WebViewClient() {
-            override fun onPageStarted(view: WebView, url: String, favicon: Bitmap) {
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
                 mProgress!!.visibility = View.VISIBLE
             }
 
-            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-                view.loadUrl(url)
+            override fun shouldOverrideUrlLoading(view: WebView, url: String?): Boolean {
+                if (url != null) {
+                    view.loadUrl(url)
+                }
                 return super.shouldOverrideUrlLoading(view, url)
             }
 
-            override fun onPageFinished(view: WebView, url: String) {
+            override fun onPageFinished(view: WebView, url: String?) {
                 super.onPageFinished(view, url)
                 mProgress!!.visibility = View.GONE
             }
