@@ -4,20 +4,18 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="delegatedBuild" value="false" />
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="11" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/anchor" />
-            <option value="$PROJECT_DIR$/annotation" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/base" />
             <option value="$PROJECT_DIR$/bottom" />
             <option value="$PROJECT_DIR$/chat" />
-            <option value="$PROJECT_DIR$/compiler" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/generate-plugin" />
             <option value="$PROJECT_DIR$/gift" />

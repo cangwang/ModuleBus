@@ -43,7 +43,7 @@ kapt {
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api project(':base')
-    kapt project(":compiler")
+    kapt project(":kotlincompiler")
 }
 repositories {
     mavenCentral()

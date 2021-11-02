@@ -18,7 +18,7 @@ class CWFacotry : IModuleFactory {
         }
     }
 
-    override fun getTempleList(templet: String): List<ICWModule> {
+    override fun getTempleList(templet: String?): List<ICWModule>? {
         return moduleMap[templet]!!
     }
 }

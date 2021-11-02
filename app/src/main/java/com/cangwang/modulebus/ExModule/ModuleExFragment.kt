@@ -18,13 +18,5 @@ class ModuleExFragment : ModuleManageExFragment() {
             fragment.arguments = bundle
             return fragment
         }
-
-        fun newInstance(modules: List<String?>?): ModuleExFragment {
-            PageExConfig.moduleList = modules
-            val fragment = ModuleExFragment()
-            val bundle = Bundle()
-            fragment.arguments = bundle
-            return fragment
-        }
     }
 }

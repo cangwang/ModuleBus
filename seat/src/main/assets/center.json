@@ -4,6 +4,7 @@
       "templet":"top",
       "title":"SeatModule",
       "layoutLevel":400,
+      "inflateLevel":-1,
       "extraLevel":0
    }
 

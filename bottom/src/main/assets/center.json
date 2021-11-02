@@ -4,6 +4,7 @@
       "templet":"top",
       "title":"BottomModule",
       "layoutLevel":400,
+      "inflateLevel":-1,
       "extraLevel":0
    }
 

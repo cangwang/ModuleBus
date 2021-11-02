@@ -70,11 +70,13 @@ object ModuleCenter {
             var index = 0
             for (i in metaList!!.indices) {
                 exitMeta = metaList[i]
-                if (meta.layoutlevel.value < exitMeta.layoutlevel.value) {  //比较层级参数,值越低,越先被加载
-                    index = i
-                } else if (meta.layoutlevel.value == exitMeta.layoutlevel.value) {   //层级相同
-                    if (meta.extralevel >= exitMeta.extralevel) {          //比较额外层级参数
+                if (meta.layoutlevel != null && exitMeta.layoutlevel != null) {
+                    if (meta.layoutlevel!!.value < exitMeta.layoutlevel!!.value) {  //比较层级参数,值越低,越先被加载
                         index = i
+                    } else if (meta.layoutlevel!!.value == exitMeta.layoutlevel!!.value) {   //层级相同
+                        if (meta.extralevel >= exitMeta.extralevel) {          //比较额外层级参数
+                            index = i
+                        }
                     }
                 }
             }
@@ -85,7 +87,7 @@ object ModuleCenter {
             }
             sortgroup[meta.templet] = metaList
         }
-        Log.i(TAG, "sortgroup =" + sortgroup.toString())
+        Log.i(TAG, "sortgroup =$sortgroup")
     }
 
     private fun split(groupName: String): Array<String> {

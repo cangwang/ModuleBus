@@ -24,6 +24,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = [ applicationName : project.getName() ]
+//            }
+//        }
     }
     buildTypes {
         release {
@@ -44,13 +50,19 @@ android {
     lintOptions {
         abortOnError false
     }
+}
 
+kapt {
+    arguments {
+        arg("applicationName", project.getName())
+    }
 }
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    kapt project(":compiler")
-
+    kapt project(":kotlincompiler")
+//    annotationProcessor project(":compiler")
+//    api project(':kotlinannotation')
     if(project.ext.isLib) {
         embedded project(':page_body')
         embedded project(':page_body_bt')
@@ -75,12 +87,6 @@ dependencies {
         }else{
             api project(':core')
         }
-    }
-}
-
-kapt {
-    arguments {
-        arg("applicationName", project.getName())
     }
 }
 

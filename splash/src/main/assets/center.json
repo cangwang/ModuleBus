@@ -4,6 +4,7 @@
       "templet":"top",
       "title":"SplashModule",
       "layoutLevel":300,
+      "inflateLevel":-1,
       "extraLevel":0
    }
 

@@ -14,15 +14,19 @@ object CWModuleExFactory {
                 if (factoryClazz != null) {
                     field = factoryClazz.newInstance()
                     field
+                } else {
+                    null
                 }
             } catch (e: ClassNotFoundException) {
                 e.printStackTrace()
+                null
             } catch (e: InstantiationException) {
                 e.printStackTrace()
+                null
             } catch (e: IllegalAccessException) {
                 e.printStackTrace()
+                null
             }
-            null
         } else field
         private set
 

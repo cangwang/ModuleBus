@@ -4,6 +4,7 @@
       "templet":"video",
       "title":"LiveModule",
       "layoutLevel":500,
+      "inflateLevel":-1,
       "extraLevel":0
    }
 

@@ -4,6 +4,7 @@
       "templet":"top",
       "title":"WebModule",
       "layoutLevel":100,
+      "inflateLevel":-1,
       "extraLevel":0
    }
 

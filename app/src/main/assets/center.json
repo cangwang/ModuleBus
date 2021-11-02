@@ -2,16 +2,30 @@
    "top":
    [
       {
-         "path":"com.cangwang.seat.SeatModule",
+         "path":"com.cangwang.gift.GiftModule",
          "templet":"top",
-         "title":"SeatModule",
-         "layoutLevel":400,
+         "title":"GiftModule",
+         "layoutLevel":100,
          "extraLevel":0
       },
       {
-         "path":"com.cangwang.chat.ChatModule",
+         "path":"com.cangwang.splash.SplashModule",
          "templet":"top",
-         "title":"ChatModule",
+         "title":"SplashModule",
+         "layoutLevel":300,
+         "extraLevel":0
+      },
+      {
+         "path":"cangwang.com.slide.SlideModule",
+         "templet":"top",
+         "title":"SlideModule",
+         "layoutLevel":100,
+         "extraLevel":0
+      },
+      {
+         "path":"com.cangwang.lamp.LampModule",
+         "templet":"top",
+         "title":"LampModule",
          "layoutLevel":400,
          "extraLevel":0
       },
@@ -23,17 +37,10 @@
          "extraLevel":0
       },
       {
-         "path":"com.cangwang.lamp.LampModule",
+         "path":"com.cangwang.chat.ChatModule",
          "templet":"top",
-         "title":"LampModule",
+         "title":"ChatModule",
          "layoutLevel":400,
-         "extraLevel":0
-      },
-      {
-         "path":"com.cangwang.splash.SplashModule",
-         "templet":"top",
-         "title":"SplashModule",
-         "layoutLevel":300,
          "extraLevel":0
       },
       {
@@ -44,23 +51,16 @@
          "extraLevel":0
       },
       {
+         "path":"com.cangwang.seat.SeatModule",
+         "templet":"top",
+         "title":"SeatModule",
+         "layoutLevel":400,
+         "extraLevel":0
+      },
+      {
          "path":"com.cangwang.web.WebModule",
          "templet":"top",
          "title":"WebModule",
-         "layoutLevel":100,
-         "extraLevel":0
-      },
-      {
-         "path":"cangwang.com.slide.SlideModule",
-         "templet":"top",
-         "title":"SlideModule",
-         "layoutLevel":100,
-         "extraLevel":0
-      },
-      {
-         "path":"com.cangwang.gift.GiftModule",
-         "templet":"top",
-         "title":"GiftModule",
          "layoutLevel":100,
          "extraLevel":0
       }
