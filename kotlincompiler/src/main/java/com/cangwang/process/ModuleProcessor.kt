@@ -166,11 +166,11 @@ class ModuleProcessor : AbstractProcessor() {
         ))
         val fieldMapBuilder: PropertySpec.Builder = PropertySpec.builder("moduleMap", templateMap,  KModifier.PRIVATE)
         fieldMapBuilder.initializer("HashMap()")
-        val fieldInstanceBuilder: PropertySpec.Builder = PropertySpec.builder("sInstance", IModuleFactory::class.java,  KModifier.PRIVATE, KModifier.COMPANION)
+        val fieldInstanceBuilder: PropertySpec.Builder = PropertySpec.builder("sInstance", IModuleFactory::class.java,  KModifier.PRIVATE)
         //添加loadInto方法
         val getInstanceBuilder: FunSpec.Builder = FunSpec.builder(ModuleUtil.METHOD_FACTROY_GET_INSTANCE)
                 .returns(IModuleFactory::class.java)
-                .addModifiers(KModifier.PUBLIC, KModifier.COMPANION)
+                .addModifiers(KModifier.PUBLIC)
                 .beginControlFlow("if (null == sInstance)")
                 .addStatement("sInstance = ModuleCenterFactory()")
                 .endControlFlow()
@@ -181,7 +181,7 @@ class ModuleProcessor : AbstractProcessor() {
         //        code.addStatement("List<ICWModule> list = new $T<>()",LinkedList.class);
         var index = 0
         try {
-            code.addStatement("val moduleMap: %T<String, List<%T>> = HashMap()", HashMap::class.java, ICWModule::class.java)
+//            code.addStatement("val moduleMap: %T<String, List<%T>> = HashMap()", HashMap::class.java, ICWModule::class.java)
             for ((key, value) in map) {
                 //排列层级
                 value.sort()
@@ -198,27 +198,30 @@ class ModuleProcessor : AbstractProcessor() {
             logger.info(e.toString())
         }
 
+        val flux = FunSpec.constructorBuilder()
+            .addCode(code.build())
+            .build()
+
         val templateName: ParameterSpec = ParameterSpec.builder("templateName", String::class.asTypeName().copy(nullable = true)).build()
         val getModuleListBuilder: FunSpec.Builder = FunSpec.builder(ModuleUtil.METHOD_FACTROY_GET_TEMPLE_LIST)
                 .addModifiers(KModifier.PUBLIC, KModifier.OVERRIDE)
-                .addCode(code.build())
+//                .addCode(code.build())
                 .addParameter(templateName)
                 .returns(templateList)
                 .addStatement("return moduleMap.get(templateName)")
 
-
-
         //构造java文件
         FileSpec.builder(ModuleUtil.FACADE_PACKAGE,"ModuleCenterFactory")
-                .addType(TypeSpec.classBuilder("ModuleCenterFactory")
-                        .addKdoc(ModuleUtil.WARNING_TIPS)
-                        .addSuperinterface(elements!!.getTypeElement(ModuleUtil.IMODULE_FACTORY).asClassName())
+            .addType(TypeSpec.classBuilder("ModuleCenterFactory")
+                .addKdoc(ModuleUtil.WARNING_TIPS)
+                .addSuperinterface(elements!!.getTypeElement(ModuleUtil.IMODULE_FACTORY).asClassName())
+                .primaryConstructor(flux)
 //                        .addModifiers(KModifier.PUBLIC)
 //                        .addProperty(fieldInstanceBuilder.build())
-//                        .addProperty(fieldMapBuilder.build())
+                .addProperty(fieldMapBuilder.build())
 //                        .addFunction(getInstanceBuilder.build())
-                        .addFunction(getModuleListBuilder.build())
-                        .build()
+                .addFunction(getModuleListBuilder.build())
+                .build()
         ).build().writeTo(mFiler)
     }
 }

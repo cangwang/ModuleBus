@@ -6,11 +6,9 @@ import androidx.fragment.app.FragmentActivity
 import com.cangwang.core.R
 import com.cangwang.core.ModuleBus
 import androidx.collection.SparseArrayCompat
-import com.cangwang.core.ModuleCenter
 import com.cangwang.core.ModuleEvent
 import com.cangwang.core.IBaseClient
 import android.content.res.Configuration
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 
@@ -24,6 +22,7 @@ abstract class ModuleManageActivity : FragmentActivity() {
     private var pluginViewGroup: ViewGroup? = null
     private var moduleManager = ModuleExManager()
     private var moduleContext = CWModuleContext()
+    private var moduleManagerController = ModuleManageController(moduleManager, moduleContext)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.module_rank_layout)
@@ -44,35 +43,7 @@ abstract class ModuleManageActivity : FragmentActivity() {
         sVerticalViews.put(CWModuleContext.Companion.BOTTOM_VIEW_GROUP, mBottomViewGroup)
         sVerticalViews.put(CWModuleContext.Companion.PLUGIN_CENTER_VIEW, pluginViewGroup)
         moduleContext.viewGroups = sVerticalViews
-        val moduleNames = ModuleBus.instance?.getModuleList(moduleManager.template)
-        if (ModuleCenter.isFromNetWork && moduleNames != null && moduleNames.isNotEmpty()) {  //在线加载
-            for (moduleName in moduleNames) {
-                moduleManager.getPool().execute {
-                    val module = CWModuleExFactory.newModuleInstance(moduleName)
-                    if (module != null) {
-                        moduleManager.getHandler().post {
-                            val before = System.currentTimeMillis()
-                            module.onCreate(moduleContext, null)
-                            Log.d(TAG, "modulename: " + moduleName + " init time = " + (System.currentTimeMillis() - before) + "ms")
-                            moduleManager.putModule(moduleName, module)
-                        }
-                    }
-                }
-            }
-        } else {   //本地缓存加载
-            var module: CWAbsExModule
-            val moduleList = CWModuleExFactory.instance?.getTempleList(moduleManager.template)
-            if (moduleList == null || moduleList.isEmpty()) return
-            for (moduleIn in moduleList) {
-                if (moduleIn is CWAbsExModule) {
-                    module = moduleIn
-                    val before = System.currentTimeMillis()
-                    module.onCreate(moduleContext, null)
-                    Log.d(TAG, "modulename: " + moduleIn.javaClass.canonicalName + " init time = " + (System.currentTimeMillis() - before) + "ms")
-                    moduleManager.putModule(moduleIn.javaClass.canonicalName, module)
-                }
-            }
-        }
+        moduleManagerController.initView(TAG)
     }
 
     abstract fun moduleConfig(): String?
@@ -103,9 +74,7 @@ abstract class ModuleManageActivity : FragmentActivity() {
     }
 
     override fun onBackPressed() {
-        if (moduleManager.onBackPressed()) {
-            return
-        }
+        moduleManagerController.onBackPressed()
         super.onBackPressed()
     }
 
@@ -116,23 +85,7 @@ abstract class ModuleManageActivity : FragmentActivity() {
      */
     @ModuleEvent(coreClientClass = IBaseClient::class)
     fun addModule(moduleName: String?, extend: Bundle?) {
-        addModule(moduleName, extend, null)
-    }
-
-    fun addModule(moduleName: String?, extend: Bundle?, listener: ModuleLoadListener?) {
-        if (moduleName != null && !moduleName.isEmpty()) {
-            if (moduleManager.allModules.containsKey(moduleName)) //模块不重复添加
-                return
-            var module = moduleManager.getModuleByNames(moduleName)
-            if (module == null) {
-                module = CWModuleExFactory.newModuleInstance(moduleName)
-            }
-            if (module != null) {
-                val result = module.onCreate(moduleContext, extend)
-                listener?.laodResult(result) //监听回调
-                if (result) moduleManager.putModule(moduleName, module)
-            }
-        }
+        moduleManagerController.addModule(moduleName, extend, null)
     }
 
     /**
@@ -141,21 +94,11 @@ abstract class ModuleManageActivity : FragmentActivity() {
      */
     @ModuleEvent(coreClientClass = IBaseClient::class)
     fun removeModule(moduleName: String?) {
-        if (moduleName != null && !moduleName.isEmpty()) {
-            val module = moduleManager.getModuleByNames(moduleName)
-            if (module != null) {
-                module.detachView() //先移除界面，再销毁
-                module.onDestroy()
-                moduleManager.remove(moduleName)
-            }
-        }
+        moduleManagerController.removeModule(moduleName)
     }
 
     @ModuleEvent(coreClientClass = IBaseClient::class)
     fun moduleVisible(moduleName: String?, isVisible: Boolean) {
-        if (moduleName != null && !moduleName.isEmpty()) {
-            val module = moduleManager.getModuleByNames(moduleName)
-            module?.setVisible(isVisible)
-        }
+        moduleManagerController.moduleVisible(moduleName, isVisible)
     }
 }

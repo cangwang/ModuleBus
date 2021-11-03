@@ -45,16 +45,17 @@
             android:layout_marginTop="20dp"
             android:textSize="15dp"
             android:text="博客地址"/>
+
         <TextView
             android:id="@+id/anchor_card_blog"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
             android:layout_below="@+id/anchor_card_blog_txt"
-            android:textSize="15dp"
-            android:text="https://www.jianshu.com/u/cd0fe10b01d2"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:text="https://github.com/cangwang"
+            android:textSize="15dp" />
     </RelativeLayout>
 </RelativeLayout>
